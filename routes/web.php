@@ -13,4 +13,13 @@
 
 Route::get('/', function () {
     return view('welcome');
+})->name('main');
+
+
+Route::get('/reg', function () {
+    return view('register');
+})->name('register');
+
+Route::post('/reg', function () {
+    return 'ok';
 });
