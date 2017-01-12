@@ -23,8 +23,13 @@
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{route('register')}}">Регистрация</a></li>
-                    <li><a href="#">Личный кабинет</a></li>
+                    @if ( !Auth::check() )
+                        <li><a href="{{route('register')}}">Регистрация</a></li>
+                        <li><a href="{{route('login')}}">Войти</a></li>
+                    @else
+                        <li><a href="{{route('user')}}">Личный кабинет</a></li>
+                        <li><a href="{{route('logout')}}">Выйти</a></li>
+                    @endif
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
