@@ -58,6 +58,8 @@ Route::group([ 'middleware' => 'auth', 'prefix'=>'user'], function()
         return view('user.profile');
     })->name('profile');
 
+    Route::post('/changePassword', [ 'uses' => 'UserController@changePassword' ] )->name('changePassword');
+
 });
 
 
