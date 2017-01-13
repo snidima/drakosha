@@ -48,7 +48,7 @@ Route::get('/logout', [ 'uses' => 'LoginController@logout' ] )->name('logout');
 
 
 
-Route::group([ 'middleware' => 'auth', 'prefix'=>'user'], function()
+Route::group([ 'middleware' => 'auth', 'prefix'=>'userzone'], function()
 {
     Route::get('/', function () {
         return view('user.main');
@@ -57,6 +57,11 @@ Route::group([ 'middleware' => 'auth', 'prefix'=>'user'], function()
     Route::get('/profile', function () {
         return view('user.profile');
     })->name('profile');
+
+    Route::get('/order', function () {
+        return view('user.order',['rewards' => App\Order::getPossibleRewards()]);
+    })->name('order');
+    Route::post('/order', [ 'uses' => 'OrderController@createOrder' ]);
 
     Route::post('/changePassword', [ 'uses' => 'UserController@changePassword' ] )->name('changePassword');
 
