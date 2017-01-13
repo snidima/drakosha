@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -27,7 +25,7 @@ class UserController extends Controller
         $user = User::find( Auth::user()->id );
         $user->password = bcrypt( $request->input('password') );
         $user->save();
-        
+
         Session::flash('changePassword', true);
         return redirect(route('profile'));
 

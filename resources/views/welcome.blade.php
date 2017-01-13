@@ -2,6 +2,6 @@
 
 @section('content')
 
-    Главная страница
+    {!! $html !!}
 
 @endsection

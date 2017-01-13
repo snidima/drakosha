@@ -29,6 +29,9 @@
                     @else
                         <li><a href="{{route('user')}}">Личный кабинет</a></li>
                         <li><a href="{{route('logout')}}">Выйти</a></li>
+                        @if ( App\User::isAdmin( Auth::user() ) )
+                            <li><a href="{{route('pages-edit')}}">Управление</a></li>
+                        @endif
                     @endif
                 </ul>
             </div><!-- /.navbar-collapse -->

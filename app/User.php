@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
-    private $defaultUserRole = 'newuser';
+    private static $defaultUserRole = 'newuser';
+    private static $defaultAdminRole = 'admin';
     use Notifiable;
 
     /**
@@ -36,7 +37,7 @@ class User extends Authenticatable
     public function createUser( array $data=[] )
     {
         $user = (User::create($data));
-        $role = (new Role())->where('role', '=', $this->defaultUserRole)->first();
+        $role = (new Role())->where('role', '=', self::$defaultUserRole)->first();
         $user->roles()->attach($role->id);
         return $user;
     }
@@ -44,7 +45,7 @@ class User extends Authenticatable
     public static function isAdmin( $user  )
     {
         if ( $user === null ) return false;
-        $role = (new Role())->where('role', '=', 'admin')->first();
+        $role = (new Role())->where('role', '=', self::$defaultAdminRole )->first();
         $res = $role->users()->where('user_id', '=', $user->id)->first();
         return (bool) $res;
     }
