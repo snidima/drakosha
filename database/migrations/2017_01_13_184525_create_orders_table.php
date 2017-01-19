@@ -23,8 +23,10 @@ class CreateOrdersTable extends Migration
             $table->string('school');
             $table->integer('sert_count');
             $table->mediumText('learner');
+            $table->mediumText('teacher_learner');
             $table->string('phone');
-            $table->enum('reward', ['Вариант1', 'Вариант2', 'Вариант3', 'Вариант4']);
+            $table->string('money');
+            $table->enum('reward', ['PDF документ', 'Письмо']);
             $table->enum('status', ['Ожидает оплаты', 'Оплачен', 'Отклонен', 'Ошибка']);
             $table->timestamps();
         });

@@ -75,17 +75,18 @@ Route::group([ 'middleware' => 'auth', 'prefix'=>'userzone'], function()
 
 Route::group([ 'middleware' => 'admin', 'prefix'=>'adminzone'], function()
 {
-    Route::get('/pages-edit', function (){
-        return view('admin.main', [ 'pages' => App\Page::all() ]);
-    })->name('pages-edit');
+    Route::get('/', function (){
+        return  redirect()->route('orders');
+    })->name('adminzone');
 
-    Route::post('/save-page', function ( Request $request ){
-        $page = App\Page::find( $request->input('id') );
-        $page->html = $request->input('html');
-        $page->save();
+    Route::get('/orders', function (){
 
-        Session::flash('page-edit', true);
-        return redirect(route('pages-edit'));
-    })->name('save-page');
+        $orders = ( \App\Order::with( ['users' => function($q){
+            $q->first();
+        }] )->get() );
+
+        return view('admin.orders', [ 'orders' => $orders ] );
+    })->name('orders');
+
 
 });

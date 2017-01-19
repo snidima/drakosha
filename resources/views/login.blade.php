@@ -23,7 +23,7 @@
             <div class="form-group">
                 <label for="password" class="col-lg-3 control-label">Введите пароль</label>
                 <div class="col-lg-9">
-                    <input type="text" class="form-control" id="password" placeholder="Пароль" name="password" value="{{ old('password') }}">
+                    <input type="password" class="form-control" id="password" placeholder="Пароль" name="password" value="{{ old('password') }}">
                 </div>
             </div>
             <input type="submit" value="Войти">
