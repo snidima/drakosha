@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 Route::get('/', function () {
-    return view('welcome',['html' => App\Page::where('slug', 'main')->first()->html]);
+    return view('welcome');
 })->name('main');
 
 
@@ -51,7 +51,12 @@ Route::get('/logout', [ 'uses' => 'LoginController@logout' ] )->name('logout');
 Route::group([ 'middleware' => 'auth', 'prefix'=>'userzone'], function()
 {
     Route::get('/', function () {
-        return view('user.main');
+
+        $params = [
+            'newOrderAvailable' => \App\Order::newOrderAvailable()
+        ];
+
+        return view('user.main', ['params' => $params] );
     })->name('user');
 
     Route::get('/profile', function () {
@@ -59,7 +64,12 @@ Route::group([ 'middleware' => 'auth', 'prefix'=>'userzone'], function()
     })->name('profile');
 
     Route::get('/order', function () {
-        return view('user.order',['rewards' => App\Order::getPossibleRewards()]);
+
+
+        $mode = ( \App\Order::newOrderAvailable() ) ? 'new' : 'edit';
+        $userdata = ( $mode == 'edit' ) ? \App\Order::getForCurrentUser() : false ;
+
+        return view('user.order',['rewards' => App\Order::getPossibleRewards(),'userdata' => $userdata, 'mode' => $mode]);
     })->name('order');
     Route::post('/order', [ 'uses' => 'OrderController@createOrder' ]);
 
@@ -81,9 +91,7 @@ Route::group([ 'middleware' => 'admin', 'prefix'=>'adminzone'], function()
 
     Route::get('/orders', function (){
 
-        $orders = ( \App\Order::with( ['users' => function($q){
-            $q->first();
-        }] )->get() );
+        $orders = \App\Order::has( 'users' )->get() ;
 
         return view('admin.orders', [ 'orders' => $orders ] );
     })->name('orders');

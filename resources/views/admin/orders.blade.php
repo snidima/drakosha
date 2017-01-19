@@ -4,6 +4,7 @@
 
     <div class="container">
 
+        @if( count($orders) > 0 )
         <table class="table">
             <caption>sege</caption>
             <thead>
@@ -77,6 +78,10 @@
             </div>
         </div>
         @endforeach
+
+        @else
+            <h1 style="text-align: center;">Заявок пока нет =(</h1>
+        @endif
 
     </div>
 

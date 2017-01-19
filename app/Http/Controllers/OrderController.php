@@ -16,7 +16,7 @@ class OrderController extends Controller
 
         Order::createNewOrder( $input );
 
-        return 'ok';
+        return redirect( route('user') );
     }
 
 

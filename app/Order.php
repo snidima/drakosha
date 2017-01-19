@@ -12,8 +12,10 @@ class Order extends Model
     protected $table = 'orders';
 
     protected $fillable = [
-        'org_num', 'region', 'city','address','postcode', 'school', 'sert_count','learner','phone','reward','status'
+        'org_num', 'region', 'city','address','postcode', 'school', 'sert_count','learner','phone','reward','teacher_learner'
     ];
+
+    protected $guarded = ['money','status'];
 
     public function users() {
         return $this->belongsToMany('App\User', 'order_user', 'order_id', 'user_id')->withTimestamps();
@@ -34,11 +36,32 @@ class Order extends Model
 
     static function createNewOrder( $data = [] )
     {
-        $data['status'] = 'Ожидает оплаты';
-
-        $order = Order::create( $data );
+        $order = new Order;
+        $order->fill( $data );
+        $order->status = 'Ожидает оплаты';
+        $order->money = '0';
+        $order->save();
         $order->users()->attach( Auth::user()->id  );
     }
+
+    static function newOrderAvailable()
+    {
+        $ordersCount = Order::whereHas( 'users', function($q){
+            $q->where( 'user_id','=', \Illuminate\Support\Facades\Auth::user()->id );
+        } )->count();
+
+        return ( $ordersCount > 0 ) ? false : true;
+    }
+
+    static function getForCurrentUser()
+    {
+        $order = Order::whereHas( 'users', function($q){
+            $q->where( 'user_id','=', \Illuminate\Support\Facades\Auth::user()->id );
+        } )->first();
+
+        return $order;
+    }
+
 
 
 
