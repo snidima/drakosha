@@ -70,7 +70,8 @@ Route::group([ 'middleware' => 'auth', 'prefix'=>'userzone'], function()
         $userdata = ( $mode == 'edit' ) ? \App\Order::getForCurrentUser() : false ;
 
         return view('user.order',['rewards' => App\Order::getPossibleRewards(),'userdata' => $userdata, 'mode' => $mode]);
-    })->name('order');
+    })->name('user.order');
+
     Route::post('/order', [ 'uses' => 'OrderController@createOrder' ]);
 
     Route::post('/changePassword', [ 'uses' => 'UserController@changePassword' ] )->name('changePassword');
@@ -89,12 +90,37 @@ Route::group([ 'middleware' => 'admin', 'prefix'=>'adminzone'], function()
         return  redirect()->route('orders');
     })->name('adminzone');
 
-    Route::get('/orders', function (){
+    Route::get('/orders/all', function (){
 
         $orders = \App\Order::has( 'users' )->get() ;
 
         return view('admin.orders', [ 'orders' => $orders ] );
     })->name('orders');
+
+
+    Route::get('/orders/{id}', function ( $id ){
+
+
+        $order = \App\Order::whereHas( 'users' , function( $q ) use ( $id ) {
+            $q->where('order_id','=',$id);
+        } )->first() ;
+
+//        dd($order);
+
+        return view('admin.order', [ 'order' => $order ] );
+    })->name('order');
+
+
+
+
+    Route::get('/sendmail', function (){
+
+        \Illuminate\Support\Facades\Mail::queue('emails.main', [], function($message)
+        {
+            $message->to('snidima@mail.ru')->subject('Новое письмо!');
+        });
+
+    });
 
 
 });

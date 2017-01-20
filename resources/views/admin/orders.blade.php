@@ -14,8 +14,7 @@
                     <th>Email</th>
                     <th>Номер телефона</th>
                     <th>Статус заявки</th>
-                    <th>Просмотр/Редактирование</th>
-                    <th>Удалить</th>
+                    <th>Просмотр</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,14 +26,7 @@
                     <td>{{$order->phone}}</td>
                     <td>{{$order->status}}</td>
                     <td>
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#order-{{$order->id}}">
-                            Просмотр
-                        </button>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#order-delete-{{$order->id}}">
-                            Удалить
-                        </button>
+                        <a href="{{route('order',$order->id )}}">Просмотр</a>
                     </td>
                 </tr>
             @endforeach
@@ -42,42 +34,7 @@
         </table>
 
 
-        @foreach( $orders as $order )
-        <div class="modal fade" id="order-{{$order->id}}" tabindex="-1" role="dialog" aria-labelledby="Orders">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Заявка №{{$order->id}}</h4>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-                        <button type="button" class="btn btn-success">Сохранить</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="order-delete-{{$order->id}}" tabindex="-1" role="dialog" aria-labelledby="Ordersdelete">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Удалить заявку №{{$order->id}}</h4>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-                        <button type="button" class="btn btn-danger">Удалить</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endforeach
+
 
         @else
             <h1 style="text-align: center;">Заявок пока нет =(</h1>

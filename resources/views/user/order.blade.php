@@ -6,7 +6,7 @@
 
     <h1>Подать заявку</h1>
     <hr>
-    <form method="post" action="{{route('order')}}">
+    <form method="post" action="{{route('user.order')}}">
         {{ csrf_field() }}
         <div class="form-group">
             <label for="org_num">Общее количество организаторов</label>
@@ -67,7 +67,7 @@
 
     <h1>Редактировать заявку</h1>
     <hr>
-    <form method="post" action="{{route('order')}}">
+    <form method="post" action="{{route('user.order')}}">
         {{ csrf_field() }}
         <div class="form-group">
             <label for="org_num">Общее количество организаторов</label>
