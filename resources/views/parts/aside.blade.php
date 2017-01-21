@@ -1,12 +1,18 @@
-<aside>
-    <div class="list-group">
-        <a href="#" class="list-group-item">О проекте</a>
-        <a href="#" class="list-group-item">Общие положения</a>
-        <a href="#" class="list-group-item">Критерии</a>
-        <a href="#" class="list-group-item">Наградные материалы</a>
-        <a href="#" class="list-group-item">Расписание мероприятий</a>
-        <a href="#" class="list-group-item">Квитанция на оплату</a>
-        <a href="#" class="list-group-item">Итоги конкурса</a>
-        <a href="#" class="list-group-item">Реквизиты</a>
-    </div>
-</aside>
+<ul class="aside-menu">
+    <li class="aside-menu__item"><a href="#">О проекте</a></li>
+    <li class="aside-menu__item"><a href="#">Общие положения</a></li>
+    <li class="aside-menu__item"><a href="#">Критерии</a></li>
+    <li class="aside-menu__item"><a href="#">Наградные материалы</a></li>
+    <li class="aside-menu__item"><a href="#">Расписания мероприятий</a></li>
+    <li class="aside-menu__item"><a href="#">Квитанция на оплату</a></li>
+    <li class="aside-menu__item"><a href="#">Итоги конкурса</a></li>
+    <li class="aside-menu__item"><a href="#">Реквизиты</a></li>
+</ul>
+
+
+
+
+
+
+
+

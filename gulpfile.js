@@ -14,6 +14,12 @@ require('laravel-elixir-vue-2');
  */
 
 elixir(mix => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+    mix.sass('app.sass');
+    // mix.version(['build/css/app.css']);
+});
+
+elixir(mix => {
+    mix.browserSync({
+        proxy: 'http://dev.drakosha.ru/'
+    });
 });

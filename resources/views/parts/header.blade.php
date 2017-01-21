@@ -1,40 +1,26 @@
-<header>
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{route('main')}}">ДРАКОША</a>
-            </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="#">Главная</a></li>
-                    <li><a href="#">Правила участия</a></li>
-                    <li><a href="#">Как принять участие</a></li>
-                    <li><a href="#">Способы оплаты</a></li>
-                    <li><a href="#">Контакты</a></li>
+<div class="top">
 
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    @if ( !Auth::check() )
-                        <li><a href="{{route('register')}}">Регистрация</a></li>
-                        <li><a href="{{route('login')}}">Войти</a></li>
-                    @else
-                        <li><a href="{{route('user')}}">Личный кабинет</a></li>
-                        <li><a href="{{route('logout')}}">Выйти</a></li>
-                        @if ( App\User::isAdmin( Auth::user() ) )
-                            <li><a href="{{route('adminzone')}}">Управление</a></li>
-                        @endif
-                    @endif
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-</header>
+</div>
+
+
+<nav class="menu">
+    <div class="menu-left">
+        <ul class="menu-list">
+            <li class="menu-list__item"><a href="#">Главная</a></li>
+            <li class="menu-list__item"><a href="#">Правила участи</a></li>
+            <li class="menu-list__item"><a href="#">Правила участи</a></li>
+            <li class="menu-list__item"><a href="#">Как принять участие?</a></li>
+            <li class="menu-list__item"><a href="#">Способы оплаты</a></li>
+            <li class="menu-list__item"><a href="#">Контакты</a></li>
+        </ul>
+    </div>
+    <div class="menu-right">
+        <ul class="menu-list">
+            <li class="menu-list__item"><a href="#">Войти</a></li>
+            <li class="menu-list__item"><a href="#">Регистрация</a></li>
+        </ul>
+    </div>
+</nav>
+
+
