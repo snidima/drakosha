@@ -17,8 +17,8 @@
     </div>
     <div class="menu-right">
         <ul class="menu-list">
-            <li class="menu-list__item"><a href="#">Войти</a></li>
-            <li class="menu-list__item"><a href="#">Регистрация</a></li>
+            <li class="menu-list__item"><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i> Войти</a></li>
+            <li class="menu-list__item"><a href="#"><i class="fa fa-user-o" aria-hidden="true"></i> Регистрация</a></li>
         </ul>
     </div>
 </nav>

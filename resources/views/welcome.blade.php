@@ -10,7 +10,7 @@
         </p>
     </div>
 
-    <div class="text-center">
+    <div class="text-center margin-bottom">
         <div class="text-size-3 condensed text-color-black"><b><u>ДЛЯ УЧАСТИЯ ВЫБЕРИТЕ ШКОЛЬНУЮ ДИСЦИПЛИНУ:</u></b></div>
         <div class="circles">
             <div class="cricle" data-coor="red">
@@ -27,7 +27,7 @@
             </div>
             <div class="cricle" data-coor="blue">
                 <div class="cricle-text">
-                    <div class="cricle-text__title">Литературное чтение</div>
+                    <div class="cricle-text__title">Литературное<br>чтение</div>
                     <div class="cricle-text__desc">1-5 класс</div>
                 </div>
             </div>
@@ -44,5 +44,11 @@
                 </div>
             </div>
         </div>
+        <p><i>Прием заявок осуществляется с <span class="text-color-red">10.01.2017 по 17.01.2017</span> включительно</i></p>
+    </div>
+
+    <div class="text-center margin-bottom">
+        <div class="text-size-3 condensed text-color-black"><b><u>ДЛЯ УЧАСТИЯ ВЫБЕРИТЕ ШКОЛЬНУЮ ДИСЦИПЛИНУ:</u></b></div>
+        wfwf
     </div>
 @endsection
