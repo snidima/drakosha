@@ -9,6 +9,10 @@ var sourcemaps = require('gulp-sourcemaps'); //https://www.npmjs.com/package/gul
 var clean = require('gulp-clean');//https://www.npmjs.com/package/gulp-clean
 var fs = require('fs');
 var GulpSSH = require('gulp-ssh');//https://github.com/teambition/gulp-ssh
+var elixir  = require('laravel-elixir');
+var htmlmin = require('gulp-htmlmin');
+
+
 
 var config = {
   host: 'halflife3.beget.com',
@@ -28,7 +32,7 @@ gulp.task('deploy:dev', function () {
     .shell([
     	'cd drakosha/', 
     	'git pull origin master', 
-    	'composer install', 
+    	'composer update', 
     	'php artisan migrate', 
     	'npm install', 
     	'npm update', 
