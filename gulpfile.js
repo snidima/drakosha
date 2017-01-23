@@ -11,6 +11,7 @@ var fs = require('fs');
 var GulpSSH = require('gulp-ssh');//https://github.com/teambition/gulp-ssh
 var elixir  = require('laravel-elixir');
 var htmlmin = require('gulp-htmlmin');
+var imagemin = require('gulp-imagemin');
 
 
 
@@ -27,6 +28,16 @@ var gulpSSH = new GulpSSH({
 })
 
 
+gulp.task('image:clean', function () {
+	return gulp.src('./public_html/images/**/*', {read: false})
+	    .pipe(clean());
+});
+gulp.task('image:production',['image:clean'], function () {
+  return gulp.src('./resources/assets/images/**/*')
+    .pipe(imagemin())
+    .pipe(gulp.dest('./public_html/images'))
+});
+
 gulp.task('deploy:dev', function () {
   return gulpSSH
     .shell([
@@ -36,10 +47,12 @@ gulp.task('deploy:dev', function () {
     	'php artisan migrate', 
     	'npm install', 
     	'npm update', 
-    	'gulp sass:prodaction'
+    	'gulp production',
     	], {filePath: 'shell.log'})
     .pipe(gulp.dest('logs'))
 })
+
+
 
 
 gulp.task('sass', function () {
@@ -81,4 +94,4 @@ gulp.task('serve', ['sass'], function() {
     });
 });
 
-gulp.task('production', ['sass:prodaction']);
+gulp.task('production', ['sass:prodaction', 'image:production']);
