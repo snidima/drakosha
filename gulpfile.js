@@ -42,15 +42,17 @@ gulp.task('deploy:dev', function () {
   return gulpSSH
     .shell([
     	'cd drakosha/', 
+    	'php artisan down', 
     	'git pull origin master', 
     	'composer update', 
     	'php artisan migrate', 
     	'npm install', 
     	'npm update', 
     	'gulp production',
+    	'php artisan up',
     	], {filePath: 'shell.log'})
     .pipe(gulp.dest('logs'))
-})
+});
 
 
 
