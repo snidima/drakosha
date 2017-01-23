@@ -7,6 +7,36 @@ var autoprefixer = require('gulp-autoprefixer');//https://www.npmjs.com/package/
 var cleanCSS = require('gulp-clean-css');//https://github.com/scniro/gulp-clean-css
 var sourcemaps = require('gulp-sourcemaps'); //https://www.npmjs.com/package/gulp-sourcemaps
 var clean = require('gulp-clean');//https://www.npmjs.com/package/gulp-clean
+var fs = require('fs');
+var GulpSSH = require('gulp-ssh');//https://github.com/teambition/gulp-ssh
+
+var config = {
+  host: 'halflife3.beget.com',
+  port: 22,
+  username: 'snidimod',
+  password: 'rL49VTJp'
+}
+
+var gulpSSH = new GulpSSH({
+  ignoreErrors: false,
+  sshConfig: config
+})
+
+
+gulp.task('deploy:dev', function () {
+  return gulpSSH
+    .shell([
+    	'cd drakosha/', 
+    	'git pull origin master', 
+    	'composer install', 
+    	'composer update', 
+    	'php artisan migrate', 
+    	'npm install', 
+    	'npm update', 
+    	'gulp sass:prodaction'
+    	], {filePath: 'shell.log'})
+    .pipe(gulp.dest('logs'))
+})
 
 
 gulp.task('sass', function () {
