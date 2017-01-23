@@ -1,25 +1,51 @@
-const elixir = require('laravel-elixir');
+var gulp = require('gulp');
 
-require('laravel-elixir-vue-2');
+var sass = require('gulp-sass');//https://www.npmjs.com/package/gulp-sass/
+var browserSync = require('browser-sync').create();//https://www.browsersync.io/docs/gulp
+var plumber = require('gulp-plumber');//https://www.npmjs.com/package/gulp-plumber
+var autoprefixer = require('gulp-autoprefixer');//https://www.npmjs.com/package/gulp-autoprefixer
+var cleanCSS = require('gulp-clean-css');//https://github.com/scniro/gulp-clean-css
+var sourcemaps = require('gulp-sourcemaps'); //https://www.npmjs.com/package/gulp-sourcemaps
+var clean = require('gulp-clean');//https://www.npmjs.com/package/gulp-clean
 
-/*
- |--------------------------------------------------------------------------
- | Elixir Asset Management
- |--------------------------------------------------------------------------
- |
- | Elixir provides a clean, fluent API for defining some basic Gulp tasks
- | for your Laravel application. By default, we are compiling the Sass
- | file for our application, as well as publishing vendor resources.
- |
- */
 
-elixir(mix => {
-    mix.sass('app.sass','public_html/css');
-    // mix.version(['build/css/app.css']);
+gulp.task('sass', function () {
+  return gulp.src('./resources/assets/sass/**/*.sass')
+    .pipe(sourcemaps.init())
+    .pipe(plumber())
+    .pipe(sass({
+        indentedSyntax: true
+      }).on('error', sass.logError))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./public_html/css/'));
 });
 
-elixir(mix => {
-    mix.browserSync({
-        proxy: 'http://dev.drakosha.ru/'
+gulp.task('sass:clean', function () {
+  return gulp.src('./public_html/css/**/*', {read: false})
+    .pipe(clean());
+});
+
+gulp.task('sass:prodaction',['sass:clean'], function () {
+    return gulp.src('./resources/assets/sass/**/*.sass')
+        .pipe(plumber())
+        .pipe(sass({
+            indentedSyntax: true
+        }).on('error', sass.logError))
+        .pipe(autoprefixer({ browsers: ['> 1%', 'IE 7'], cascade: false }))
+        .pipe(cleanCSS({keepSpecialComments : 0}))
+        .pipe(gulp.dest('./public_html/css/'));
+});
+
+
+gulp.task('serve', ['sass'], function() {
+    browserSync.init({
+        proxy: 'http://dev.drakosha.ru/',
+        notify: false
+    });
+    gulp.watch('./resources/assets/sass/**/*', ['sass']);
+    gulp.watch(["./public_html/**/*", "./resources/views/**/*"]).on('change', function () {
+        browserSync.reload();
     });
 });
+
+gulp.task('production', ['sass:prodaction']);
