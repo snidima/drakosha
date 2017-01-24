@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Регистрация нового пользователя</h1>
-    <form action="{{route('register')}}" method="post" class="form_login form_login_reg">
+    <form action="{{route('register')}}" method="post" class="form_login form_login_reg" id="reg-form">
         <small class="errors">
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
@@ -58,9 +58,17 @@
             </div>
         </div>
         <div class="text-right">
-            <input type="submit" value="Регистрация">
+            <input type="submit" value="Регистрация"  class="g-recaptcha"
+                   data-sitekey="6LcVABMUAAAAAEoGqerXoZmiWtePUwtWBE7LI7lp"
+                   data-callback="YourOnSubmitFn">
         </div>
 
     </form>
+    <script>
+        var YourOnSubmitFn = function(token) {
+            var form = document.getElementById('reg-form');
+            form.submit();
+        };
+    </script>
 
 @endsection
