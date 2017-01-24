@@ -43,9 +43,9 @@ class User extends Authenticatable
         return $user;
     }
 
-    public static function isAdmin( $user  )
+    public static function isAdmin( $user )
     {
-        if ( $user === null ) return false;
+        if ( !$user ) return false;
         $role = (new Role())->where('role', '=', self::$defaultAdminRole )->first();
         $res = $role->users()->where('user_id', '=', $user->id)->first();
         return (bool) $res;

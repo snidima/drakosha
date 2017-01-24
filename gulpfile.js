@@ -85,7 +85,7 @@ gulp.task('sass:prodaction',['sass:clean'], function () {
 });
 
 
-gulp.task('serve', ['sass'], function() {
+gulp.task('serve', ['sass','image:production'], function() {
     browserSync.init({
         proxy: 'http://dev.drakosha.ru/',
         notify: false

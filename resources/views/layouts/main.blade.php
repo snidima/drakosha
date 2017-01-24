@@ -15,7 +15,9 @@
         <header>@include('parts/header')</header>
         <div class="main-content">
             <aside>@include('parts/aside')</aside>
-            <div class="content">@yield('content')</div>
+            <div class="content-wrap">
+                <div class="content">@yield('content')</div>
+            </div>
         </div>
         <footer>@include('parts/footer')</footer>
     </div>

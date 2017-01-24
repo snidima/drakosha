@@ -9,7 +9,7 @@
     <li class="aside-menu__item"><a href="#">Реквизиты</a></li>
 </ul>
 <div class="aside-menu text-center" data-color="red" >
-    <img src="images/banner.jpg" alt="">
+    <a href="#"><img src="/images/banner.jpg" alt="Русфондд - фонд помощи больным детям"></a>
 </div>
 
 

@@ -1,32 +1,36 @@
 @extends('layouts/main')
 
+
 @section('content')
-    @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <form action="{{route('login')}}" method="post">
+    <h1>Войти в систему</h1>
+
+    <form action="{{route('login')}}" method="post" class="form_login">
+        <small class="errors">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </small>
         {{ csrf_field() }}
-        <fieldset>
-            <legend>Войти в систему</legend>
-            <div class="form-group">
-                <label for="inputEmail" class="col-lg-3 control-label">Введите email</label>
-                <div class="col-lg-9">
-                    <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="email" value="{{ old('email') }}">
-                </div>
+        <div class="row">
+            <label for="inputEmail" class="col-lg-3 control-label">Email</label>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="email" value="{{ old('email') }}">
             </div>
-            <div class="form-group">
-                <label for="password" class="col-lg-3 control-label">Введите пароль</label>
-                <div class="col-lg-9">
-                    <input type="password" class="form-control" id="password" placeholder="Пароль" name="password" value="{{ old('password') }}">
-                </div>
+        </div>
+        <div class="row">
+            <label for="password" class="col-lg-3 control-label">Пароль</label>
+            <div class="col-lg-9">
+                <input type="password" class="form-control" id="password" placeholder="Пароль" name="password" value="">
             </div>
+        </div>
+        <div class="text-right">
             <input type="submit" value="Войти">
-        </fieldset>
+        </div>
     </form>
 @endsection
