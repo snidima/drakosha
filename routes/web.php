@@ -105,22 +105,39 @@ Route::group([ 'middleware' => 'admin', 'prefix'=>'adminzone'], function()
             $q->where('order_id','=',$id);
         } )->first() ;
 
-//        dd($order);
-
         return view('admin.order', [ 'order' => $order ] );
     })->name('order');
 
 
 
 
-    Route::get('/sendmail', function (){
+//    Route::get('/sendmail', function (){
+//
+//        \Illuminate\Support\Facades\Mail::queue('emails.main', [], function($message)
+//        {
+//            $message->to('snidima@mail.ru')->subject('Новое письмо!');
+//        });
+//
+//    });
 
-        \Illuminate\Support\Facades\Mail::queue('emails.main', [], function($message)
-        {
-            $message->to('snidima@mail.ru')->subject('Новое письмо!');
-        });
 
-    });
+    Route::get('/tasks', function (){
+        $tasks = App\Task::all();
+        return view('admin.tasks', [ 'tasks' => $tasks ] );
+    })->name('tasks');
+
+    Route::post('/task-add', function ( Request $request ){
+
+        return false;
+    })->name('task-add');
+
+    Route::post('/task-delete', function ( Request $request ){
+        $task = App\Task::find( $request->input('id') );
+
+        if ( $task ) $task->delete();
+
+        return redirect(route('tasks'));
+    })->name('task-delete');
 
 
 });

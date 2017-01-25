@@ -6,7 +6,6 @@
 
         @if( count($orders) > 0 )
         <table class="table">
-            <caption>sege</caption>
             <thead>
                 <tr>
                     <th>Имя</th>
@@ -24,7 +23,7 @@
                     <td>{{$order->users->first()->surname}}</td>
                     <td>{{$order->users->first()->email}}</td>
                     <td>{{$order->phone}}</td>
-                    <td>{{$order->status}}</td>
+                    <td>{{$order->money}}</td>
                     <td>
                         <a href="{{route('order',$order->id )}}">Просмотр</a>
                     </td>
