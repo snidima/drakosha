@@ -30,7 +30,7 @@
             </div>
         @else
             <div class="cricle" data-coor="green">
-                <a href="#" class="cricle-text">
+                <a href="{{route('user.pay')}}" class="cricle-text">
                     <div class="cricle-text__title">Оплатить</div>
                 </a>
             </div>
@@ -56,5 +56,15 @@
     <p>
         Изменить настройки аккаунта вы можете по ссылке - <a href="{{route('profile')}}">настройки аккаунта</a>
     </p>
+
+    @if( count($tasks) )
+    <ul>
+        @foreach( $tasks as $task )
+        <li>{{$task->name}} - <a href="{{route('download.task', $task->id)}}" target="_blank">Скачать</a></li>
+        @endforeach
+    </ul>
+    @else
+        Заданий пока нет =(
+    @endif
 
 @endsection

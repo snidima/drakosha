@@ -3,6 +3,19 @@
 @section('content')
 
     <div class="container">
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Ошибка!</strong> {{ session('error') }}
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Успешно!</strong> {{ session('success') }}
+            </div>
+        @endif
         <h3 class="text-center">Заявка от пользователя {{$order->users->first()->name}} {{$order->users->first()->surname}}</h3>
         <hr>
         <div class="row">
@@ -78,21 +91,23 @@
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <b>Баланс:</b> {{$order->money}}
-                                <div class="modal fade" id="order-money" tabindex="-1" role="dialog" aria-labelledby="OrderMoney">
+                                <div class="modal fade" id="order-money">
                                     <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
+                                        <form class="modal-content" method="post" action="{{route('order.money.update')}}">
+                                            {{csrf_field()}}
+                                            <input type="hidden" name="id" value="{{$order->id}}">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">Изменить баланс</h4>
+                                                <h4 class="modal-title">Изменить баланс</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <input type="text" class="form-control" id="sert_count" placeholder="Необходимое количество сертификатов" name="sert_count" value="{{$order->money}}">
+                                                <input type="text" class="form-control" placeholder="Необходимое количество сертификатов" name="money" value="{{$order->money}}">
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-                                                <button type="button" class="btn btn-success">Сохранть</button>
+                                                <input type="submit" class="btn btn-success" value="Сохранить">
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </li>
