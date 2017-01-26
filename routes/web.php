@@ -20,47 +20,27 @@ Route::get('/', function () {
 
 
 
-Route::get('/reg', function () {
-
-    if (Auth::check()) return redirect(route('main'));
-
-    return view('register');
-})->name('register');
-Route::post('/reg', [ 'uses' => 'LoginController@postRegister' ] );
 
 
+Route::get('/register', [ 'uses' => 'AuthController@getRegister' ] )->name('register');
+Route::post('/register', [ 'uses' => 'AuthController@postRegister' ] );
+Route::get('/login', [ 'uses' => 'AuthController@getLogin' ] )->name('login');;
+Route::post('/login', [ 'uses' => 'AuthController@postLogin' ] );
+Route::get('/logout', [ 'uses' => 'AuthController@logout' ] )->name('logout');
+Route::get('/resets', [ 'uses' => 'AuthController@getResets' ] )->name('resets');
+Route::post('/resets', [ 'uses' => 'AuthController@postResets' ] );
 
-
-Route::get('/login', function () {
-
-    if (Auth::check()) return redirect(route('main'));
-
-    return view('login');
-})->name('login');
-Route::post('/login', [ 'uses' => 'LoginController@postLogin' ] );
-Route::get('/logout', [ 'uses' => 'LoginController@logout' ] )->name('logout');
+Route::get('/activate/{id}/{code}', [ 'uses' => 'AuthController@activate' ] )->name('activate');
+Route::get('/resets/{email}/{code}', [ 'uses' => 'AuthController@getResetsCheck' ] )->name('resets.check');
+Route::post('/resets/{email}/{code}', [ 'uses' => 'AuthController@postResetsCheck' ] );
 
 
 
 
 
-
-
-
-
-Route::group([ 'middleware' => 'auth', 'prefix'=>'userzone'], function()
+Route::group([ 'middleware' => 'user', 'prefix'=>'userzone'], function()
 {
-    Route::get('/', function () {
-
-        $params = [
-            'newOrderAvailable' => \App\Order::newOrderAvailable()
-        ];
-
-        return view('user.main', [
-            'params' => $params,
-            'tasks'  => App\Task::where('status','=','1')->get()
-        ] );
-    })->name('user');
+    Route::get('/', ['uses' => 'UserController@main'])->name('user');
 
     Route::get('/profile', function () {
         return view('user.profile');

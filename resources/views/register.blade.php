@@ -22,12 +22,6 @@
             </div>
         </div>
         <div class="row">
-            <label for="inputEmail2" class="col-lg-3 control-label">Email( снова )</label>
-            <div class="col-lg-9">
-                <input type="text" class="form-control" id="inputEmail2" placeholder="Email" name="email_confirmation" value="{{ old('email_confirmation') }}">
-            </div>
-        </div>
-        <div class="row">
             <label for="password" class="col-lg-3 control-label">Пароль</label>
             <div class="col-lg-9">
                 <input type="password" class="form-control" id="password" placeholder="password" name="password" value="{{ old('password') }}">

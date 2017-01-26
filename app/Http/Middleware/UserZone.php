@@ -19,9 +19,15 @@ class UserZone
      */
     public function handle($request, Closure $next)
     {
-        if ( !Auth::check() ) {
+        if ( !Auth::check()  ) {
             return Redirect::intended('/');
         }
+
+        if ( !Auth::user()->activated ){
+            Auth::logout();
+            return redirect(route('login'));
+        }
+
 
         return $next($request);
     }
