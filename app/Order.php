@@ -17,8 +17,14 @@ class Order extends Model
 
     protected $guarded = ['money','status'];
 
-    public function users() {
-        return $this->belongsToMany('App\User', 'order_user', 'order_id', 'user_id')->withTimestamps();
+//    public function users()
+//    {
+//        return $this->belongsToMany('App\User', 'order_user', 'order_id', 'user_id')->withTimestamps();
+//    }
+
+    public function users()
+    {
+        return $this->belongsTo('App\User','user_id');
     }
 
     static function getPossibleRewards()
@@ -36,12 +42,12 @@ class Order extends Model
 
     static function createNewOrder( $data = [] )
     {
+
         $order = new Order;
         $order->fill( $data );
         $order->status = 'Ожидает оплаты';
         $order->money = '0';
-        $order->save();
-        $order->users()->attach( Auth::user()->id  );
+        Auth::user()->orders()->save( $order );
     }
 
     static function newOrderAvailable()

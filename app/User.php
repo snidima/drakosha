@@ -29,6 +29,15 @@ class User extends Authenticatable
         return $this->hasMany('App\Code', 'user_id');
     }
 
+    public function orders()
+    {
+        return $this->hasMany('App\Order','user_id');
+    }
+
+    public function answers()
+    {
+        return $this->hasMany('App\Answer','user_id');
+    }
 
     public function createUser( array $data=[] )
     {

@@ -29,7 +29,6 @@ Route::post('/login', [ 'uses' => 'AuthController@postLogin' ] );
 Route::get('/logout', [ 'uses' => 'AuthController@logout' ] )->name('logout');
 Route::get('/resets', [ 'uses' => 'AuthController@getResets' ] )->name('resets');
 Route::post('/resets', [ 'uses' => 'AuthController@postResets' ] );
-
 Route::get('/activate/{id}/{code}', [ 'uses' => 'AuthController@activate' ] )->name('activate');
 Route::get('/resets/{email}/{code}', [ 'uses' => 'AuthController@getResetsCheck' ] )->name('resets.check');
 Route::post('/resets/{email}/{code}', [ 'uses' => 'AuthController@postResetsCheck' ] );
@@ -41,53 +40,14 @@ Route::post('/resets/{email}/{code}', [ 'uses' => 'AuthController@postResetsChec
 Route::group([ 'middleware' => 'user', 'prefix'=>'userzone'], function()
 {
     Route::get('/', ['uses' => 'UserController@main'])->name('user');
-
-    Route::get('/profile', function () {
-        return view('user.profile');
-    })->name('profile');
-
-    Route::get('/order', function () {
-
-
-        $mode = ( \App\Order::newOrderAvailable() ) ? 'new' : 'edit';
-        $userdata = ( $mode == 'edit' ) ? \App\Order::getForCurrentUser() : false ;
-
-        return view('user.order',['rewards' => App\Order::getPossibleRewards(),'userdata' => $userdata, 'mode' => $mode]);
-    })->name('user.order');
-
-    Route::post('/order', [ 'uses' => 'OrderController@createOrder' ]);
-
+    Route::get('/profile', ['uses' => 'UserController@profile'])->name('profile');
+    Route::get('/order', ['uses'=>'UserController@getOrder'])->name('user.order');
+    Route::post('/order', ['uses' => 'OrderController@createOrder' ]);
     Route::post('/changePassword', [ 'uses' => 'UserController@changePassword' ] )->name('changePassword');
-
-    Route::get('/pay', function () {
-
-        $userID = \Illuminate\Support\Facades\Auth::user()->id;
-
-        $order = App\Order::whereHas( 'users' , function( $q ) use ( $userID ) {
-            $q->where('user_id','=',$userID);
-        } )->first() ;
-
-
-
-        return view('user.pay',[
-            'summ' => (($order->sert_count*60 - $order->money) >=0 ) ? $order->sert_count*60 - $order->money : 0 ,
-            'money' => $order->money,
-            'sert' => $order->sert_count,
-        ]);
-    })->name('user.pay');
-
-    Route::post('/pay', function ( Request $request ) {
-
-        $userID = \Illuminate\Support\Facades\Auth::user()->id;
-        $order = App\Order::whereHas( 'users' , function( $q ) use ( $userID ) {
-            $q->where('user_id','=',$userID);
-        } )->first() ;
-        $order->money += $request->input('money');
-        $order->save();
-
-        return redirect(route('user'));
-    });
-
+    Route::get('/pay', [ 'uses' => 'UserController@getPay' ])->name('user.pay');
+    Route::post('/pay', [ 'uses' => 'UserController@postPay' ]);
+    Route::get('/answer', [ 'uses' => 'UserController@getAnswer' ])->name('user.answer');
+    Route::post('/answer', [ 'uses' => 'UserController@postAnswer' ]);
 });
 
 
@@ -98,13 +58,14 @@ Route::group([ 'middleware' => 'user', 'prefix'=>'userzone'], function()
 
 Route::group([ 'middleware' => 'admin', 'prefix'=>'adminzone'], function()
 {
-    Route::get('/', function (){
-        return  redirect()->route('orders');
-    })->name('adminzone');
+    Route::get('/', ['uses'=>'Admin\OrderController@orders'])->name('adminzone');
+
+    Route::get('/answers', ['uses'=>'Admin\AnswerController@answers'])->name('admin.answers');
 
     Route::get('/orders/all', function (){
 
-        $orders = \App\Order::has( 'users' )->get() ;
+
+        $orders = App\Order::with('users')->get() ;
 
         return view('admin.orders', [ 'orders' => $orders ] );
     })->name('orders');
@@ -113,9 +74,7 @@ Route::group([ 'middleware' => 'admin', 'prefix'=>'adminzone'], function()
     Route::get('/orders/{id}', function ( $id ){
 
 
-        $order = \App\Order::whereHas( 'users' , function( $q ) use ( $id ) {
-            $q->where('order_id','=',$id);
-        } )->first() ;
+        $order = \App\Order::find( $id ) ;
 
         return view('admin.order', [ 'order' => $order ] );
     })->name('order');
@@ -136,14 +95,7 @@ Route::group([ 'middleware' => 'admin', 'prefix'=>'adminzone'], function()
 
 
 
-//    Route::get('/sendmail', function (){
-//
-//        \Illuminate\Support\Facades\Mail::queue('emails.main', [], function($message)
-//        {
-//            $message->to('snidima@mail.ru')->subject('Новое письмо!');
-//        });
-//
-//    });
+
 
 
     Route::get('/tasks', function (){
@@ -204,9 +156,7 @@ Route::group([ 'middleware' => 'admin', 'prefix'=>'adminzone'], function()
 
 Route::get('download/task/{id}', function ( $id )
 {
-
     try {
-
         $task = App\Task::where('status','=','1')->find( $id );
 
         if( !$task ) throw new Exception('Доступ запрещен');
@@ -215,18 +165,38 @@ Route::get('download/task/{id}', function ( $id )
 
         if(!File::exists($path)) throw new Exception('Файл не существует.');
 
-//        $file = File::get($path);
-//        $type = File::mimeType($path);
-//
-//        $response = Response::make($file, 200);
-//        $response->header("Content-Type", $type);
-//        $response->header("Content-Disposition", 'inline');
-//        $response->header("Content-Disposition", 'inline');
-
     } catch (Exception $e) {
         abort(404);
     }
 
-//    return $response;
     return response()->download($path, $task->name.'.'.File::extension( $path ));
 })->name('download.task');
+
+
+Route::get('download/answer/{id}', function ( $id )
+{
+    try {
+
+        if ( \App\User::isAdmin( \Illuminate\Support\Facades\Auth::user() ) ){
+            $answer = App\Answer::has('users')->find( $id );
+        } else {
+            $answer = App\Answer::where('user_id','=', \Illuminate\Support\Facades\Auth::user()->id)->find( $id );
+        }
+
+
+
+        if( !$answer ) throw new Exception('Доступ запрещен');
+
+        $path = storage_path() . '/answers/' . $answer->path;
+
+        if(!File::exists($path)) throw new Exception('Файл не существует.');
+
+    } catch (Exception $e) {
+        abort(404);
+    }
+    $fileName =
+        $answer->users()->first()->name.' '.
+        $answer->users()->first()->surname;
+
+    return response()->download($path, $fileName.'.'.File::extension( $path ));
+})->name('download.answer');
