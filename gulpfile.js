@@ -44,7 +44,7 @@ gulp.task('deploy:dev', function () {
     	'cd drakosha/', 
     	'php artisan down', 
     	'git pull origin master', 
-    	'composer update', 
+    	'composer install',
     	'php artisan migrate', 
     	'npm install', 
     	'npm update', 
