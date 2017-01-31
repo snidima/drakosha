@@ -5,7 +5,7 @@
         Прислать ответ
         @if( count($answers)>0 )
             <br>
-            Вы уже загружали файл с ответами(<a href="{{route('download.answer',['id'=>$answers->first()->id])}}">Скачать</a>)
+            Вы уже загружали файл с ответами(<a href="{{route('download.answer',['id'=>$answers->users->id])}}">Скачать</a>)
 
             <br>
             Старый файл будет перезаписан на новый.

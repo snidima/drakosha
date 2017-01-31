@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Mockery\CountValidator\Exception;
-use Storage;
+
 class UserController extends Controller
 {
 
@@ -89,39 +89,6 @@ class UserController extends Controller
 
 
 
-    public function getAnswer()
-    {
-        $answers = Answer::whereHas('users', function ($query) {
-            $query->where( 'id', '=', Auth::user()->id );
-        })->get();
 
-        return view('user.answer',['answers'=>$answers]);
-    }
-    public function postAnswer( Request $request )
-    {
-        $this->validate($request, [
-            'file' => 'required|max:10240|min:10',
-        ]);
-
-
-
-        $answer = Answer::whereHas('users', function ($query) {
-            $query->where( 'id', '=', Auth::user()->id );
-        })->first();
-
-        $fileName = ( !$answer ) ? uniqid().'.'.$request->file('file')->getClientOriginalExtension() : $answer->path;
-        $request->file('file')->move( storage_path().'/answers/', $fileName);
-
-        $answer = ( !$answer ) ? new Answer : $answer;
-        $answer->desc = $request->input('desc') || '';
-        $answer->path = $fileName;
-
-        Auth::user()->answers()->save( $answer );
-
-        Storage::delete( storage_path().'/answers/', $fileName );
-
-        return redirect(route('user.answer'));
-
-    }
 
 }

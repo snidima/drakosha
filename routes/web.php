@@ -50,10 +50,14 @@ Route::group([ 'middleware' => 'user', 'prefix'=>'userzone'], function()
     Route::post('/order', ['uses' => 'User\OrderController@createOrder' ]);
 
     Route::post('/changePassword', [ 'uses' => 'UserController@changePassword' ] )->name('changePassword');
+
     Route::get('/pay', [ 'uses' => 'UserController@getPay' ])->name('user.pay');
     Route::post('/pay', [ 'uses' => 'UserController@postPay' ]);
-    Route::get('/answer', [ 'uses' => 'UserController@getAnswer' ])->name('user.answer');
-    Route::post('/answer', [ 'uses' => 'UserController@postAnswer' ]);
+    Route::post('/paycheck', [ 'uses' => 'User\PayController@postPaycheck' ])->name('user.paycheck');
+
+
+    Route::get('/answer', [ 'uses' => 'User\AnswerController@getAnswer' ])->name('user.answer');
+    Route::post('/answer', [ 'uses' => 'User\AnswerController@postAnswer' ]);
 
 });
 
@@ -72,18 +76,24 @@ Route::group([ 'middleware' => 'admin', 'prefix'=>'adminzone'], function()
     Route::get('/orders/all', function (){
 
 
-        $orders = App\Order::with('users')->get() ;
+        $users = App\User::has('orders')->with('answers')->with('pay_checks')->get() ;
 
-        return view('admin.orders', [ 'orders' => $orders ] );
+//        dd( $users[0]-> );
+
+        return view('admin.orders', [ 'users' => $users ] );
     })->name('orders');
 
 
-    Route::get('/orders/{id}', function ( $id ){
+    Route::get('/order/{id}', function ( $id ){
 
 
-        $order = \App\Order::find( $id ) ;
+        $order = \App\Order::where( 'user_id', $id )->with('users')->first();
+//        dd($order->users->name);
+        $paycheck = $order->users->id;
 
-        return view('admin.order', [ 'order' => $order ] );
+//        dd( $paycheck );
+
+        return view('admin.order', [ 'order' => $order , 'paycheck' => $paycheck ] );
     })->name('order');
 
     Route::post('/money-update', function ( Request $request ){
@@ -185,9 +195,9 @@ Route::get('download/answer/{id}', function ( $id )
     try {
 
         if ( \App\User::isAdmin( \Illuminate\Support\Facades\Auth::user() ) ){
-            $answer = App\Answer::has('users')->find( $id );
+            $answer = App\Answer::where('user_id',$id)->first();
         } else {
-            $answer = App\Answer::where('user_id','=', \Illuminate\Support\Facades\Auth::user()->id)->find( $id );
+            $answer = App\Answer::where('user_id','=', $id)->first( $id );
         }
 
 
@@ -207,3 +217,32 @@ Route::get('download/answer/{id}', function ( $id )
 
     return response()->download($path, $fileName.'.'.File::extension( $path ));
 })->name('download.answer');
+
+
+Route::get('download/paycheck/{id}', function ( $id )
+{
+    try {
+
+        if ( \App\User::isAdmin( \Illuminate\Support\Facades\Auth::user() ) ){
+            $answer = App\PayCheck::where('user_id',$id)->first();
+        } else {
+            $answer = App\PayCheck::where('user_id', $id)->first();
+        }
+
+//        dd($answer);
+
+        if( !$answer ) throw new Exception('Доступ запрещен');
+
+        $path = storage_path() . '/paychecks/' . $answer->path;
+
+        if(!File::exists($path)) throw new Exception('Файл не существует.');
+
+    } catch (Exception $e) {
+        abort(404);
+    }
+    $fileName =
+        $answer->users()->first()->name.' '.
+        $answer->users()->first()->surname;
+
+    return response()->download($path, $fileName.'.'.File::extension( $path ));
+})->name('download.paychecks');

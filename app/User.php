@@ -39,6 +39,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Answer','user_id');
     }
 
+    public function pay_checks()
+    {
+        return $this->hasMany('App\PayCheck','user_id');
+    }
     public function createUser( array $data=[] )
     {
         $user = User::create($data);

@@ -16,7 +16,7 @@
                 <strong>Успешно!</strong> {{ session('success') }}
             </div>
         @endif
-        <h3 class="text-center">Заявка от пользователя {{$order->users->first()->name}} {{$order->users->first()->surname}}</h3>
+        <h3 class="text-center">Заявка от пользователя {{$order->users->name}} {{$order->users->surname}}</h3>
         <hr>
         <div class="row">
             <div class="col-xs-3">
@@ -34,22 +34,22 @@
                         <div class="panel panel-default">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <b>Имя:</b> {{$order->users->first()->name}}
+                                    <b>Имя:</b> {{$order->users->name}}
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Фамилия:</b> {{$order->users->first()->surname}}
+                                    <b>Фамилия:</b> {{$order->users->surname}}
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Отчество:</b> {{$order->users->first()->lastname}}
+                                    <b>Отчество:</b> {{$order->users->lastname}}
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Отчество:</b> {{$order->users->first()->lastname}}
+                                    <b>Отчество:</b> {{$order->users->lastname}}
                                 </li>
                                 <li class="list-group-item">
                                     <b>Номер телефона:</b> {{$order->phone}}
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Email:</b> {{$order->users->first()->email}}
+                                    <b>Email:</b> {{$order->users->email}}
                                 </li>
                                 <li class="list-group-item">
                                     <b>Регион:</b> {{$order->region}}
@@ -113,7 +113,7 @@
                             </li>
 
                             <li class="list-group-item">
-                                <b>Чек оплаты:</b> <a href="#">Просмотр</a>
+                                <b>Чек оплаты:</b> <a href="{{route('download.paychecks',['id' =>$order->users->id ] )}}">Просмотр</a>
                             </li>
                         </ul>
                         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#order-money">

@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="{{route('orders')}}">Управление заявками</a></li>
-                <li><a href="{{route('tasks')}}">Задания</a></li>
+                <li><a href="{{route('tasks')}}">Файлы</a></li>
                 <li><a href="{{route('admin.answers')}}">Ответы</a></li>
                 <li><a href="{{route('adminzone')}}">Настройки конкурса</a></li>
             </ul>

@@ -32,5 +32,34 @@
             <input type="submit" value="Оплатить">
         </div>
     </form>
+    <br><br>
+    <form action="{{route('user.paycheck')}}" method="post" class="form_login" enctype="multipart/form-data">
+        <small class="errors">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </small>
+        {{ csrf_field() }}
+        <div class="row">
+            <label for="file" class="col-lg-4 control-label">Прикрепить чек</label>
+            <div class="col-lg-8">
+                <input type="file" class="form-control" id="file"  name="file">
+            </div>
+        </div>
+
+        <div class="text-right">
+            @if( 1>0 )
+                <input type="submit" value="Прикрепить чек">
+            @else
+                <input type="submit" value="Прикрепить чек">
+            @endif
+        </div>
+    </form>
 
 @endsection
