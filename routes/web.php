@@ -14,6 +14,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+Route::get('/test', function (){
+    Bugsnag::notifyError('ErrorType', 'Test Error');
+});
 Route::get('/', function () {
     return view('welcome');
 })->name('main');
@@ -39,15 +42,19 @@ Route::post('/resets/{email}/{code}', [ 'uses' => 'AuthController@postResetsChec
 
 Route::group([ 'middleware' => 'user', 'prefix'=>'userzone'], function()
 {
+
     Route::get('/', ['uses' => 'UserController@main'])->name('user');
     Route::get('/profile', ['uses' => 'UserController@profile'])->name('profile');
-    Route::get('/order', ['uses'=>'UserController@getOrder'])->name('user.order');
-    Route::post('/order', ['uses' => 'OrderController@createOrder' ]);
+
+    Route::get('/order', ['uses'=>'User\OrderController@getOrder'])->name('user.order');
+    Route::post('/order', ['uses' => 'User\OrderController@createOrder' ]);
+
     Route::post('/changePassword', [ 'uses' => 'UserController@changePassword' ] )->name('changePassword');
     Route::get('/pay', [ 'uses' => 'UserController@getPay' ])->name('user.pay');
     Route::post('/pay', [ 'uses' => 'UserController@postPay' ]);
     Route::get('/answer', [ 'uses' => 'UserController@getAnswer' ])->name('user.answer');
     Route::post('/answer', [ 'uses' => 'UserController@postAnswer' ]);
+
 });
 
 

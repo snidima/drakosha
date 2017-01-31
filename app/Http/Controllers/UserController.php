@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Mockery\CountValidator\Exception;
 use Storage;
 class UserController extends Controller
 {
@@ -51,26 +52,27 @@ class UserController extends Controller
         return view('user.profile');
     }
 
-    public function getOrder()
-    {
-        return view('user.order',['rewards' => Order::getPossibleRewards()]);
-    }
+
 
     public function getPay()
     {
+        try{
         $userID = \Illuminate\Support\Facades\Auth::user()->id;
 
         $order = Order::whereHas( 'users' , function( $q ) use ( $userID ) {
             $q->where('user_id','=',$userID);
         } )->first() ;
 
-
+         if( !$order ) throw new Exception('Ошибка доступа');
 
         return view('user.pay',[
             'summ' => (($order->sert_count*60 - $order->money) >=0 ) ? $order->sert_count*60 - $order->money : 0 ,
             'money' => $order->money,
             'sert' => $order->sert_count,
         ]);
+        } catch (Exception $e){
+            abort('403');
+        }
     }
 
     public function postPay( Request $request )

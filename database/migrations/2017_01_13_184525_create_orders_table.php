@@ -26,7 +26,7 @@ class CreateOrdersTable extends Migration
             $table->mediumText('teacher_learner');
             $table->string('phone');
             $table->string('money');
-            $table->enum('reward', ['PDF документ', 'Письмо']);
+            $table->enum('reward', ['PDF документ', 'Почта России']);
             $table->enum('status', ['Ожидает оплаты', 'Оплачен', 'Отклонен', 'Ошибка']);
             $table->timestamps();
         });

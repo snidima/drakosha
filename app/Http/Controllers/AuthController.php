@@ -14,21 +14,6 @@ use Illuminate\View\View;
 class AuthController extends Controller
 {
 
-
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:100|min:2',
-            'email' => 'required|unique:users|confirmed|max:250|email',
-            'password' => 'required|confirmed|min:6',
-            'surname' => 'required|min:2',
-            'lastname' => 'required|min:2',
-        ]);
-    }
-
-
-
-
     public function postRegister( Request $request, User $user )
     {
         $validator = Validator::make($request->all(), [
@@ -89,6 +74,7 @@ class AuthController extends Controller
             if ( $user->activated ) return redirect(route('main'));
             $user->activated = true;
             $user->save();
+            Code::where('user_id',$user->id)->delete();
             return redirect(route('login'))->with('activated', 'activated');
         } else {
             return redirect(route('main'));
