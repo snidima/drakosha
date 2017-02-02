@@ -153,4 +153,4 @@ gulp.task('serve', ['sass','image:production'], function() {
     });
 });
 
-gulp.task('production', ['sass:production', 'image:production']);
+gulp.task('production', ['sass:production', 'image:production','js:production']);
