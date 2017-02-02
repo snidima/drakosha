@@ -14,6 +14,8 @@
         <div class="content">@yield('content')</div>
         <footer>@include('parts/footer')</footer>
     </div>
-<link rel="stylesheet" href="/css/app2.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app2.css">
 </body>
 </html>
