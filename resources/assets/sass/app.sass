@@ -267,6 +267,7 @@ footer
 
 .form_login
   input[type="submit"]
+    outline: none
     cursor: pointer
     border: none
     background: #8cd108
@@ -277,6 +278,14 @@ footer
     border-radius: 10px
     font-family: 'Open Sans', sans-serif
     margin-top: 10px
+    &.loading:after
+      content: 'loading..'
+      width: 100px
+      border: 1px solid yellow
+
+
+
+
   input:not([type="submit"])
     display: block
     width: 100%

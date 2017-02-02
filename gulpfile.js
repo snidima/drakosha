@@ -9,10 +9,16 @@ var sourcemaps = require('gulp-sourcemaps'); //https://www.npmjs.com/package/gul
 var clean = require('gulp-clean');//https://www.npmjs.com/package/gulp-clean
 var fs = require('fs');
 var GulpSSH = require('gulp-ssh');//https://github.com/teambition/gulp-ssh
-var elixir  = require('laravel-elixir');
-var htmlmin = require('gulp-htmlmin');
+// var elixir  = require('laravel-elixir');
+// var htmlmin = require('gulp-htmlmin');
 var imagemin = require('gulp-imagemin');
 
+var gutil = require('gulp-util');
+var browserify = require('browserify');
+var babelify = require('babelify');
+var source = require('vinyl-source-stream');
+var uglify      = require('gulp-uglify');
+var buffer = require('vinyl-buffer');
 
 
 var config = {
@@ -26,6 +32,8 @@ var gulpSSH = new GulpSSH({
   ignoreErrors: false,
   sshConfig: config
 })
+
+
 
 
 gulp.task('image:clean', function () {
@@ -47,12 +55,60 @@ gulp.task('deploy:dev', function () {
     	'composer install',
     	'php artisan migrate', 
     	'npm install', 
-    	'npm update', 
+    	// 'npm update',
     	'gulp production',
     	'php artisan up',
     	], {filePath: 'shell.log'})
     .pipe(gulp.dest('logs'))
 });
+
+
+
+gulp.task('js:clean', function () {
+    return gulp.src('./public_html/js/**/*', {read: false})
+        .pipe(clean());
+});
+gulp.task('js', function () {
+    return browserify({
+        entries: './resources/assets/js/app.js',
+        debug: true,
+        paths: ['./node_modules']
+    })
+    .transform('babelify', {
+        presets: ['es2015']
+    })
+    .bundle()
+    .on('error', function(err){
+        gutil.log(gutil.colors.red.bold('[browserify error]'));
+        gutil.log(err.message);
+        this.emit('end');
+    })
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest('./public_html/js/'));
+});
+
+gulp.task('js:production',['js:clean'], function () {
+    return browserify({
+            entries: './resources/assets/js/app.js',
+            debug: false,
+        paths: ['./node_modules']
+        })
+        .transform('babelify', {
+            presets: ['es2015']
+        })
+        .bundle()
+        .on('error', function(err){
+            gutil.log(gutil.colors.red.bold('[browserify error]'));
+            gutil.log(err.message);
+            this.emit('end');
+        })
+        .pipe(source('bundle.js'))
+        .pipe(buffer())
+        .pipe(uglify())
+        .pipe(gulp.dest('./public_html/js/'));
+});
+
+
 
 
 
@@ -73,7 +129,7 @@ gulp.task('sass:clean', function () {
     .pipe(clean());
 });
 
-gulp.task('sass:prodaction',['sass:clean'], function () {
+gulp.task('sass:production',['sass:clean'], function () {
     return gulp.src('./resources/assets/sass/**/*.sass')
         .pipe(plumber())
         .pipe(sass({
@@ -91,9 +147,10 @@ gulp.task('serve', ['sass','image:production'], function() {
         notify: false
     });
     gulp.watch('./resources/assets/sass/**/*', ['sass']);
+    gulp.watch('./resources/assets/js/**/*', ['js']);
     gulp.watch(["./public_html/**/*", "./resources/views/**/*"]).on('change', function () {
         browserSync.reload();
     });
 });
 
-gulp.task('production', ['sass:prodaction', 'image:production']);
+gulp.task('production', ['sass:production', 'image:production']);

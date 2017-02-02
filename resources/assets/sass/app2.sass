@@ -1,0 +1,152 @@
+@import url(https://fonts.googleapis.com/css?family=Comfortaa:300,400,700&amp;subset=cyrillic-ext)
+@import "variables"
+@import "mixins"
+@import "vendors/grid"
+
+
+
+//.container
+//  width: 900px
+//.container
+//  +d()
+
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+html, body
+  width: 100%
+  height: 100%
+  font-size: 16px
+  font-family: 'Comfortaa', cursive
+
+
+.ul-clear
+  list-style: none
+
+
+
+
+
+
+//Главное меню
+.menu-top__wrapper
+  background: #fff
+.menu-top
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 15px 0
+
+.menu-top__logo > img
+  +responsive($L)
+    width: 80px
+.menu-top__list a
+  font-weight: bold
+  text-decoration: none
+  font-size: 1rem
+  +responsive($L)
+    color: red
+    font-size: .9rem
+.menu-top__list li
+  //&:after
+  //  content: ''
+  //  display: inline-block
+  //  margin-left: 2px
+  //  position: relative
+  //  bottom: 3px
+  //  width:  6px
+  //  height: 6px
+  //  border-radius: 50%
+  //  background: #000
+  display: inline-block
+  &:not(:last-of-type)
+    margin-right: 10px
+.menu-top__list_main a
+  color: $black2
+
+  &:hover
+    color: $black1
+.menu-top__list_acc a
+  color: $color2
+  font-weight: bold
+
+
+
+
+//Главное меню нижнее
+.menu-bottom__wrapper
+  background: $color1
+.menu-bottom
+  list-style: none
+  text-align: center
+  padding: 10px 0
+  display: flex
+  justify-content: center
+  overflow-x: auto
+  & li
+    display: inline-block
+    &:not(:last-of-type)
+      margin-right: 10px
+    a
+      white-space: pre
+      color: #fff
+      font-size: $menu-bottom-fz
+      text-decoration: none
+      &:hover
+        color: rgba(#fff, .8)
+
+//Главное изображение с текстом
+.slider
+  height: 666px
+  width: 100%
+  background-image: url(../images/slider.jpg)
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center center
+.slider-texts
+  display: flex
+  flex-direction: column
+  justify-content: center
+  height: 100%
+  width: 680px
+  margin: 0 auto
+  position: relative
+  left: -170px
+
+
+.slider-texts__big-text
+  font-size: 4rem
+  font-weight: bold
+  text-transform: uppercase
+  color: #fff
+  line-height: 1
+  text-shadow: 0 0 10px rgba($black1, .2)
+.slider-texts__under_big-text
+  font-size: 1.5rem
+  color: #fff
+  line-height: 1
+  text-shadow: 0 0 20px rgba($black1, .4)
+.slider-texts__desc
+  font-style: italic
+  margin-top: 40px
+  color: #fff
+  line-height: 1.6
+  font-size: 1.3rem
+  text-shadow: 0 0 20px rgba($black1, .4)
+  font-family: "Times New Roman", serif
+.slider-texts__action
+  margin-top: 40px
+
+  .slider-texts__btn
+    font-size: 2rem
+    padding: 20px 40px
+    border: 2px solid rgba(#fff, .8)
+    background: rgba($black1, .3)
+    color: rgba(#fff, .8)
+    transition: all 0.1s linear
+    cursor: pointer
+
+    &:hover
+      border-color: #fff
+      color: #fff

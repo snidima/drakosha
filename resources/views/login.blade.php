@@ -16,7 +16,7 @@
         <h1>Войти в систему</h1>
     @endif
 
-    <form action="{{route('login')}}" method="post" class="form_login">
+    <form action="{{route('login')}}" method="post" class="form_login form-ajax">
         <small class="errors">
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
@@ -49,6 +49,7 @@
         </div>
         <div class="text-right">
             <input type="submit" value="Войти">
+            <div class="loader"></div>
         </div>
     </form>
 @endsection

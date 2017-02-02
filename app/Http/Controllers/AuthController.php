@@ -98,10 +98,12 @@ class AuthController extends Controller
 
     public function postLogin( Request $request )
     {
+//        sleep(5);
         $res = $this->validate($request, [
             'email' => 'required|max:250|email',
             'password' => 'required|min:6',
         ]);
+
 
 
         if (Auth::attempt([

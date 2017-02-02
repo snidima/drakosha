@@ -1,20 +1,52 @@
+require('./bootstrap');
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * include Vue and Vue Resource. This gives a great starting point for
- * building robust, powerful web applications using Vue and Laravel.
- */
 
-//require('./bootstrap');
+function defaultAjax(url, params, btn) {
+    btn.addClass('loading');
+    return new Promise(function(success, fail){
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: url,
+            data: params,
+            success: function( d ){
+                success( d );
+                btn.removeClass('loading');
+            },
+            error: function( d ){
+                fail( fail );
+                btn.removeClass('loading');
+            }
+        });
+    });
+}
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the body of the page. From here, you may begin adding components to
- * the application, or feel free to tweak this setup for your needs.
- */
 
-// Vue.component('example', require('./components/Example.vue'));
+$('.form-ajax').submit( function(){
+    event.preventDefault();
 
-// const app = new Vue({
-//     el: '#app'
-// });
+    defaultAjax( $(this).attr('action'), $(this).serialize(), $(this).find('input[type="submit"]') ).then(
+        function(d){
+            alert('ok');
+        },
+        function(d){
+            alert('no');
+        }
+    );
+
+    // let data = $(this).serialize();
+    // // console.log( $(this).attr('action') );
+    // $.ajax({
+    //     type: "POST",
+    //     dataType: "json",
+    //     url: $(this).attr('action'),
+    //     data: data,
+    //     success: function( d ){
+    //
+    //     },
+    //     error: function( d ){
+    //         console.log(d.responseJSON);
+    //     }
+    // });
+
+});
