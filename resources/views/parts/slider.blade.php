@@ -1,3 +1,4 @@
+<div class="slider-texts__effect"></div>
 <div class="slider-texts">
     <div class="slider-texts__big-text"><span class="color1">У</span>мный <span class="color2">Д</span>ракоша</div>
     <div class="slider-texts__under_big-text">Онлайн конкурс для маладших школьников</div>
@@ -7,6 +8,6 @@
         по различным дисциплинам.
     </div>
     <div class="slider-texts__action">
-        <button class="slider-texts__btn">Подробнее</button>
+        <button class="slider-texts__btn"><i class="fa fa-info" aria-hidden="true"></i>Подробнее..</button>
     </div>
 </div>

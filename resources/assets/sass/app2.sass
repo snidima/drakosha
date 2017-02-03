@@ -20,56 +20,77 @@ html, body
   font-size: 16px
   font-family: 'Comfortaa', cursive
 
-
+.tac
+  text-align: center
 .ul-clear
   list-style: none
 
+.color1
+  color: $color1
+.color2
+  color: $color2
 
-
-
-
-
+.d
+  +d()
 //Главное меню
 .menu-top__wrapper
   background: #fff
+  max-width: 1170px
+  margin-left: auto
+  margin-right: auto
+  +responsive($L)
+    width: 100%
+    padding-left: 20px
+    padding-right: 20px
+.menu-top__logo > img
+  max-width: 100%
+  height: auto
+  +responsive($L)
+    max-width: 70px
+  +responsive($S)
+    max-width: 100%
+    margin-bottom: 20px
+
 .menu-top
   display: flex
   justify-content: space-between
   align-items: center
   padding: 15px 0
+  flex-direction: row
+  font-size: 1rem
 
-.menu-top__logo > img
-  +responsive($L)
-    width: 80px
+  +responsive($S)
+    flex-direction: column
+    font-size: 1rem
+    &.menu-top_mobile-active .menu-top__list
+      display: block
+    &:not(.menu-top_mobile-active) .menu-top__list
+      display: none
+
+
+
 .menu-top__list a
   font-weight: bold
   text-decoration: none
-  font-size: 1rem
-  +responsive($L)
-    color: red
-    font-size: .9rem
+
 .menu-top__list li
-  //&:after
-  //  content: ''
-  //  display: inline-block
-  //  margin-left: 2px
-  //  position: relative
-  //  bottom: 3px
-  //  width:  6px
-  //  height: 6px
-  //  border-radius: 50%
-  //  background: #000
   display: inline-block
   &:not(:last-of-type)
     margin-right: 10px
+  +responsive($S)
+    &:not(:last-of-type)
+     margin-right: 0
+     margin-bottom: 5px
+    display: block
+    text-align: center
+.menu-top__list_main
+  +responsive($S)
+    margin-bottom: 25px
 .menu-top__list_main a
   color: $black2
-
   &:hover
     color: $black1
-.menu-top__list_acc a
-  color: $color2
-  font-weight: bold
+
 
 
 
@@ -77,13 +98,13 @@ html, body
 //Главное меню нижнее
 .menu-bottom__wrapper
   background: $color1
+
 .menu-bottom
   list-style: none
   text-align: center
-  padding: 10px 0
-  display: flex
-  justify-content: center
+  padding: 14px 20px
   overflow-x: auto
+  white-space: nowrap
   & li
     display: inline-block
     &:not(:last-of-type)
@@ -98,55 +119,289 @@ html, body
 
 //Главное изображение с текстом
 .slider
+  &:after
+    content: ''
+    position: absolute
+    left: 0
+    top: 0
+    right: 0
+    bottom: 0
+    background: rgba(#000, .1)
   height: 666px
   width: 100%
-  background-image: url(../images/slider.jpg)
+  background-image: url(../images/slider-2.jpg)
   background-size: cover
   background-repeat: no-repeat
   background-position: center center
+  position: relative
+.slider-texts__effect
+  background: rgba(#fff, .15)
+  width: 100%
+  position: absolute
+  right: -47%
+  height: 100%
+  transform: skewX(-15deg)
+  z-index: 1
+
 .slider-texts
+  position: relative
+  z-index: 2
+  text-align: right
   display: flex
   flex-direction: column
   justify-content: center
   height: 100%
-  width: 680px
+  max-width: 1170px
   margin: 0 auto
-  position: relative
-  left: -170px
+
+
+
+
 
 
 .slider-texts__big-text
-  font-size: 4rem
+  font-size: 3.4rem
   font-weight: bold
   text-transform: uppercase
   color: #fff
   line-height: 1
-  text-shadow: 0 0 10px rgba($black1, .2)
+  text-shadow: 0 0 20px rgba($black1, .2)
 .slider-texts__under_big-text
-  font-size: 1.5rem
+  font-size: 1.3rem
   color: #fff
   line-height: 1
-  text-shadow: 0 0 20px rgba($black1, .4)
+  text-shadow: 0 0 10px rgba($black1, .4)
 .slider-texts__desc
   font-style: italic
   margin-top: 40px
   color: #fff
   line-height: 1.6
-  font-size: 1.3rem
-  text-shadow: 0 0 20px rgba($black1, .4)
-  font-family: "Times New Roman", serif
+  font-size: 1.1rem
+  text-shadow: 0 0 10px rgba($black1, .6)
+
 .slider-texts__action
   margin-top: 40px
-
   .slider-texts__btn
-    font-size: 2rem
+    font-size: 1.6rem
+    font-weight: lighter
     padding: 20px 40px
-    border: 2px solid rgba(#fff, .8)
-    background: rgba($black1, .3)
-    color: rgba(#fff, .8)
+    border: none
+    background: $color1
+    color: #fff
     transition: all 0.1s linear
     cursor: pointer
-
+    border-radius: $br
+    .fa
+      margin-right: 15px
     &:hover
-      border-color: #fff
-      color: #fff
+      background: lighten($color1, 4%)
+
+
+
+
+.btn
+  border-radius: $br
+  border-width: $bw
+  border-style: solid
+  padding: 7px
+  font-size: 1rem
+  display: inline-block
+  vertical-align: middle
+  .fa
+    font-size: 1rem
+    padding-right: 5px
+.btn-color1
+  border-color: $color1
+  color: $color1
+  font-weight: bold
+.btn-trans
+  border: none
+
+
+
+
+
+
+
+
+.main-section
+  padding: 100px 0
+.main-section__header
+  font-size: 2.5rem
+  color: $black1
+  font-weight: lighter
+  margin-bottom: 45px
+  text-align: center
+  text-transform: uppercase
+  position: relative
+  z-index: 3
+.main-section__header_white
+  color: #fff
+.school-items
+  display: flex
+  width: 100%
+
+.school-items__item
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  width: 20%
+  text-align: center
+  padding: 15px
+  transition: all 0.1s linear
+  border-radius: $br
+  text-decoration: none
+  cursor: pointer
+  position: relative
+  &:hover
+    background: rgba(#000,.05)
+    .school-items__action
+      background: lighten($color1, 5%)
+
+.school-items__image
+  width:  182px
+  height: 182px
+  background-position: center center
+  background-size: 100%
+  background-repeat: no-repeat
+  border-radius: 50%
+  margin-left: auto
+  margin-right: auto
+  margin-bottom: 15px
+.school-items__text
+  font-size: 1rem
+  font-weight: bold
+  color: $black1
+  margin-bottom: 5px
+.school-items__small
+  color: $black4
+  display: block
+  font-size: .9rem
+.school-items__action
+  border: none
+  font-size: 1rem
+  font-family: 'Comfortaa', cursive
+  background: $color1
+  border-radius: $br
+  padding: 10px 20px
+  color: #fff
+  display: inline-block
+  margin-top: 10px
+  cursor: pointer
+  .fa
+    margin-right: 8px
+
+
+.main-section-bg
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center center
+  position: relative
+
+.main-section_2:before
+  content: ''
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  background:  linear-gradient(45deg, lighten($color2, 15%) 0%, $color2 100%)
+  opacity: 0.8
+.main-section-bg_text
+  position: relative
+  z-index: 1
+.main-section-bg_text-2
+  text-align: center
+  color: #fff
+  font-size: 1.6rem
+  font-weight: lighter
+  line-height: 1.5
+  z-index: 1
+
+.section-times__title
+  font-size: 1.35rem
+  font-weight: bold
+  margin-top: 20px
+  
+.section-times__devide
+  width: 75px
+  height: 2px
+  margin: 0 auto
+  margin-top: 20px
+  
+.section-times__desc
+  margin-top: 20px
+  color: $black2
+  line-height: 1.5
+  font-size: 1.1rem
+
+.section-times_1
+  .section-times__title
+    color: $color2
+  .section-times__devide
+    background: $color2
+  .section-times__desc b
+    color: $color2
+.section-times_2
+  .section-times__title
+    color: $color3
+  .section-times__devide
+    background: $color3
+  .section-times__desc b
+    color: $color3
+.section-times_3
+  .section-times__title
+    color: $color1
+  .section-times__devide
+    background: $color1
+  .section-times__desc b
+    color: $color1
+
+.main-section__pay
+  background: rgba(#000, .04)
+.section-pay
+  max-width: 300px
+  display: inline-block
+  text-align: center
+.section-pay_l
+  text-align: right
+.section-pay_r
+  text-align: left
+.section-pay__desc
+  line-height: 1.5
+  color: $black2
+  font-size: 1.1rem
+.section-pay__title
+  font-size: 6rem
+  color: $color3
+
+
+.section-award__title
+  font-size: 1.5rem
+  color: $black1
+  margin-bottom: 20px
+  font-weight: bold
+.section-award__desc
+  line-height: 1.5
+  font-size: 1.1rem
+  color: $black2
+
+
+
+.footer-wrapper
+  background: #343434
+  padding: 20px
+.footer
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: center
+.footer-menu
+  list-style: none
+  li
+    display: inline-block
+    &:not(:last-of-type)
+      margin-right: 10px
+    a
+      color: #b0b0b0
+      text-decoration: none
