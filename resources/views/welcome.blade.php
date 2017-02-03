@@ -115,7 +115,7 @@
                     </div>
                     <div class="col-md-5 section-pay_r">
                         <div class="section-pay">
-                            <div class="section-pay__title">60 Р</div>
+                            <div class="section-pay__title">10 Р</div>
                             <div class="section-pay__desc">
                                 Остаются в школе<br>
                                 на сопутствующие<br>
