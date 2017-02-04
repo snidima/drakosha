@@ -17,10 +17,14 @@ use Illuminate\Support\Facades\Session;
 Route::get('/test', function (){
     Bugsnag::notifyError('ErrorType', 'Test Error');
 });
+
 Route::get('/', function () {
     return view('welcome');
 })->name('main');
 
+Route::get('/payments', function () {
+    return view('payments');
+})->name('payments');
 
 
 

@@ -37,7 +37,7 @@ var gulpSSH = new GulpSSH({
 
 
 gulp.task('image:clean', function () {
-	return gulp.src('./public_html/images/**/*', {read: false})
+	return gulp.src('./public_html/images/**/*', {read: true})
 	    .pipe(clean());
 });
 gulp.task('image:production',['image:clean'], function () {

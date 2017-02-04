@@ -3,17 +3,17 @@
         {{--<nav class="menu-top">--}}
         <nav class="menu-top  menu-top_mobile-active">
             <div class="menu-top__logo">
-                <img src="/images/logo.png" alt="logo">
+                <a href="{{route('main')}}"><img src="/images/logo.png" alt="logo"></a>
             </div>
             <ul class="menu-top__list menu-top__list_main">
-                <li><a href="#">Главная!</a></li>
+                <li><a href="{{route('main')}}">Главная!</a></li>
                 {{--<li><a href="#">Правила участия</a></li>--}}
                 <li><a href="#">Как принять участие?</a></li>
-                <li><a href="#">Способы оплаты</a></li>
+                <li><a href="{{route('payments')}}">Способы оплаты</a></li>
                 <li><a href="#">Контакты</a></li>
             </ul>
             <ul class="menu-top__list menu-top__list_acc">
-                <li><a href="#" class="btn btn-color1"><i class="fa fa-sign-in" aria-hidden="true"></i>Войти</a></li>
+                <li><a href="{{route('login')}}" class="btn btn-color1"><i class="fa fa-sign-in" aria-hidden="true"></i>Войти</a></li>
                 <li><a href="#" class="btn btn-trans btn-color1"><i class="fa fa-lock" aria-hidden="true"></i>Регистрация</a></li>
             </ul>
         </nav>

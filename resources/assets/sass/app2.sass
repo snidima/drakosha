@@ -20,6 +20,30 @@ html, body
   font-size: 16px
   font-family: 'Comfortaa', cursive
 
+
+.main
+  width: 100%
+  height: 100%
+  display: flex
+  flex-direction: column
+  header
+  main
+    flex-grow: 1
+  footer
+
+.h1
+  font-size: 2.5rem
+  color: $black1
+  font-weight: lighter
+  margin-bottom: 45px
+  margin-top: 45px
+  text-align: center
+  text-transform: uppercase
+  line-height: 1.5
+a
+  color: $color2
+  &:hover
+    text-decoration: none
 .tac
   text-align: center
 .ul-clear
@@ -217,9 +241,21 @@ html, body
 .btn-trans
   border: none
 
-
-
-
+.btn2
+  text-decoration: none
+  border-radius: $br
+  padding: 10px 20px
+  font-size: 1rem
+  display: inline-block
+  vertical-align: middle
+  transition: all 0.1s linear
+  .fa
+    padding-right: 5px
+.btn2-color1
+  background-color: $color1
+  color: #fff
+  &:hover
+    background-color: lighten($color1, 10%)
 
 
 
@@ -406,3 +442,67 @@ html, body
     a
       color: #b0b0b0
       text-decoration: none
+
+
+ol.payments
+  list-style: none
+  margin-top: 45px
+  margin-bottom: 45px
+  li
+    font-size: 1.1rem
+    color: $black1
+    line-height: 1.5
+    counter-increment: list1
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    &:not(:last-of-type)
+      margin-bottom: 20px
+  li:before
+    content: counter(list1)
+    font-size: 3rem
+    color: $color1
+    line-height: 1
+    font-weight: bold
+    margin-right: 20px
+.payments-warning
+  margin-top: 45px
+  color: $black1
+  line-height: 1.5
+  font-size: .9rem
+  .r
+    text-align: justify
+    display: block
+    font-weight: bold
+    font-style: italic
+    margin-top: 5px
+
+
+
+
+.form
+  margin-left: auto
+  margin-right: auto
+  .row:not(:last-of-type)
+    margin-bottom: 15px
+
+  label, input[type="text"], input[type="password"]
+    display: block
+    width: 100%
+  label
+    text-align: right
+    font-size: 1.1rem
+    line-height: 45px
+    font-weight: bold
+    color: $black1
+
+  input[type="text"], input[type="password"]
+    background-color: #f0eef0
+    border: #e1e1e1
+    padding: 10px
+    border-radius: $br
+    font-size: 1.3rem
+    color: $black1
+
+.form-large
+  max-width: 720px
