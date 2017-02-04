@@ -13,8 +13,13 @@
                 <li><a href="#">Контакты</a></li>
             </ul>
             <ul class="menu-top__list menu-top__list_acc">
-                <li><a href="{{route('login')}}" class="btn btn-color1"><i class="fa fa-sign-in" aria-hidden="true"></i>Войти</a></li>
-                <li><a href="#" class="btn btn-trans btn-color1"><i class="fa fa-lock" aria-hidden="true"></i>Регистрация</a></li>
+                @if( Auth::check() )
+                    <li><a href="{{route('user')}}" class="btn btn-color1"><i class="fa fa-user" aria-hidden="true"></i>Личный кабинет</a></li>
+                    <li><a href="{{route('logout')}}" class="btn btn-trans btn-color1"><i class="fa fa-sign-out" aria-hidden="true"></i>Выйти</a></li>
+                @else
+                    <li><a href="{{route('login')}}" class="btn btn-color1"><i class="fa fa-sign-in" aria-hidden="true"></i>Войти</a></li>
+                    <li><a href="#" class="btn btn-trans btn-color1"><i class="fa fa-lock" aria-hidden="true"></i>Регистрация</a></li>
+                @endif
             </ul>
         </nav>
 

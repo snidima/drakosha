@@ -2,7 +2,7 @@
 @import "variables"
 @import "mixins"
 @import "vendors/grid"
-
+@import "vendors/dialog"
 
 
 //.container
@@ -14,6 +14,7 @@
   margin: 0
   padding: 0
   box-sizing: border-box
+  outline: none
 html, body
   width: 100%
   height: 100%
@@ -158,6 +159,7 @@ a
   background-repeat: no-repeat
   background-position: center center
   position: relative
+  overflow: hidden
 .slider-texts__effect
   background: rgba(#fff, .15)
   width: 100%
@@ -496,13 +498,14 @@ ol.payments
     font-weight: bold
     color: $black1
 
-  input[type="text"], input[type="password"]
+  input[type="text"], input[type="password"], input[type="email"]
     background-color: #f0eef0
     border: #e1e1e1
     padding: 10px
     border-radius: $br
     font-size: 1.3rem
     color: $black1
-
+    &.error
+      border: 1px solid red
 .form-large
   max-width: 720px

@@ -17,5 +17,11 @@
 
     <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
     <link rel="stylesheet" href="/css/app2.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-resource@1.1.2/dist/vue-resource.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vex-js/3.0.0/js/vex.combined.min.js"></script>
+
+    <script>vex.defaultOptions.className = 'vex-theme-default'</script>
+    <script src="/js/app.js"></script>
 </body>
 </html>

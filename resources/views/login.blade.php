@@ -4,13 +4,20 @@
 @section('content')
     <div class="container">
         <h1 class="h1">Войти в систему:</h1>
-        <form action="" class="form form-large">
+
+
+
+
+        <form action="{{route('login')}}" class="form form-large" id="app" method="post" v-on:submit.prevent="send">
+            <div class="errors" v-if="errors">
+                ОШИБКУА!
+            </div>
             <div class="row">
                 <div class="col-sm-4">
                     <label for="email">E-mail</label>
                 </div>
                 <div class="col-sm-8">
-                    <input type="text" name="email" id="email">
+                    <input type="email" name="email" id="email" required v-model="formData.email" placeholder="E-mail" v-bind:class="{ error: errors.email }">
                 </div>
             </div>
             <div class="row">
@@ -18,7 +25,7 @@
                     <label for="password">Пароль</label>
                 </div>
                 <div class="col-sm-8">
-                    <input type="password" name="password" id="password">
+                    <input type="password" name="password" required id="password" v-model="formData.password" placeholder="Пароль">
                 </div>
             </div>
             <div class="row">
@@ -29,7 +36,10 @@
                     <a href="#">Забыли пароль?</a>
                 </div>
             </div>
+            <button>fwwfwfw</button>
         </form>
+
+
     </div>
 @endsection
 

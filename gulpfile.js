@@ -83,7 +83,7 @@ gulp.task('js', function () {
         gutil.log(err.message);
         this.emit('end');
     })
-    .pipe(source('bundle.js'))
+    .pipe(source('app.js'))
     .pipe(gulp.dest('./public_html/js/'));
 });
 
@@ -102,7 +102,7 @@ gulp.task('js:production',['js:clean'], function () {
             gutil.log(err.message);
             this.emit('end');
         })
-        .pipe(source('bundle.js'))
+        .pipe(source('app.js'))
         .pipe(buffer())
         .pipe(uglify())
         .pipe(gulp.dest('./public_html/js/'));
