@@ -19,7 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vex-js/3.0.0/js/vex.combined.min.js"></script>
 
     <script>vex.defaultOptions.className = 'vex-theme-default'</script>
-    <script src="/js/app.js"></script>
+
 </head>
 <body>
 
@@ -36,6 +36,6 @@
     </div>
 
 
-
+    <script src="/js/app.js"></script>
 </body>
 </html>
