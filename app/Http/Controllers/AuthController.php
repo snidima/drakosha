@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\PassReset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
@@ -25,10 +26,13 @@ class AuthController extends Controller
         ]);
 
         if ( $validator->fails() )
-            return redirect()
-                ->route('register')
-                ->withErrors($validator)
-                ->withInput();
+            return Response::json($validator->getMessageBag()->toArray(), 422);
+
+//            return redirect()
+//                ->route('register')
+//                ->withErrors($validator)
+//                ->withInput();
+
 
 
         $recaptcha = false;
@@ -36,15 +40,13 @@ class AuthController extends Controller
             curl_setopt($curl, CURLOPT_URL, 'https://www.google.com/recaptcha/api/siteverify');
             curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
             curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, "secret=6LcVABMUAAAAAObjmOhr7xGknunxnt5r3IEzpnLj&response={$request->input('g-recaptcha-response')}");
+            curl_setopt($curl, CURLOPT_POSTFIELDS, "secret=	6LcVABMUAAAAAObjmOhr7xGknunxnt5r3IEzpnLj&response={$request->input('g-recaptcha-response')}");
             $recaptcha = json_decode(curl_exec($curl));
             curl_close($curl);
         }
 
         if ( !$recaptcha->success )
-            return redirect()
-                ->route('register')
-                ->withInput();
+            return Response::json(['g-recaptcha-response' => ['Нужно пройти проверку'] ], 422);
 
         $user = $user->createUser( $request->all() );
 
@@ -58,8 +60,11 @@ class AuthController extends Controller
             $message->to($request->email)->subject('Регистрация на ДРАКОШЕ.');
         });
 
-//        Auth::login($user);
-        return redirect( route('login') )->with('activated', 'notactivated');
+        return Response::json([
+            'success' => true,
+            'redirect' => route('login')
+        ], 200);
+
     }
 
 

@@ -1,6 +1,8 @@
 // var Vue = require('vue');
 window.$ = require('jquery');
+window._ = require('lodash');
 const TOKEN = document.querySelector('meta[name="csrf-token"]').content;
+
 
 Vue.http.interceptors.push((request, next) => {
     request.method = 'POST';
@@ -11,16 +13,90 @@ Vue.http.interceptors.push((request, next) => {
 
 
 
-var app = new Vue({
-    el: '#app',
+var register = new Vue({
+    el: '#form-register',
+    data: {
+        email: {
+            value: '',
+            error: false
+        },
+        password: {
+            value: '',
+            error: false
+        },
+        password_confirmation: {
+            value: '',
+            error: false
+        },
+        name: {
+            value: '',
+            error: false
+        },
+        surname: {
+            value: '',
+            error: false
+        },
+        lastname:{
+            value: '',
+            error: false
+        },
+
+
+    },
+    computed:{
+        all: function(){
+            var data = {
+                email: this.email.value,
+                password: this.password.value,
+                password_confirmation: this.password_confirmation.value,
+                name: this.name.value,
+                surname: this.surname.value,
+                lastname: this.lastname.value,
+                'g-recaptcha-response': $('[name="g-recaptcha-response"]').val()
+            };
+            return data;
+        }
+    },
+
+
+    methods: {
+        send: function(){
+
+            var self = this;
+            console.log( this.all );
+            this.$http.post('/register', this.all).then(function(response) {
+
+                vex.dialog.alert({
+                    message: 'Для регистрации необхадима активация аккаунта! Проверьте почту и следуйте дальнейшим инструкциям!',
+                    callback: function(){
+                        window.location.href = response.body.redirect;
+                    }
+                })
+                // window.location.href = "/userzone";
+
+            }, function(response) {
+                // console.log(response.body);
+                _.forOwn(self.all, function (e,a) {
+                    if ( response.body[a] )
+                        self[a].error = response.body[a][0];
+                    else
+                        self[a].error = false;
+                });
+
+            });
+
+            return false;
+        }
+    }
+});
+var login = new Vue({
+    el: '#form-login',
     data: {
         formData: {
             email: '',
             password: '',
             saveMe: true
-        },
-        errors: false
-
+        }
     },
     methods:{
         send: function(){
@@ -32,7 +108,6 @@ var app = new Vue({
             }, function(response) {
                 vex.dialog.alert({
                     message: 'Введены не верные Email/Пароль',
-                    // className: 'vex-theme-wireframe' // Overwrites defaultOptions
                 })
             });
 

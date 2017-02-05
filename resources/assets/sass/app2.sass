@@ -10,11 +10,16 @@
 //.container
 //  +d()
 
+.flex-lr
+  display: flex
+  justify-content: space-between
+  align-items: center
 *
   margin: 0
   padding: 0
   box-sizing: border-box
   outline: none
+  font-family: 'Comfortaa', cursive
 html, body
   width: 100%
   height: 100%
@@ -50,6 +55,9 @@ a
 .ul-clear
   list-style: none
 
+.block
+  display: block
+  width: 100%
 .color1
   color: $color1
 .color2
@@ -233,6 +241,9 @@ a
   font-size: 1rem
   display: inline-block
   vertical-align: middle
+  background: transparent
+  font-family: 'Comfortaa', cursive
+  cursor: pointer
   .fa
     font-size: 1rem
     padding-right: 5px
@@ -251,6 +262,8 @@ a
   display: inline-block
   vertical-align: middle
   transition: all 0.1s linear
+  border: none
+  cursor: pointer
   .fa
     padding-right: 5px
 .btn2-color1
@@ -485,27 +498,48 @@ ol.payments
 .form
   margin-left: auto
   margin-right: auto
-  .row:not(:last-of-type)
-    margin-bottom: 15px
-
-  label, input[type="text"], input[type="password"]
+  margin-top: 20px
+  margin-bottom: 20px
+  text-align: right
+  .form__row
+    position: relative
+  .form__row:not(:last-of-type)
+    margin-bottom: 20px
+  .form__action
+    margin-top: 20px
+  label, input[type="text"], input[type="password"], input[type="email"]
     display: block
     width: 100%
   label
-    text-align: right
-    font-size: 1.1rem
-    line-height: 45px
+    text-align: left
+    font-size: 1rem
     font-weight: bold
     color: $black1
+    margin-bottom: 5px
 
   input[type="text"], input[type="password"], input[type="email"]
     background-color: #f0eef0
-    border: #e1e1e1
-    padding: 10px
+    padding: 15px
     border-radius: $br
-    font-size: 1.3rem
+    font-size: .9rem
+    font-weight: bold
     color: $black1
+    border: 2px solid #e1e1e1
+    &:focus
+      border-color: $color1
+      color: $color1
+      background: #f6f4f6
     &.error
-      border: 1px solid red
+      border-color: $color3
+    
+.form__error
+  font-size: .6rem
+  color: $color3
+  position: absolute
+  width: 100%
+  text-align: center
+  padding-top: 3px
+.form-small
+  max-width: 380px
 .form-large
-  max-width: 720px
+  max-width: 760px

@@ -10,7 +10,7 @@
         <div class="footer__item footer-menu-wrapper">
             <ul class="footer-menu">
                 <li><a href="#">Главная</a></li>
-                <li><a href="#">Договор оверта</a></li>
+                <li><a href="#">Договор оферта</a></li>
                 <li><a href="#">О проекте</a></li>
                 <li><a href="#">Контакты</a></li>
             </ul>

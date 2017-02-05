@@ -5,41 +5,20 @@
     <div class="container">
         <h1 class="h1">Войти в систему:</h1>
 
-
-
-
-        <form action="{{route('login')}}" class="form form-large" id="app" method="post" v-on:submit.prevent="send">
-            <div class="errors" v-if="errors">
-                ОШИБКУА!
+        <form action="{{route('login')}}" class="form form-small" id="form-login" method="post" v-on:submit.prevent="send" novalidate>
+            <div class="form__row">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" required v-model="formData.email" placeholder="E-mail">
             </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <label for="email">E-mail</label>
-                </div>
-                <div class="col-sm-8">
-                    <input type="email" name="email" id="email" required v-model="formData.email" placeholder="E-mail" v-bind:class="{ error: errors.email }">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
+            <div class="form__row">
                     <label for="password">Пароль</label>
-                </div>
-                <div class="col-sm-8">
                     <input type="password" name="password" required id="password" v-model="formData.password" placeholder="Пароль">
-                </div>
             </div>
-            <div class="row">
-                <div class="col-sm-4">
-
-                </div>
-                <div class="col-sm-8">
-                    <a href="#">Забыли пароль?</a>
-                </div>
+            <div class="form__row flex-lr">
+                <a href="#">Забыли пароль?</a>
+                <button class="btn btn-color1"><i class="fa fa-sign-in" aria-hidden="true"></i>Войти</button>
             </div>
-            <button>fwwfwfw</button>
         </form>
-
-
     </div>
 @endsection
 
