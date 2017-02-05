@@ -18,7 +18,7 @@
                     <li><a href="{{route('logout')}}" class="btn btn-trans btn-color1"><i class="fa fa-sign-out" aria-hidden="true"></i>Выйти</a></li>
                 @else
                     <li><a href="{{route('login')}}" class="btn btn-color1"><i class="fa fa-sign-in" aria-hidden="true"></i>Войти</a></li>
-                    <li><a href="{{route('register')}}" class="btn btn-trans btn-color1"><i class="fa fa-lock" aria-hidden="true"></i>Регистрация</a></li>
+                    <li><a href="{{route('register')}}" class="btn btn-trans btn-color1"><i class="fa fa-unlock" aria-hidden="true"></i>Регистрация</a></li>
                 @endif
             </ul>
         </nav>

@@ -57,7 +57,7 @@ class AuthController extends Controller
         $url = route('activate',['id'=>$user->id,'code'=> $code->code]);
         Mail::send('emails.registration', array('url' => $url), function($message) use ($request)
         {
-            $message->to($request->email)->subject('Регистрация на ДРАКОШЕ.');
+            $message->to($request->email)->subject('Регистрация на drakosha-olimpiada.ru');
         });
 
         return Response::json([

@@ -44,7 +44,7 @@
 
             <div class="form__action flex-lr">
                 <div class="g-recaptcha" data-sitekey="6LcVABMUAAAAAEoGqerXoZmiWtePUwtWBE7LI7lp" data-callback="recaptchaCallback" v-bind:class="{ error: 'g-recaptcha-response'.error }"></div>
-                <button class="btn2 btn2-color1" disabled id="btn-send"><i class="fa fa-lock" aria-hidden="true"></i>Регистрация</button>
+                <button class="btn2 btn2-color1" disabled id="btn-send"><i class="fa fa-unlock" aria-hidden="true"></i>Регистрация</button>
             </div>
             <div class="form__pending" v-if="pending">
                 <div class="form__pending-wrapper">
