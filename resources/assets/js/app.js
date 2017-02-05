@@ -16,6 +16,7 @@ Vue.http.interceptors.push((request, next) => {
 var register = new Vue({
     el: '#form-register',
     data: {
+        pending: false,
         email: {
             value: '',
             error: false
@@ -40,12 +41,16 @@ var register = new Vue({
             value: '',
             error: false
         },
+        'g-recaptcha-response': {
+            value: '',
+            error: false
+        }
 
 
     },
     computed:{
         all: function(){
-            var data = {
+            return {
                 email: this.email.value,
                 password: this.password.value,
                 password_confirmation: this.password_confirmation.value,
@@ -54,28 +59,28 @@ var register = new Vue({
                 lastname: this.lastname.value,
                 'g-recaptcha-response': $('[name="g-recaptcha-response"]').val()
             };
-            return data;
         }
     },
 
 
     methods: {
+        recaptchaTrue: function( r ){
+          this['g-recaptcha-response'].value = r;
+            $(this.$el).find('#btn-send').removeAttr('disabled');
+        },
         send: function(){
-
             var self = this;
-            console.log( this.all );
+            this.pending = true;
             this.$http.post('/register', this.all).then(function(response) {
-
+                self.pending = false;
                 vex.dialog.alert({
                     message: 'Для регистрации необхадима активация аккаунта! Проверьте почту и следуйте дальнейшим инструкциям!',
                     callback: function(){
                         window.location.href = response.body.redirect;
                     }
                 })
-                // window.location.href = "/userzone";
-
             }, function(response) {
-                // console.log(response.body);
+                self.pending = false;
                 _.forOwn(self.all, function (e,a) {
                     if ( response.body[a] )
                         self[a].error = response.body[a][0];
@@ -84,11 +89,16 @@ var register = new Vue({
                 });
 
             });
-
             return false;
         }
     }
 });
+
+window.recaptchaCallback = register.recaptchaTrue;
+
+
+
+
 var login = new Vue({
     el: '#form-login',
     data: {

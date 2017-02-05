@@ -4,7 +4,7 @@
 
     <div class="container">
         <h1 class="h1">Регистрация</h1>
-        <form action="{{route('register')}}" class="form form-large" id="form-register" method="post" v-on:submit.prevent="send">
+        <form action="{{route('register')}}" class="form form-large" v-bind:class="{ pending: pending}" id="form-register" method="post" v-on:submit.prevent="send">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form__row">
@@ -43,8 +43,26 @@
             </div>
 
             <div class="form__action flex-lr">
-                <div class="g-recaptcha" data-sitekey="6LcVABMUAAAAAEoGqerXoZmiWtePUwtWBE7LI7lp" data-size="normal" v-bind:class="{ error: 'g-recaptcha-response'.error }"></div>
-                <button class="btn2 btn2-color1"><i class="fa fa-lock" aria-hidden="true"></i>Регистрация</button>
+                <div class="g-recaptcha" data-sitekey="6LcVABMUAAAAAEoGqerXoZmiWtePUwtWBE7LI7lp" data-callback="recaptchaCallback" v-bind:class="{ error: 'g-recaptcha-response'.error }"></div>
+                <button class="btn2 btn2-color1" disabled id="btn-send"><i class="fa fa-lock" aria-hidden="true"></i>Регистрация</button>
+            </div>
+            <div class="form__pending" v-if="pending">
+                <div class="form__pending-wrapper">
+                    <div class="sk-circle">
+                        <div class="sk-circle1 sk-child"></div>
+                        <div class="sk-circle2 sk-child"></div>
+                        <div class="sk-circle3 sk-child"></div>
+                        <div class="sk-circle4 sk-child"></div>
+                        <div class="sk-circle5 sk-child"></div>
+                        <div class="sk-circle6 sk-child"></div>
+                        <div class="sk-circle7 sk-child"></div>
+                        <div class="sk-circle8 sk-child"></div>
+                        <div class="sk-circle9 sk-child"></div>
+                        <div class="sk-circle10 sk-child"></div>
+                        <div class="sk-circle11 sk-child"></div>
+                        <div class="sk-circle12 sk-child"></div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

@@ -5,7 +5,7 @@
     <div class="container">
         <h1 class="h1">Войти в систему:</h1>
 
-        <form action="{{route('login')}}" class="form form-small" id="form-login" method="post" v-on:submit.prevent="send" novalidate>
+        <form action="{{route('login')}}" class="form form-small" id="form-login" method="post" v-on:submit.prevent="send">
             <div class="form__row">
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email" required v-model="formData.email" placeholder="E-mail">
