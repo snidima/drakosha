@@ -39,7 +39,7 @@ html, body
   footer
 
 .h1
-  font-size: 2.5rem
+  font-size: 2.1rem
   color: $black1
   font-weight: lighter
   margin-bottom: 45px
@@ -543,9 +543,26 @@ ol.payments
     margin-bottom: 20px
   .form__action
     margin-top: 20px
-  label, input[type="text"], input[type="password"], input[type="email"]
+  label, input[type="text"], input[type="password"], input[type="email"],input[type="number"], textarea, select
     display: block
     width: 100%
+  textarea
+    min-height: 190px
+    resize: vertical
+  select
+    background-color: #f0eef0
+    padding: 15px
+    border-radius: $br
+    font-size: .9rem
+    font-weight: bold
+    color: $black1
+    border: 2px solid #e1e1e1
+    &:focus
+      border-color: $color1
+      color: $color1
+      background: #f6f4f6
+    &.error
+      border-color: $color3
   label
     text-align: left
     font-size: 1rem
@@ -553,7 +570,7 @@ ol.payments
     color: $black1
     margin-bottom: 5px
 
-  input[type="text"], input[type="password"], input[type="email"]
+  input[type="text"], input[type="password"], input[type="email"],input[type="number"], textarea
     background-color: #f0eef0
     padding: 15px
     border-radius: $br
@@ -584,11 +601,83 @@ ol.payments
 
 
 
+.user-header
+  line-height: .7
+  small
+    font-size: .8rem
+    text-transform: none
+    font-weight: bold
+    color: $black4
 
+.user-nav-wrapper .h2
+  text-align: center
+  font-size: 1rem
+  font-weight: bold
+  margin-bottom: 15px
+  color: $black2
+  line-height: 1.5
+.user-nav
+  margin-top: 20px
+  display: flex
+  margin-bottom: 40px
+  justify-content: space-between
+  position: relative
+  z-index: 3
+  &:before
+    content: ''
+    width: 100%
+    height: 5px
+    background: #ededed
+    position: absolute
+    z-index: 0
+    top: 36px
+.user-nav__item
+  width: 16.666666666%
+  padding: 0 10px
+  text-align: center
+  display: flex
+  flex-direction: column
+  align-items: center
+  position: relative
+  z-index: 3
 
+a.user-nav__item
+  text-decoration: none
+.user-nav__step
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 20px
+  width: 80px
+  height: 80px
+  line-height: 40px
+  border-radius: 50%
+  border: 6px solid #ededed
+  color: #fff
+  font-weight: bold
+  font-size: 1.4rem
+  transition: all 0.1s linear
 
+.user-nav__item_disabled .user-nav__step
+  background: #b3b3b3
+.user-nav__item_disabled .user-nav__title
+  color: #909090
 
+.user-nav__item_new .user-nav__step
+  background: $color4
+a.user-nav__item_new:hover .user-nav__step
+  background: lighten($color4, 2%)
 
+a.user-nav__item_old:hover .user-nav__step
+  background: lighten($color2, 5%)
+.user-nav__item_old .user-nav__step
+  background: $color2
+
+.user-nav__title
+  margin-top: 8px
+  font-weight: bold
+  color: $black2
+  text-decoration: none
 
 
 

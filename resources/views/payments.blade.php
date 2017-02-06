@@ -3,7 +3,7 @@
 @section('title', 'Конкурс для младших классов')
 @section('content')
     <div class="container">
-        <h1 class="h1">Оплатить участие вы можете любым удобным для вас способом:</h1>
+        <h1 class="h1">Способы оплаты</h1>
         <div class="row">
             <div class="col-sm-3 tac"><img src="/images/payments/yandex_money.png" alt=""></div>
             <div class="col-sm-3 tac"><img src="/images/payments/sberbank.png" alt=""></div>

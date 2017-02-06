@@ -113,11 +113,11 @@ var login = new Vue({
 
             this.$http.post('/login', this.formData).then(function(response) {
 
-                window.location.href = "/userzone";
+                window.location.href = response.body.redirect;
 
             }, function(response) {
                 vex.dialog.alert({
-                    message: 'Введены не верные Email/Пароль',
+                    message: response.body.error
                 })
             });
 
@@ -125,6 +125,138 @@ var login = new Vue({
         }
     }
 });
+
+
+
+
+
+
+
+
+
+
+var order = new Vue({
+    el: '#order',
+    data: {
+        pending: false,
+        org_num: {
+            value: '',
+            error: false
+        },
+        region: {
+            value: '',
+            error: false
+        },
+        city: {
+            value: '',
+            error: false
+        },
+        address: {
+            value: '',
+            error: false
+        },
+        postcode: {
+            value: '',
+            error: false
+        },
+        school:{
+            value: '',
+            error: false
+        },
+        sert_count:{
+            value: '',
+            error: false
+        },
+        learner:{
+            value: '',
+            error: false
+        },
+        teacher_learner:{
+            value: '',
+            error: false
+        },
+        phone:{
+            value: '',
+            error: false
+        },
+        reward:{
+            value: '',
+            error: false
+        },
+        defaultReward:[]
+
+    },
+    computed:{
+        all: function(){
+            return {
+                org_num: this.org_num.value,
+                region: this.region.value,
+                city: this.city.value,
+                address: this.address.value,
+                postcode: this.postcode.value,
+                school: this.school.value,
+                sert_count: this.sert_count.value,
+                learner: this.learner.value,
+                teacher_learner: this.teacher_learner.value,
+                phone: this.phone.value,
+                reward: this.reward.value,
+            };
+        }
+    },
+    created: function(){
+        this.pending = true;
+        var self = this;
+        this.$http.post('/userzone/order/getDefault').then(
+            function(response) {
+                _.forOwn(self.all, function (e,a) {
+                    if ( response.body.data[a] )
+                        self[a].value = response.body.data[a];
+                    else
+                        self[a].value = false;
+                });
+                self.defaultReward = response.body.rewards;
+
+                self.pending = false;
+            },
+            function(response){
+                self.defaultReward = response.body.rewards;
+                self.reward.value = response.body.rewards[0];
+                self.pending = false;
+                console.log( self.defaultReward);
+            });
+    },
+
+
+
+    methods: {
+
+        send: function(){
+            var self = this;
+            this.pending = true;
+            this.$http.post('/userzone/order', this.all).then(function(response) {
+                self.pending = false;
+                vex.dialog.alert({
+                    message: 'Ваша заявка успешно обработана!',
+                    callback: function(){
+                        window.location.href = response.body.redirect;
+                    }
+                })
+            }, function(response) {
+                self.pending = false;
+                _.forOwn(self.all, function (e,a) {
+                    if ( response.body[a] )
+                        self[a].error = response.body[a][0];
+                    else
+                        self[a].error = false;
+                });
+
+            });
+            return false;
+        }
+    }
+});
+
+
 
 
 

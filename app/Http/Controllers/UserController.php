@@ -18,14 +18,7 @@ class UserController extends Controller
 
     public function main()
     {
-        $params = [
-            'newOrderAvailable' => []
-        ];
-
-        return view('user.main', [
-            'params' => $params,
-            'tasks'  => Task::where('status','=','1')->get()
-        ] );
+        return view('user.main');
     }
 
     public function changePassword( Request $request )

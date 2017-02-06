@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 class Order extends Model
 {
-    static $rewards = [
+    public static $rewards = [
         'Сертификат-онлайн',
         'Почта России',
     ];
+
+
 
     public static function boot()
     {

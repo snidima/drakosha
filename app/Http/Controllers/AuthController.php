@@ -103,7 +103,7 @@ class AuthController extends Controller
 
     public function postLogin( Request $request )
     {
-//        sleep(5);
+
         $res = $this->validate($request, [
             'email' => 'required|max:250|email',
             'password' => 'required|min:6',
@@ -115,10 +115,13 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password,
             'activated' => true,
-        ], true))
-            return redirect(route('user'));
+        ], $request->saveMe))
+            return Response::json([
+                'success' => true,
+                'redirect' => route('user')
+            ], 200);
         else
-            return view('login')->withErrors('Данные не корректны или аккаунт не активирован!');
+            return Response::json(['error' => ['Не корректные E-mail/Пароль'] ], 422);
     }
 
 

@@ -13,7 +13,7 @@ class UserNavComposer extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('user.parts.user-nav', 'App\Http\ViewComposers\UserNavComposer');
     }
 
     /**

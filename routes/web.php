@@ -52,6 +52,7 @@ Route::group([ 'middleware' => 'user', 'prefix'=>'userzone'], function()
 
     Route::get('/order', ['uses'=>'User\OrderController@getOrder'])->name('user.order');
     Route::post('/order', ['uses' => 'User\OrderController@createOrder' ]);
+    Route::post('/order/getDefault', ['uses' => 'User\OrderController@getDefault' ]);
 
     Route::post('/changePassword', [ 'uses' => 'UserController@changePassword' ] )->name('changePassword');
 

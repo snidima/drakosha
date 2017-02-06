@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 class User extends Authenticatable
 {
     private static $defaultUserRole = 'newuser';
@@ -64,4 +65,24 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($pass);
 
     }
+
+    public static function isAvailStep( $step )
+    {
+        if ( !\Config::get('constants.CONCURS') ) return false;
+
+        if ( $step == 1 ){
+            return true;
+        }
+
+        if ( $step == 2 && User::isAvailStep(1) ){
+            if( Auth::user()->orders()->first() )
+                return true;
+            else
+                return false;
+        }
+
+    }
+
+
+
 }
