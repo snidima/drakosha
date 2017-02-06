@@ -259,7 +259,43 @@ var order = new Vue({
 
 
 
+var payment = new Vue({
+    el: '#user-pay',
+    data: {
+        payMethods:[
+            {
+                text: 'Yandex.Деньги',
+                value: 'ya',
+            },
+            {
+                text: 'С помощью квитанции',
+                value: 'check',
+            }
 
+
+        ],
+        selectPayMethods: false,
+        file: false
+    },
+    created: function(){
+      this.selectPayMethods = this.payMethods[1].value
+    },
+    methods:{
+        send: function(){
+
+            return false;
+        },
+        fileChange: function(e){
+            var fullPath = e.target.value;
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            var filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+            this.file = filename;
+        }
+    }
+});
 
 
 

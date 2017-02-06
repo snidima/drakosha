@@ -14,7 +14,10 @@
 .flex-lr
   display: flex
   justify-content: space-between
-  align-items: center
+  align-items: stretch
+  >*:not(:last-child)
+    margin-right: 10px
+
 *
   margin: 0
   padding: 0
@@ -245,6 +248,7 @@ a
   background: transparent
   font-family: 'Comfortaa', cursive
   cursor: pointer
+  white-space: pre
   .fa
     font-size: 1rem
     padding-right: 5px
@@ -256,6 +260,7 @@ a
   border: none
 
 .btn2
+  white-space: pre
   text-decoration: none
   border-radius: $br
   padding: 10px 20px
@@ -549,6 +554,37 @@ ol.payments
   textarea
     min-height: 190px
     resize: vertical
+  input[type="file"]
+    display: none
+  .file-label
+    margin-bottom: 0
+    background-color: #f0eef0
+    padding: 15px
+    border-radius: $br
+    font-size: .9rem
+    font-weight: bold
+    color: $black1
+    border: 2px solid #e1e1e1
+    cursor: pointer
+    word-break: break-all
+    text-overflow: ellipsis
+    white-space: pre
+    max-width: 100%
+    overflow: hidden
+    &.active
+      font-weight: lighter
+      font-size: 0.8rem
+      &:hover
+        border: 2px solid #e1e1e1
+    .fa
+      margin-right: 7px
+      opacity: 0.3
+    &:hover
+      border-color: $color1
+      color: $color1
+      background: #f6f4f6
+    &.error
+      border-color: $color3
   select
     background-color: #f0eef0
     padding: 15px
@@ -596,7 +632,8 @@ ol.payments
   max-width: 380px
 .form-large
   max-width: 760px
-
+.form-full
+  max-width: 100%
 
 
 

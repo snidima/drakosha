@@ -2,19 +2,78 @@
 
 @section('content')
 
+
+    @include('user/parts/user-nav')
+
     <div class="container">
-        <h1 class="h1 user-header">
-            <b class="color1">{{Auth::user()->name}}</b>, добро пожаловать!<br>
-            <small>
-                Изменить пароль от личного кабинета вы можете по <a href="{{route('profile')}}">ссылке</a>
-            </small>
-        </h1>
-        @include('user/parts/user-nav')
 
+        <div class="form form-small" id="user-pay" method="post">
+            <div class="form__row">
+                <label for="pay-method">Выбирите метод оплаты</label>
+                <select id="pay-method" v-model="selectPayMethods">
+                    <option v-for="pay in payMethods" v-bind:value="pay.value">@{{ pay.text }}</option>
+                </select>
+            </div>
 
+            <form method="post" action="#" style="margin-top: 20px" v-if="selectPayMethods == 'ya'">
 
+                <div class="form__row" style="margin-bottom: 0">
+                    <label for="money">
+                        Необходимая сумма: <span class="color1">{{$summ}}</span> руб.
+                    </label>
+                </div>
+                <div class="form__row flex-lr">
+                    <input type="number" name="money" id="money" required placeholder="Введите сумму">
+                    <button class="btn2 btn2-color1"><i class="fa fa-rub" aria-hidden="true"></i>Оплатить</button>
+                </div>
+            </form>
 
+            <form method="post" action="#" style="margin-top: 20px" v-if="selectPayMethods == 'check'">
+                <div class="form__row">
+                    <label for="file">Прикрепите скан чека ( jpg, png )</label>
+                    <input type="file" name="file" id="file" required v-on:change="fileChange">
+                    <label for="file" class="file-label" v-if="file" v-bind:class="{ 'active': file }"><i class="fa fa-file" aria-hidden="true"></i>@{{ file }}</label>
+                    <label for="file" class="file-label" v-else >Выбирите файл</label>
+                </div>
 
+                <div class="form__row">
+                    <button class="btn2 btn2-color1" style="display: block;width: 100%"><i class="fa fa-upload" aria-hidden="true"></i>Прикрепить</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+    {{--<div class="container">--}}
+        {{--<div class="row">--}}
+            {{--<div class="col-md-6">--}}
+                {{--<form action="{{route('login')}}" class="form form-full" id="form-login" method="post" v-on:submit.prevent="send">--}}
+                    {{--<div class="form__row">--}}
+                        {{--<label for="email">Введите сумму( Необходимо {{$summ}} руб.  )</label>--}}
+                        {{--<input type="number" name="money" id="email" required v-model="formData.email" placeholder="Введите сумму">--}}
+                    {{--</div>--}}
+                    {{--<div class="form__row flex-lr">--}}
+                        {{--<select>--}}
+                            {{--<option value="yandex">Yandex.Деньги</option>--}}
+                        {{--</select>--}}
+                        {{--<button class="btn2 btn2-color1"><i class="fa fa-rub" aria-hidden="true"></i>Оплатить</button>--}}
+                    {{--</div>--}}
+                {{--</form>--}}
+            {{--</div>--}}
+            {{--<div class="col-md-6">--}}
+                {{--<form action="{{route('login')}}" class="form form-full" id="form-login" method="post" v-on:submit.prevent="send">--}}
+                    {{--<div class="form__row">--}}
+                        {{--<label for="email">Оплата через Yandex.Деньги</label>--}}
+                        {{--<input type="email" name="email" id="email" required v-model="formData.email" placeholder="E-mail">--}}
+                    {{--</div>--}}
+                    {{--<div class="form__row">--}}
+                        {{--<button class="btn2 btn2-color1"><i class="fa fa-rub" aria-hidden="true"></i>Оплатить</button>--}}
+                    {{--</div>--}}
+                {{--</form>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
 
 
         {{--<h1 class="h1 user-header">--}}
@@ -88,7 +147,7 @@
 
         
 
-    </div>
+
 
 
 
