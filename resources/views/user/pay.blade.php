@@ -22,7 +22,7 @@
                         Необходимая сумма: <span class="color1">{{$summ}}</span> руб.
                     </label>
                 </div>
-                <div class="form__row flex-lr">
+                <div class="form__row flex-lr flex-lr_stretch">
                     <input type="number" name="money" id="money" required placeholder="Введите сумму">
                     <button class="btn2 btn2-color1"><i class="fa fa-rub" aria-hidden="true"></i>Оплатить</button>
                 </div>
