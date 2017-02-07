@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Order;
@@ -21,9 +22,15 @@ class AnswerController extends Controller
     }
     public function postAnswer( Request $request )
     {
+
+
+//        return Response::json(['res'=>$request->file('file')->getClientOriginalExtension()], 200);
+
         $this->validate($request, [
-            'file' => 'required|max:10240|min:10',
+            'file' => 'required|max:50000|min:50|mimes:zip,rar,7z,jpeg,png',
         ]);
+
+
 
         $answer = Answer::where( 'user_id', Auth::user()->id )->first();
         if ( $answer ) unlink( storage_path().'/answers/' . $answer->path );
@@ -38,7 +45,11 @@ class AnswerController extends Controller
 
         Auth::user()->answers()->save( $answer );
 
-        return redirect(route('user.answer'));
+
+        return Response::json([
+            'success' => true,
+            'redirect' => route('user')
+        ], 200);
 
     }
 }

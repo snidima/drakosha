@@ -272,27 +272,50 @@ var payment = new Vue({
                 value: 'check',
             }
 
-
         ],
         selectPayMethods: false,
-        file: false
+        file: false,
+        error: false,
+        pending: false,
+        fileSrc: false
     },
     created: function(){
       this.selectPayMethods = this.payMethods[0].value
     },
     methods:{
-        send: function(){
+        sendCheck: function(){
+            if ( !this.file ) {
+                this.error = 'Прикрепите файл';
+                return;
+            }
+            var action = '/userzone/paycheck';
+            var self = this;
+            this.pending = true;
 
-            return false;
+            var formData = new FormData();
+            formData.append('file', this.fileSrc);
+
+            this.$http.post(action, formData).then(function(response) {
+                self.pending = false;
+                vex.dialog.alert({
+                    message: 'Чек успешно загружен!',
+                    callback: function(){
+                        window.location.href = response.body.redirect;
+                    }
+                })
+            }, function(response) {
+                self.pending = false;
+                self.error = response.body.file[0];
+            });
         },
         fileChange: function(e){
-            var fullPath = e.target.value;
-            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-            var filename = fullPath.substring(startIndex);
-            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-                filename = filename.substring(1);
+            var filename = e.target.files[0].name;
+            if( filename ){
+                this.file = filename;
+                this.error = false;
+                this.fileSrc = e.target.files[0];
+                console.log( this.fileSrc )
             }
-            this.file = filename;
         }
     }
 });
@@ -305,18 +328,48 @@ var payment = new Vue({
 var answer = new Vue({
     el: '#upload-answer',
     data: {
-        file: false
+        file: false,
+        error: false,
+        pending: false,
+        fileSrc: false
     },
     methods:{
 
-        fileChange: function(e){
-            var fullPath = e.target.value;
-            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-            var filename = fullPath.substring(startIndex);
-            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-                filename = filename.substring(1);
+        send: function(){
+            if ( !this.file ) {
+                this.error = 'Прикрепите файл';
+                return;
             }
-            this.file = filename;
+            var action = $(this.$el).attr('action');
+            var self = this;
+            this.pending = true;
+
+            var formData = new FormData();
+            formData.append('file', this.fileSrc);
+
+            this.$http.post(action, formData).then(function(response) {
+                self.pending = false;
+                vex.dialog.alert({
+                    message: 'Ответы успешно загружены!',
+                    callback: function(){
+                        window.location.href = response.body.redirect;
+                    }
+                })
+            }, function(response) {
+                self.pending = false;
+                self.error = response.body.file[0];
+            });
+        },
+
+        fileChange: function(e){
+            var filename = e.target.files[0].name;
+            if( filename ){
+                this.file = filename;
+                this.error = false;
+                this.fileSrc = e.target.files[0];
+                console.log( this.fileSrc )
+            }
+
         }
     }
 });

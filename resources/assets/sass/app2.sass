@@ -26,6 +26,9 @@
   box-sizing: border-box
   outline: none
   font-family: 'Comfortaa', cursive
+  text-rendering: optimizeLegibility
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
 html, body
   width: 100%
   height: 100%
@@ -65,11 +68,9 @@ html, body
   margin-bottom: 40px
   small
     font-size: 1rem
-    color: $color2
+    color: $color1
     margin-top: -5px
-    a
-      text-decoration: none
-      color: $color1
+
 a
   color: $color2
   &:hover
@@ -565,14 +566,14 @@ ol.payments
   .form__row
     position: relative
   .form__row:not(:last-of-type)
-    margin-bottom: 20px
+    margin-bottom: 25px
   .form__action
     margin-top: 20px
   label, input[type="text"], input[type="password"], input[type="email"],input[type="number"], textarea, select
     display: block
     width: 100%
   textarea
-    min-height: 190px
+    min-height: 204px
     resize: vertical
   input[type="file"]
     display: none
@@ -642,8 +643,9 @@ ol.payments
       border-color: $color3
     
 .form__error
-  font-size: .6rem
-  color: $color3
+  font-size: .7rem
+  color: darken($color3, 10%)
+  font-weight: bold
   position: absolute
   width: 100%
   text-align: center

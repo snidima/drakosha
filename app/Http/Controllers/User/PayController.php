@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
 use App\PayCheck;
 
 
@@ -13,7 +14,7 @@ class PayController extends Controller
     public function postPaycheck( Request $request )
     {
         $this->validate($request, [
-            'file' => 'required|max:10240|min:10',
+            'file' => 'required|max:50000|min:50|mimes:jpeg,png,zip,rar',
         ]);
 
         $answer = PayCheck::where( 'user_id', Auth::user()->id )->first();
@@ -28,6 +29,9 @@ class PayController extends Controller
 
         Auth::user()->answers()->save( $answer );
 
-        return redirect(route('user'));
+        return Response::json([
+            'success' => true,
+            'redirect' => route('user')
+        ], 200);
     }
 }

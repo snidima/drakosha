@@ -76,7 +76,7 @@
             <div class="form__action">
                 <button class="btn2 btn2-color1" id="btn-send"><i class="fa fa-paper-plane" aria-hidden="true"></i>Отправить</button>
             </div>
-            <div class="form__pending" v-if="pending">
+            <div class="form__pending" v-show="pending" style="display: none;">
                 <div class="form__pending-wrapper">
                     <div class="sk-circle">
                         <div class="sk-circle1 sk-child"></div>

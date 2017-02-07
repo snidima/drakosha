@@ -9,43 +9,50 @@
 
         @if( count($answers)>0 )
             <h2 class="pay-h2">
-                Ранее вы уже загружали ответы.<br>
-                <small id="asnwer-upload-again" class="cursor">
-                    Загрузить еще раз
+                Ранее вы уже загружали ответы - <a href="{{route('download.answer', ['id' => \Illuminate\Support\Facades\Auth::user()->id])}}">скачать</a><br>
+                <small>
+                    Повторная заграузка заменит предыдущий файл ответов
                 </small>
             </h2>
-                <form method="post" action="#" style="margin-top: 20px; display: none;" id="upload-answer"  class="form form-small"  {{route('user.answer')}} enctype="multipart/form-data">
-                    {{csrf_field()}}
-                    <div class="form__row">
-                        <label for="file">Прикрепите ответы ( doc, docx )</label>
-                        <input type="file" name="file" id="file" required v-on:change="fileChange">
-                        <label for="file" class="file-label" v-if="file" v-bind:class="{ 'active': file }"><i class="fa fa-file" aria-hidden="true"></i>@{{ file }}</label>
-                        <label for="file" class="file-label" v-else >Выбирите файл</label>
-                    </div>
-                    <div class="form__row">
-                        <button class="btn2 btn2-color1" style="display: block;width: 100%"><i class="fa fa-upload" aria-hidden="true"></i>Загрузить ответы</button>
-                    </div>
-                </form>
-            </h2>
         @else
-
             <h2 class="pay-h2">Загрузить ответы: </h2>
+        @endif
 
-            <form method="post" action="#" style="margin-top: 20px"  class="form form-small" id="upload-answer" {{route('user.answer')}} enctype="multipart/form-data">
+
+
+            <form method="post" action="{{route('user.answer')}}" style="margin-top: 20px"  class="form form-small" v-bind:class="{ pending: pending}" id="upload-answer"  v-on:submit.prevent="send"  enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="form__row">
-                    <label for="file">Прикрепите ответы ( doc, docx )</label>
-                    <input type="file" name="file" id="file" required v-on:change="fileChange">
-                    <label for="file" class="file-label" v-if="file" v-bind:class="{ 'active': file }"><i class="fa fa-file" aria-hidden="true"></i>@{{ file }}</label>
-                    <label for="file" class="file-label" v-else >Выбирите файл</label>
+                    <label for="file">Прикрепите ответы ( zip,rar,7z,jpeg,png )</label>
+                    <input type="file" name="file" id="file"  v-on:change="fileChange">
+                    <label for="file" class="file-label" v-if="file" v-bind:class="{ 'active': file, error: error }" ><i class="fa fa-file" aria-hidden="true"></i>@{{ file }}</label>
+                    <label for="file" class="file-label" v-else  v-bind:class="{ error: error }">Выбирите файл</label>
+                    <p class="form__error" v-if="error">@{{error}}</p>
                 </div>
-
                 <div class="form__row">
                     <button class="btn2 btn2-color1" style="display: block;width: 100%"><i class="fa fa-upload" aria-hidden="true"></i>Загрузить ответы</button>
                 </div>
+                <div class="form__pending" v-show="pending" style="display: none;">
+                    <div class="form__pending-wrapper">
+                        <div class="sk-circle">
+                            <div class="sk-circle1 sk-child"></div>
+                            <div class="sk-circle2 sk-child"></div>
+                            <div class="sk-circle3 sk-child"></div>
+                            <div class="sk-circle4 sk-child"></div>
+                            <div class="sk-circle5 sk-child"></div>
+                            <div class="sk-circle6 sk-child"></div>
+                            <div class="sk-circle7 sk-child"></div>
+                            <div class="sk-circle8 sk-child"></div>
+                            <div class="sk-circle9 sk-child"></div>
+                            <div class="sk-circle10 sk-child"></div>
+                            <div class="sk-circle11 sk-child"></div>
+                            <div class="sk-circle12 sk-child"></div>
+                        </div>
+                    </div>
+                </div>
             </form>
 
-        @endif
+
 
 
     </div>
