@@ -14,9 +14,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-Route::get('/test', function (){
-    Bugsnag::notifyError('ErrorType', 'Test Error');
-});
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,6 +24,23 @@ Route::get('/payments', function () {
     return view('payments');
 })->name('payments');
 
+
+
+
+
+Route::group([ 'prefix'=>'/payments/system/yandex'], function()
+{
+    Route::get('/check', ['uses'=>'Payments\YandexController@checkUrl']);
+    Route::get('/aviso', ['uses'=>'Payments\YandexController@avisoUrl']);
+    Route::get('/success', ['uses'=>'Payments\YandexController@shopSuccessUrl']);
+    Route::get('/fail', ['uses'=>'Payments\YandexController@shopFailUrl']);
+
+    Route::get('/demo/check', ['uses'=>'Payments\YandexController@checkUrlDemo']);
+    Route::get('/demo/aviso', ['uses'=>'Payments\YandexController@avisoUrlDemo']);
+    Route::get('/demo/success', ['uses'=>'Payments\YandexController@shopSuccessUrlDemo']);
+    Route::get('/demo/fail', ['uses'=>'Payments\YandexController@shopFailUrlDemo']);
+
+});
 
 
 
