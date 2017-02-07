@@ -18,7 +18,7 @@
         </div>
     @endif
 
-    <h1>Управление файлами</h1>
+    <h1>Управление заданиями</h1>
         <hr>
         @if( count($tasks) > 0 )
             <table class="table">

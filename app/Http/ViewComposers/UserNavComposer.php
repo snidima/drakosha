@@ -32,6 +32,22 @@ class UserNavComposer {
         else
             $res['pay'] = false;
 
+        if( Route::currentRouteName() == 'user.task' )
+            $res['task'] = 'current';
+        elseif( User::isAvailStep( 3 ) )
+            $res['task'] = 'avail';
+        else
+            $res['task'] = false;
+
+
+
+        if( Route::currentRouteName() == 'user.answer' )
+            $res['answer'] = 'current';
+        elseif( User::isAvailStep( 3 ) )
+            $res['answer'] = 'avail';
+        else
+            $res['answer'] = false;
+
 
 
 

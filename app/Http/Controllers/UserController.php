@@ -49,6 +49,7 @@ class UserController extends Controller
 
     public function getPay()
     {
+
         try{
         $userID = \Illuminate\Support\Facades\Auth::user()->id;
 
@@ -74,14 +75,23 @@ class UserController extends Controller
         $order = Order::whereHas( 'users' , function( $q ) use ( $userID ) {
             $q->where('user_id','=',$userID);
         } )->first() ;
+
+
         $order->money += $request->input('money');
         $order->save();
 
-        return redirect(route('user'));
+        return redirect(route('user.pay'));
     }
 
 
+    public function getTasks()
+    {
 
+        if( !Order::where('user_id',Auth::user()->id)->first()->status ) return redirect(route('user'));
+        $tasks = Task::where('status', true)->get();
+        return view('user.task',['tasks' => $tasks]);
+
+    }
 
 
 }

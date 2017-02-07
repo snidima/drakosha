@@ -32,7 +32,11 @@
             @else
                 <div class="user-nav__item user-nav__item_disabled">
                     <div class="user-nav__step">1</div>
-                    <div class="user-nav__title">Подать заявку</div>
+                    @if( !\App\Order::getForCurrentUser() )
+                        <div class="user-nav__title">Подать заявку</div>
+                    @else
+                        <div class="user-nav__title">Редактировать заявку</div>
+                    @endif
                 </div>
             @endif
 
@@ -57,14 +61,46 @@
 
 
 
-            <div class="user-nav__item user-nav__item_disabled">
-                <div class="user-nav__step">3</div>
-                <div class="user-nav__title">Получить задание</div>
-            </div>
-            <div class="user-nav__item user-nav__item_disabled">
-                <div class="user-nav__step">4</div>
-                <div class="user-nav__title">Отправить ответы</div>
-            </div>
+            @if( $navData['task'] == 'current' )
+                <div class="user-nav__item user-nav__item_new">
+                    <div class="user-nav__step">3</div>
+                    <div class="user-nav__title">Получить задание</div>
+                </div>
+            @elseif($navData['task'] == 'avail')
+                <a href="{{route('user.task')}}" class="user-nav__item user-nav__item_old">
+                    <div class="user-nav__step">3</div>
+                    <div class="user-nav__title">Получить задание</div>
+                </a>
+            @else
+                <div class="user-nav__item user-nav__item_disabled">
+                    <div class="user-nav__step">3</div>
+                    <div class="user-nav__title">Получить задание</div>
+                </div>
+            @endif
+
+
+
+            @if( $navData['answer'] == 'current' )
+                <div class="user-nav__item user-nav__item_new">
+                    <div class="user-nav__step">4</div>
+                    <div class="user-nav__title">Отправить ответы</div>
+                </div>
+            @elseif($navData['answer'] == 'avail')
+                <a href="{{route('user.answer')}}" class="user-nav__item user-nav__item_old">
+                    <div class="user-nav__step">4</div>
+                    <div class="user-nav__title">Отправить ответы</div>
+                </a>
+            @else
+                <div class="user-nav__item user-nav__item_disabled">
+                    <div class="user-nav__step">4</div>
+                    <div class="user-nav__title">Отправить ответы</div>
+                </div>
+            @endif
+
+
+
+
+
             <div class="user-nav__item user-nav__item_disabled">
                 <div class="user-nav__step">5</div>
                 <div class="user-nav__title">Узнать результаты</div>

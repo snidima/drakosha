@@ -14,6 +14,7 @@ class AnswerController extends Controller
 {
     public function getAnswer()
     {
+        if( !Order::where('user_id',Auth::user()->id)->first()->status ) return redirect(route('user'));
         $answers = Answer::where('user_id',Auth::user()->id)->with('users')->first();
 
         return view('user.answer',['answers'=>$answers]);

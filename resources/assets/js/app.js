@@ -278,7 +278,7 @@ var payment = new Vue({
         file: false
     },
     created: function(){
-      this.selectPayMethods = this.payMethods[1].value
+      this.selectPayMethods = this.payMethods[0].value
     },
     methods:{
         send: function(){
@@ -301,6 +301,55 @@ var payment = new Vue({
 
 
 
+
+var answer = new Vue({
+    el: '#upload-answer',
+    data: {
+        file: false
+    },
+    methods:{
+
+        fileChange: function(e){
+            var fullPath = e.target.value;
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            var filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+            this.file = filename;
+        }
+    }
+});
+
+
+
+// Vue.component('file-component', {
+//     template: '#template-file',
+//     props: ['title','text','name'],
+//     data: function(){
+//         return{
+//             file: false
+//         }
+//     },
+//     methods:{
+//         fileChange: function(e){
+//             var fullPath = e.target.value;
+//             var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+//             var filename = fullPath.substring(startIndex);
+//             if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+//                 filename = filename.substring(1);
+//             }
+//             this.file = filename;
+//         }
+//     }
+// });
+
+
+
+
+$('#asnwer-upload-again').click(function(){
+    $('#upload-answer').show();
+});
 
 //
 // function defaultAjax(url, params, btn) {

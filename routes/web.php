@@ -71,6 +71,8 @@ Route::group([ 'middleware' => 'user', 'prefix'=>'userzone'], function()
     Route::post('/pay', [ 'uses' => 'UserController@postPay' ]);
     Route::post('/paycheck', [ 'uses' => 'User\PayController@postPaycheck' ])->name('user.paycheck');
 
+    Route::get('/gettask', [ 'uses' => 'UserController@getTasks' ])->name('user.task');
+
     Route::get('/answer', [ 'uses' => 'User\AnswerController@getAnswer' ])->name('user.answer');
     Route::post('/answer', [ 'uses' => 'User\AnswerController@postAnswer' ]);
 
@@ -127,7 +129,7 @@ Route::group([ 'middleware' => 'admin', 'prefix'=>'adminzone'], function()
             return redirect(route('order', $request->input('id')))->with('error', 'Баланс пользователя не обновлен!');
         }
 
-        return redirect(route('order', $request->input('id')))->with('success', "Баланс пользователя успешно изменен на {$request->input('money')} руб.");
+        return redirect(route('order', \Illuminate\Support\Facades\Auth::user()->id))->with('success', "Баланс пользователя успешно изменен на {$request->input('money')} руб.");
 
     })->name('order.money.update');
 
@@ -194,10 +196,17 @@ Route::group([ 'middleware' => 'admin', 'prefix'=>'adminzone'], function()
 
 Route::get('download/task/{id}', function ( $id )
 {
+
     try {
-        $task = App\Task::where('status','=','1')->find( $id );
+
+        $task = App\Task::where('status', true)->find( $id );
 
         if( !$task ) throw new Exception('Доступ запрещен');
+
+
+        if ( !(\App\User::isAdmin(\Illuminate\Support\Facades\Auth::user()) || \App\Order::where('user_id',\Illuminate\Support\Facades\Auth::user()->id)->first()->status) )
+            throw new Exception('Доступ запрещен');
+
 
         $path = storage_path() . '/tasks/' . $task->file;
 

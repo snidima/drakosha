@@ -6,42 +6,59 @@
     @include('user/parts/user-nav')
 
     <div class="container">
+        @if( $summ > 0)
+            @if( \Illuminate\Support\Facades\Auth::user()->pay_checks()->first() )
+            <h2 class="pay-h2">
+                Ранее вы уже загружали скан чека.<br>
+                <small>Повторная заграузка заменит предыдущий скан ( <a href="{{route('download.paychecks', ['id' => \Illuminate\Support\Facades\Auth::user()->id])}}">скачать</a> )</small>
+            </h2>
+            @endif
 
-        <div class="form form-small" id="user-pay" method="post">
-            <div class="form__row">
-                <label for="pay-method">Выбирите метод оплаты</label>
-                <select id="pay-method" v-model="selectPayMethods">
-                    <option v-for="pay in payMethods" v-bind:value="pay.value">@{{ pay.text }}</option>
-                </select>
+            <div class="form form-small" id="user-pay" method="post">
+                <div class="form__row">
+                    <label for="pay-method">Выбирите метод оплаты</label>
+                    <select id="pay-method" v-model="selectPayMethods">
+                        <option v-for="pay in payMethods" v-bind:value="pay.value">@{{ pay.text }}</option>
+                    </select>
+                </div>
+
+                <form method="post" action="{{route('user.pay')}}" style="margin-top: 20px" v-if="selectPayMethods == 'ya'">
+                    {{csrf_field()}}
+                    <div class="form__row" style="margin-bottom: 0">
+                        <label for="money">
+                            Необходимая сумма: <span class="color1">{{$summ}}</span> руб.
+                        </label>
+                    </div>
+                    <div class="form__row flex-lr flex-lr_stretch">
+                        <input type="number" name="money" id="money" required placeholder="Введите сумму">
+                        <button class="btn2 btn2-color1"><i class="fa fa-rub" aria-hidden="true"></i>Оплатить</button>
+                    </div>
+                </form>
+
+                <form method="post" action="{{route('user.paycheck')}}" style="margin-top: 20px" v-if="selectPayMethods == 'check'" enctype="multipart/form-data">
+                    {{csrf_field()}}
+                    <div class="form__row">
+                        <label for="file">Прикрепите скан чека ( jpg, png )</label>
+                        <input type="file" name="file" id="file" required v-on:change="fileChange">
+                        <label for="file" class="file-label" v-if="file" v-bind:class="{ 'active': file }"><i class="fa fa-file" aria-hidden="true"></i>@{{ file }}</label>
+                        <label for="file" class="file-label" v-else >Выбирите файл</label>
+                    </div>
+
+                    <div class="form__row">
+                        <button class="btn2 btn2-color1" style="display: block;width: 100%"><i class="fa fa-upload" aria-hidden="true"></i>Прикрепить</button>
+                    </div>
+                </form>
+
             </div>
 
-            <form method="post" action="#" style="margin-top: 20px" v-if="selectPayMethods == 'ya'">
+        @else
 
-                <div class="form__row" style="margin-bottom: 0">
-                    <label for="money">
-                        Необходимая сумма: <span class="color1">{{$summ}}</span> руб.
-                    </label>
-                </div>
-                <div class="form__row flex-lr flex-lr_stretch">
-                    <input type="number" name="money" id="money" required placeholder="Введите сумму">
-                    <button class="btn2 btn2-color1"><i class="fa fa-rub" aria-hidden="true"></i>Оплатить</button>
-                </div>
-            </form>
+            <h2 class="pay-h2">
+                Конкурс оплачен.<br>
+                <small>Доступное количество сертификатов: <b class="color1">{{$sert}}</b></small>
+            </h2>
 
-            <form method="post" action="#" style="margin-top: 20px" v-if="selectPayMethods == 'check'">
-                <div class="form__row">
-                    <label for="file">Прикрепите скан чека ( jpg, png )</label>
-                    <input type="file" name="file" id="file" required v-on:change="fileChange">
-                    <label for="file" class="file-label" v-if="file" v-bind:class="{ 'active': file }"><i class="fa fa-file" aria-hidden="true"></i>@{{ file }}</label>
-                    <label for="file" class="file-label" v-else >Выбирите файл</label>
-                </div>
-
-                <div class="form__row">
-                    <button class="btn2 btn2-color1" style="display: block;width: 100%"><i class="fa fa-upload" aria-hidden="true"></i>Прикрепить</button>
-                </div>
-            </form>
-
-        </div>
+        @endif
 
     </div>
 

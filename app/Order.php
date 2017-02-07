@@ -36,6 +36,29 @@ class Order extends Model
         return $this->belongsTo('App\User','user_id');
     }
 
+    public  function getStatusAttribute()
+    {
+        $sert = $this->sert_count;
+        $money = $this->money;
+
+        if ( ($sert*60 - $money) > 0 )
+            return false;
+        else
+            return true;
+
+    }
+
+    public  function getNeedMoneyAttribute()
+    {
+        $sert = $this->sert_count;
+        $money = $this->money;
+
+        if ( ($sert*60 - $money) > 0 )
+            return $sert*60 - $money;
+        else
+            return 0;
+
+    }
 
     static function createNewOrder( $data = [] )
     {

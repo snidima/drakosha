@@ -19,15 +19,8 @@
         <h3 class="text-center">Заявка от пользователя {{$order->users->name}} {{$order->users->surname}}</h3>
         <hr>
         <div class="row">
-            <div class="col-xs-3">
-                <ul class="nav nav-pills nav-stacked" role="tablist">
-                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Информация</a></li>
-                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Счет</a></li>
-                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Ответы</a></li>
-                    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Наградные материалы</a></li>
-                </ul>
-            </div>
-            <div class="col-xs-9">
+
+            <div class="col-xs-12">
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="home">
 
@@ -83,6 +76,36 @@
                                 <li class="list-group-item">
                                     <b>Форма получения нагрдных материалов:</b> {{$order->reward}}
                                 </li>
+                                <li class="list-group-item">
+                                    <b>Баланс:</b> {{$order->money}} из {{$order->sert_count*60 }}
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#order-money">
+                                        Изменить
+                                    </button>
+                                    <div class="modal fade" id="order-money">
+                                        <div class="modal-dialog" role="document">
+                                            <form class="modal-content" method="post" action="{{route('order.money.update')}}">
+                                                {{csrf_field()}}
+                                                <input type="hidden" name="id" value="{{$order->id}}">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title">Изменить баланс</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <input type="text" class="form-control" placeholder="Необходимое количество сертификатов" name="money" value="{{$order->money}}">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                                                    <input type="submit" class="btn btn-success" value="Сохранить">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <b>Чек оплаты:</b> <a href="{{route('download.paychecks',['id' =>$order->users->id ] )}}">Просмотр</a>
+
+                                </li>
                             </ul>
                         </div>
 
@@ -90,35 +113,12 @@
                     <div role="tabpanel" class="tab-pane" id="profile">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <b>Баланс:</b> {{$order->money}}
-                                <div class="modal fade" id="order-money">
-                                    <div class="modal-dialog" role="document">
-                                        <form class="modal-content" method="post" action="{{route('order.money.update')}}">
-                                            {{csrf_field()}}
-                                            <input type="hidden" name="id" value="{{$order->id}}">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title">Изменить баланс</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="text" class="form-control" placeholder="Необходимое количество сертификатов" name="money" value="{{$order->money}}">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-                                                <input type="submit" class="btn btn-success" value="Сохранить">
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+
                             </li>
 
-                            <li class="list-group-item">
-                                <b>Чек оплаты:</b> <a href="{{route('download.paychecks',['id' =>$order->users->id ] )}}">Просмотр</a>
-                            </li>
+
                         </ul>
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#order-money">
-                            Изменить баланс
-                        </button>
+
                     </div>
                     <div role="tabpanel" class="tab-pane" id="messages">...</div>
                     <div role="tabpanel" class="tab-pane" id="settings">...</div>

@@ -31,10 +31,20 @@
         @endif
 
         <header>@include('parts/header')</header>
-        <main class="content">@yield('content')</main>
+        <main class="content"  id="main-content">@yield('content')</main>
         <footer>@include('parts/footer')</footer>
     </div>
 
+
+
+    {{--<script type="text/x-template" id="template-file">--}}
+        {{--<div>--}}
+            {{--<label for="file">@{{ title }}</label>--}}
+            {{--<input type="file" v-bind:name="name" id="file" required v-on:change="fileChange">--}}
+            {{--<label for="file" class="file-label" v-if="file" v-bind:class="{ 'active': file }"><i class="fa fa-file" aria-hidden="true"></i>@{{ file }}</label>--}}
+            {{--<label for="file" class="file-label" v-else >@{{ text }}</label>--}}
+        {{--</div>--}}
+    {{--</script>--}}
 
     <script src="/js/app.js"></script>
 </body>

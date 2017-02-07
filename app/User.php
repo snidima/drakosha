@@ -70,15 +70,37 @@ class User extends Authenticatable
     {
         if ( !\Config::get('constants.CONCURS') ) return false;
 
-        if ( $step == 1 ){
+        if ( $step == 1  ){
             return true;
         }
 
-        if ( $step == 2 && User::isAvailStep(1) ){
+        if ( $step == 2  ){
             if( Auth::user()->orders()->first() )
                 return true;
             else
                 return false;
+        }
+
+        if ( $step == 3  ){
+
+            if ( \App\Order::where( 'user_id', Auth::user()->id )->first() )
+                $status = \App\Order::where( 'user_id', Auth::user()->id )->first()->status;
+            else
+                $status = false;
+
+            return ( $status ) ? true : false;
+
+        }
+
+        if ( $step == 4  ){
+
+            if ( \App\Order::where( 'user_id', Auth::user()->id )->first() )
+                $status = \App\Order::where( 'user_id', Auth::user()->id )->first()->status;
+            else
+                $status = false;
+
+            return ( $status ) ? true : false;
+
         }
 
     }
