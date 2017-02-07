@@ -6,8 +6,9 @@
 
    <div class="container">
 
-       <h2 class="pay-h2">Задания доступные для скачивания: </h2>
+
        @if(count($tasks)>0)
+           <h2 class="pay-h2">Задания доступные для скачивания: </h2>
            <ul class="user-tasks">
                @foreach($tasks as $task)
                    <li><a href="{{route('download.task', ['id' => $task->id ])}}" class="btn2 btn2-color1"><i class="fa fa-download" aria-hidden="true"></i>{{$task->name}}</a></li>
