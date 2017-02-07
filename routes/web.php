@@ -32,13 +32,9 @@ Route::group([ 'prefix'=>'/payments/system/yandex'], function()
 {
     Route::get('/check', ['uses'=>'Payments\YandexController@checkUrl']);
     Route::get('/aviso', ['uses'=>'Payments\YandexController@avisoUrl']);
-    Route::get('/success', ['uses'=>'Payments\YandexController@shopSuccessUrl']);
-    Route::get('/fail', ['uses'=>'Payments\YandexController@shopFailUrl']);
 
     Route::get('/demo/check', ['uses'=>'Payments\YandexController@checkUrlDemo']);
     Route::get('/demo/aviso', ['uses'=>'Payments\YandexController@avisoUrlDemo']);
-    Route::get('/demo/success', ['uses'=>'Payments\YandexController@shopSuccessUrlDemo']);
-    Route::get('/demo/fail', ['uses'=>'Payments\YandexController@shopFailUrlDemo']);
 
 });
 
@@ -75,9 +71,14 @@ Route::group([ 'middleware' => 'user', 'prefix'=>'userzone'], function()
     Route::post('/pay', [ 'uses' => 'UserController@postPay' ]);
     Route::post('/paycheck', [ 'uses' => 'User\PayController@postPaycheck' ])->name('user.paycheck');
 
-
     Route::get('/answer', [ 'uses' => 'User\AnswerController@getAnswer' ])->name('user.answer');
     Route::post('/answer', [ 'uses' => 'User\AnswerController@postAnswer' ]);
+
+
+    Route::get('/pay/success', ['uses'=>'Payments\YandexController@shopSuccessUrl']);
+    Route::get('/pay/fail', ['uses'=>'Payments\YandexController@shopFailUrl']);
+    Route::get('/pay/demo/success', ['uses'=>'Payments\YandexController@shopSuccessUrlDemo']);
+    Route::get('/pay/demo/fail', ['uses'=>'Payments\YandexController@shopFailUrlDemo']);
 
 });
 
