@@ -64,6 +64,15 @@ gulp.task('deploy:dev', function () {
 
 
 
+gulp.task('fonts:clean', function () {
+    return gulp.src('./public_html/fonts', {read: false})
+        .pipe(clean());
+});
+gulp.task('fonts', function () {
+    return gulp.src('./resources/assets/fonts/**/*')
+        .pipe(gulp.dest('./public_html/fonts/'));
+});
+
 gulp.task('js:clean', function () {
     return gulp.src('./public_html/js', {read: false})
         .pipe(clean());
@@ -149,7 +158,7 @@ gulp.task('sass:production',['sass:clean'], function () {
 });
 
 
-gulp.task('serve', ['sass','js','image:production'], function() {
+gulp.task('serve', ['sass','js','image:production', 'fonts'], function() {
     browserSync.init({
         proxy: 'http://dev.drakosha.ru/',
         notify: false

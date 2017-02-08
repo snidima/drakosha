@@ -1,7 +1,14 @@
 window.$ = require('jquery');
 window._ = require('lodash');
 var axios = require('axios');
+var Vue = require('vue');
+Vue.use(require('vue-resource'));
 
+
+
+var vex = require('vex-js');
+vex.registerPlugin(require('vex-dialog'));
+vex.defaultOptions.className = 'vex-theme-default';
 
 const TOKEN = document.querySelector('meta[name="csrf-token"]').content;
 
