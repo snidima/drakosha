@@ -27,31 +27,31 @@
         <header class="main-section__header">Участие в дисциплинах</header>
         <div class="school-items">
             <a href="#" class="school-items__item">
-                <div class="school-items__image" style="background-image: url(../images/main-item-1.png)"></div>
+                <div class="school-items__image" style="background-image: url(../images/main-item-1.jpg)"></div>
                 <div class="school-items__text">Математика</div>
                 <div class="school-items__small">1-5 класс</div>
                 <button class="school-items__action"><i class="fa fa-rocket" aria-hidden="true"></i>Участвовать</button>
             </a>
             <div class="school-items__item">
-                <div class="school-items__image" style="background-image: url(../images/main-item-2.png)"></div>
+                <div class="school-items__image" style="background-image: url(../images/main-item-2.jpg)"></div>
                 <div class="school-items__text">Русский язык</div>
                 <div class="school-items__small">1-5 класс</div>
                 <button class="school-items__action"><i class="fa fa-rocket" aria-hidden="true"></i>Участвовать</button>
             </div>
             <div class="school-items__item">
-                <div class="school-items__image" style="background-image: url(../images/main-item-3.png)"></div>
+                <div class="school-items__image" style="background-image: url(../images/main-item-3.jpg)"></div>
                 <div class="school-items__text">Литературное чтение</div>
                 <div class="school-items__small">1-5 класс</div>
                 <button class="school-items__action"><i class="fa fa-rocket" aria-hidden="true"></i>Участвовать</button>
             </div>
             <div class="school-items__item">
-                <div class="school-items__image" style="background-image: url(../images/main-item-4.png)"></div>
+                <div class="school-items__image" style="background-image: url(../images/main-item-4.jpg)"></div>
                 <div class="school-items__text">Английский язык</div>
                 <div class="school-items__small">1-5 класс</div>
                 <button class="school-items__action"><i class="fa fa-rocket" aria-hidden="true"></i>Участвовать</button>
             </div>
             <div class="school-items__item">
-                <div class="school-items__image" style="background-image: url(../images/main-item-5.png)"></div>
+                <div class="school-items__image" style="background-image: url(../images/main-item-5.jpg)"></div>
                 <div class="school-items__text">Окружающий мир</div>
                 <div class="school-items__small">1-5 класс</div>
                 <button class="school-items__action"><i class="fa fa-rocket" aria-hidden="true"></i>Участвовать</button>

@@ -42,7 +42,12 @@ gulp.task('image:clean', function () {
 });
 gulp.task('image:production',['image:clean'], function () {
   return gulp.src('./resources/assets/images/**/*')
-    .pipe(imagemin())
+    .pipe(imagemin({
+        optimizationLevel: 7,
+        progressive: true,
+        interlaced: true,
+        colorTypeReduction: false
+    }))
     .pipe(gulp.dest('./public_html/images'))
 });
 
