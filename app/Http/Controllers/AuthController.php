@@ -155,7 +155,9 @@ class AuthController extends Controller
              $message->to($request->email)->subject('Восстановление пароля на ДРАКОШЕ.');
          });
 
-        return redirect(route('login'))->with('password-reset-send', 'true');
+        return Response::json([
+            'success' => true
+        ], 200);
 
     }
     public function getResets()
@@ -183,7 +185,10 @@ class AuthController extends Controller
             $reset->delete();
         }
 
-        return redirect(route('login'))->with('password-reset-save', 'true');
+        return Response::json([
+            'success' => true,
+            'redirect' => route('login')
+        ], 200);
 
 
     }

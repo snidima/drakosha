@@ -15,7 +15,7 @@
                     <input type="password" name="password" required id="password" v-model="formData.password" placeholder="Пароль">
             </div>
             <div class="form__row flex-lr">
-                <a href="#">Забыли пароль?</a>
+                <a href="#" onclick="return false" id="reset-btn">Забыли пароль?</a>
                 <button class="btn btn-color1"><i class="fa fa-sign-in" aria-hidden="true"></i>Войти</button>
             </div>
         </form>

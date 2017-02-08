@@ -1,6 +1,7 @@
-// var Vue = require('vue');
 window.$ = require('jquery');
 window._ = require('lodash');
+var axios = require('axios');
+
 const TOKEN = document.querySelector('meta[name="csrf-token"]').content;
 
 
@@ -128,6 +129,41 @@ var login = new Vue({
 
 
 
+
+
+
+var reset = new Vue({
+    el: '#form-reset',
+    data: {
+        formData: {
+            password_confirmation: '',
+            password: '',
+        }
+    },
+    methods:{
+        send: function(){
+
+            this.$http.post(location.pathname, this.formData).then(function(response) {
+
+                vex.dialog.alert({
+                    message: 'Пароль успешно сохранен! Войдите с новыми данными',
+                    callback: function(){
+                        window.location.href = response.body.redirect;
+                    }
+                })
+
+
+
+            }, function(response) {
+                vex.dialog.alert({
+                    message: response.body.password[0]
+                })
+            });
+
+            return false;
+        }
+    }
+});
 
 
 
@@ -400,44 +436,32 @@ var answer = new Vue({
 
 
 
-$('#asnwer-upload-again').click(function(){
-    $('#upload-answer').show();
-});
+$('#reset-btn').click(function(){
+    vex.dialog.prompt({
+        message: 'Введите свой E-mail: ',
+        placeholder: 'E-mail',
+        callback: function(email){
 
-//
-// function defaultAjax(url, params, btn) {
-//     btn.addClass('loading');
-//     return new Promise(function(success, fail){
-//         $.ajax({
-//             type: "POST",
-//             dataType: "json",
-//             url: url,
-//             data: params,
-//             success: function( d ){
-//                 success( d );
-//                 btn.removeClass('loading');
-//             },
-//             error: function( d ){
-//                 fail( fail );
-//                 btn.removeClass('loading');
-//             }
-//         });
-//     });
-// }
-//
-//
-// $('.form-ajax').submit( function(){
-//     event.preventDefault();
-//
-//     defaultAjax( $(this).attr('action'), $(this).serialize(), $(this).find('input[type="submit"]') ).then(
-//         function(d){
-//             alert('ok');
-//         },
-//         function(d){
-//             alert('no');
-//         }
-//     );
-//
-//
-//
-// });
+            axios.post('/resets', {
+                email: email
+            })
+                .then(function (response) {
+
+                    vex.dialog.alert({
+                        message: 'На ваш E-mail отправлено пиьсмо с инструкцией по восстановлению',
+                    })
+
+                })
+                .catch(function (error) {
+                    vex.dialog.alert({
+                        message: error.response.data.email[0]+' Попробуйте еще раз',
+                    })
+                });
+
+        },
+        buttons: [
+            $.extend({}, vex.dialog.buttons.YES, { text: 'Восстановить' }),
+            $.extend({}, vex.dialog.buttons.NO, { text: 'Отмена' })
+        ],
+    })
+});
