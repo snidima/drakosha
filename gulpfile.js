@@ -9,9 +9,9 @@ var sourcemaps = require('gulp-sourcemaps'); //https://www.npmjs.com/package/gul
 var clean = require('gulp-clean');//https://www.npmjs.com/package/gulp-clean
 var fs = require('fs');
 var GulpSSH = require('gulp-ssh');//https://github.com/teambition/gulp-ssh
-// var elixir  = require('laravel-elixir');
-// var htmlmin = require('gulp-htmlmin');
+
 var imagemin = require('gulp-imagemin');
+var rev = require('gulp-rev');//https://www.npmjs.com/package/gulp-rev
 
 var gutil = require('gulp-util');
 var browserify = require('browserify');
@@ -37,7 +37,7 @@ var gulpSSH = new GulpSSH({
 
 
 gulp.task('image:clean', function () {
-	return gulp.src('./public_html/images/**/*', {read: true})
+	return gulp.src('./public_html/images', {read: true})
 	    .pipe(clean());
 });
 gulp.task('image:production',['image:clean'], function () {
@@ -65,7 +65,7 @@ gulp.task('deploy:dev', function () {
 
 
 gulp.task('js:clean', function () {
-    return gulp.src('./public_html/js/**/*', {read: false})
+    return gulp.src('./public_html/js', {read: false})
         .pipe(clean());
 });
 gulp.task('js', function () {
@@ -105,7 +105,11 @@ gulp.task('js:production',['js:clean'], function () {
         .pipe(source('app.js'))
         .pipe(buffer())
         .pipe(uglify())
-        .pipe(gulp.dest('./public_html/js/'));
+        .pipe(rev())
+        .pipe(gulp.dest('./public_html/js/'))
+        .pipe(rev.manifest())
+        .pipe(gulp.dest('./resources/assets/manifests/js'))
+        ;
 });
 
 
@@ -125,7 +129,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('sass:clean', function () {
-  return gulp.src('./public_html/css/**/*', {read: false})
+  return gulp.src('./public_html/css', {read: false})
     .pipe(clean());
 });
 
@@ -137,11 +141,15 @@ gulp.task('sass:production',['sass:clean'], function () {
         }).on('error', sass.logError))
         .pipe(autoprefixer({ browsers: ['> 1%', 'IE 7'], cascade: false }))
         .pipe(cleanCSS({keepSpecialComments : 0}))
-        .pipe(gulp.dest('./public_html/css/'));
+        .pipe(rev())
+        .pipe(gulp.dest('./public_html/css/'))
+        .pipe(rev.manifest())
+        .pipe(gulp.dest('./resources/assets/manifests/css'))
+        ;
 });
 
 
-gulp.task('serve', ['sass','image:production'], function() {
+gulp.task('serve', ['sass','js','image:production'], function() {
     browserSync.init({
         proxy: 'http://dev.drakosha.ru/',
         notify: false
