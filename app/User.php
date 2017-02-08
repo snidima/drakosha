@@ -105,8 +105,10 @@ class User extends Authenticatable
 
         if ( $step == 5  ){
 
+            $order = \App\Order::where( 'user_id', Auth::user()->id )->first();
+            if ( !$order ) return false;
 
-            if ( \App\Result::where( 'status', true )->first() && \App\Order::where( 'user_id', Auth::user()->id )->first()->status && User::has('answers')->first() )
+            if ( \App\Result::where( 'status', true )->first() && $order->status && User::has('answers')->first() )
                 return true;
             else
                 return false;
