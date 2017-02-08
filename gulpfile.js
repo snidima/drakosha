@@ -170,4 +170,4 @@ gulp.task('serve', ['sass','js','image:production', 'fonts'], function() {
     });
 });
 
-gulp.task('production', ['sass:production', 'image:production','js:production']);
+gulp.task('production', ['sass:production', 'image:production','js:production', 'fonts']);
