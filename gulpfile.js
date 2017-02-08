@@ -49,13 +49,12 @@ gulp.task('image:production',['image:clean'], function () {
 gulp.task('deploy:dev', function () {
   return gulpSSH
     .shell([
-    	'cd drakosha/', 
+    	'cd drakosha.prod/',
     	'php artisan down', 
     	'git pull origin master', 
     	'composer install',
     	'php artisan migrate', 
-    	'npm install', 
-    	// 'npm update',
+    	'npm install',
     	'gulp production',
     	'php artisan up',
     	], {filePath: 'shell.log'})
