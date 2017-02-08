@@ -2,6 +2,7 @@ window.$ = require('jquery');
 window._ = require('lodash');
 var axios = require('axios');
 
+
 const TOKEN = document.querySelector('meta[name="csrf-token"]').content;
 
 
@@ -13,93 +14,95 @@ Vue.http.interceptors.push((request, next) => {
 
 
 
+if ( $('#form-register').length >0 ) {
 
-var register = new Vue({
-    el: '#form-register',
-    data: {
-        pending: false,
-        email: {
-            value: '',
-            error: false
-        },
-        password: {
-            value: '',
-            error: false
-        },
-        password_confirmation: {
-            value: '',
-            error: false
-        },
-        name: {
-            value: '',
-            error: false
-        },
-        surname: {
-            value: '',
-            error: false
-        },
-        lastname:{
-            value: '',
-            error: false
-        },
-        'g-recaptcha-response': {
-            value: '',
-            error: false
-        }
-
-
-    },
-    computed:{
-        all: function(){
-            return {
-                email: this.email.value,
-                password: this.password.value,
-                password_confirmation: this.password_confirmation.value,
-                name: this.name.value,
-                surname: this.surname.value,
-                lastname: this.lastname.value,
-                'g-recaptcha-response': $('[name="g-recaptcha-response"]').val()
-            };
-        }
-    },
+    var register = new Vue({
+        el: '#form-register',
+        data: {
+            pending: false,
+            email: {
+                value: '',
+                error: false
+            },
+            password: {
+                value: '',
+                error: false
+            },
+            password_confirmation: {
+                value: '',
+                error: false
+            },
+            name: {
+                value: '',
+                error: false
+            },
+            surname: {
+                value: '',
+                error: false
+            },
+            lastname:{
+                value: '',
+                error: false
+            },
+            'g-recaptcha-response': {
+                value: '',
+                error: false
+            }
 
 
-    methods: {
-        recaptchaTrue: function( r ){
-          this['g-recaptcha-response'].value = r;
-            $(this.$el).find('#btn-send').removeAttr('disabled');
         },
-        send: function(){
-            var self = this;
-            this.pending = true;
-            this.$http.post('/register', this.all).then(function(response) {
-                self.pending = false;
-                vex.dialog.alert({
-                    message: 'Для регистрации необхадима активация аккаунта! Проверьте почту и следуйте дальнейшим инструкциям!',
-                    callback: function(){
-                        window.location.href = response.body.redirect;
-                    }
-                })
-            }, function(response) {
-                self.pending = false;
-                _.forOwn(self.all, function (e,a) {
-                    if ( response.body[a] )
-                        self[a].error = response.body[a][0];
-                    else
-                        self[a].error = false;
+        computed:{
+            all: function(){
+                return {
+                    email: this.email.value,
+                    password: this.password.value,
+                    password_confirmation: this.password_confirmation.value,
+                    name: this.name.value,
+                    surname: this.surname.value,
+                    lastname: this.lastname.value,
+                    'g-recaptcha-response': $('[name="g-recaptcha-response"]').val()
+                };
+            }
+        },
+
+
+        methods: {
+            recaptchaTrue: function( r ){
+              this['g-recaptcha-response'].value = r;
+                $(this.$el).find('#btn-send').removeAttr('disabled');
+            },
+            send: function(){
+                var self = this;
+                this.pending = true;
+                this.$http.post('/register', this.all).then(function(response) {
+                    self.pending = false;
+                    vex.dialog.alert({
+                        message: 'Для регистрации необхадима активация аккаунта! Проверьте почту и следуйте дальнейшим инструкциям!',
+                        callback: function(){
+                            window.location.href = response.body.redirect;
+                        }
+                    })
+                }, function(response) {
+                    self.pending = false;
+                    _.forOwn(self.all, function (e,a) {
+                        if ( response.body[a] )
+                            self[a].error = response.body[a][0];
+                        else
+                            self[a].error = false;
+                    });
+
                 });
-
-            });
-            return false;
+                return false;
+            }
         }
-    }
-});
-
-window.recaptchaCallback = register.recaptchaTrue;
+    });
 
 
+    window.recaptchaCallback = register.recaptchaTrue;
+}
 
 
+if ( $('#form-login').length >0 )
 var login = new Vue({
     el: '#form-login',
     data: {
@@ -131,7 +134,7 @@ var login = new Vue({
 
 
 
-
+if ( $('#form-reset').length >0 )
 var reset = new Vue({
     el: '#form-reset',
     data: {
@@ -144,22 +147,17 @@ var reset = new Vue({
         send: function(){
 
             this.$http.post(location.pathname, this.formData).then(function(response) {
-
                 vex.dialog.alert({
                     message: 'Пароль успешно сохранен! Войдите с новыми данными',
                     callback: function(){
                         window.location.href = response.body.redirect;
                     }
                 })
-
-
-
             }, function(response) {
                 vex.dialog.alert({
                     message: response.body.password[0]
                 })
             });
-
             return false;
         }
     }
@@ -170,7 +168,7 @@ var reset = new Vue({
 
 
 
-
+if ( $('#order').length >0 )
 var order = new Vue({
     el: '#order',
     data: {
@@ -294,7 +292,7 @@ var order = new Vue({
 
 
 
-
+if ( $('#user-pay').length >0 )
 var payment = new Vue({
     el: '#user-pay',
     data: {
@@ -360,7 +358,7 @@ var payment = new Vue({
 
 
 
-
+if ( $('#upload-answer').length >0 )
 var answer = new Vue({
     el: '#upload-answer',
     data: {
@@ -412,6 +410,83 @@ var answer = new Vue({
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if ( $('#change-password').length >0 )
+var changePassword = new Vue({
+    el: '#change-password',
+    data: {
+        pending: false,
+        old_password: {
+            value: '',
+            error: false
+        },
+        password: {
+            value: '',
+            error: false
+        },
+        password_confirmation: {
+            value: '',
+            error: false
+        },
+    },
+    computed:{
+        all: function(){
+            return {
+                old_password: this.old_password.value,
+                password: this.password.value,
+                password_confirmation: this.password_confirmation.value,
+            };
+        }
+    },
+    methods: {
+        send: function(){
+            var self = this;
+            this.pending = true;
+            var action = $(this.$el).attr('action');
+            this.$http.post(action, this.all).then(function(response) {
+                self.pending = false;
+                vex.dialog.alert({
+                    message: 'Пароль успешно изменен!',
+                    callback: function(){
+                        window.location.href = response.body.redirect;
+                    }
+                })
+            }, function(response) {
+                self.pending = false;
+                _.forOwn(self.all, function (e,a) {
+                    if ( response.body[a] )
+                        self[a].error = response.body[a][0];
+                    else
+                        self[a].error = false;
+                });
+
+            });
+            return false;
+        }
+    }
+});
+
+
+
+
+
+
+
+
+
 // Vue.component('file-component', {
 //     template: '#template-file',
 //     props: ['title','text','name'],
@@ -442,6 +517,7 @@ $('#reset-btn').click(function(){
         placeholder: 'E-mail',
         callback: function(email){
 
+            if ( !email ) return;
             axios.post('/resets', {
                 email: email
             })
@@ -455,6 +531,9 @@ $('#reset-btn').click(function(){
                 .catch(function (error) {
                     vex.dialog.alert({
                         message: error.response.data.email[0]+' Попробуйте еще раз',
+                        callback: function(){
+                            $('#reset-btn').trigger('click');
+                        }
                     })
                 });
 

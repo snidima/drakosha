@@ -103,6 +103,16 @@ class User extends Authenticatable
 
         }
 
+        if ( $step == 5  ){
+
+
+            if ( \App\Result::where( 'status', true )->first() && \App\Order::where( 'user_id', Auth::user()->id )->first()->status && User::has('answers')->first() )
+                return true;
+            else
+                return false;
+
+        }
+
     }
 
 

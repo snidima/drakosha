@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Mockery\CountValidator\Exception;
+use Illuminate\Support\Facades\Response;
+
 
 class UserController extends Controller
 {
@@ -25,7 +27,8 @@ class UserController extends Controller
     {
 
         if ( !Hash::check($request->old_password, Auth::user()->password) )
-            return back()->withInput()->withErrors('Старый пароль введен не правильно');
+            return Response::json(['old_password'=>['Не правлильно введен старый пароль']], 422);
+//            return back()->withInput()->withErrors('Старый пароль введен не правильно');
 
         $this->validate($request, [
             'password' => 'required|confirmed|min:6',
@@ -35,8 +38,10 @@ class UserController extends Controller
         $user->password = $request->input('password');
         $user->save();
 
-        Session::flash('changePassword', true);
-        return redirect(route('profile'));
+        return Response::json([
+            'success' => true,
+            'redirect' => route('user')
+        ], 200);
 
     }
 
@@ -49,7 +54,7 @@ class UserController extends Controller
 
     public function getPay()
     {
-
+        if ( !Auth::user()->orders()->first() ) return redirect(route('user'));
         try{
         $userID = \Illuminate\Support\Facades\Auth::user()->id;
 
@@ -87,7 +92,7 @@ class UserController extends Controller
     public function getTasks()
     {
 
-        if( !Order::where('user_id',Auth::user()->id)->first()->status ) return redirect(route('user'));
+        if ( !User::isAvailStep(2) ) return redirect(route('user'));
         $tasks = Task::where('status', true)->get();
         return view('user.task',['tasks' => $tasks]);
 

@@ -76,6 +76,7 @@ Route::group([ 'middleware' => 'user', 'prefix'=>'userzone'], function()
     Route::get('/answer', [ 'uses' => 'User\AnswerController@getAnswer' ])->name('user.answer');
     Route::post('/answer', [ 'uses' => 'User\AnswerController@postAnswer' ]);
 
+    Route::get('/results', [ 'uses' => 'User\ResultsController@getResults' ])->name('user.results');
 
     Route::get('/pay/success', ['uses'=>'Payments\YandexController@shopSuccessUrl']);
     Route::get('/pay/fail', ['uses'=>'Payments\YandexController@shopFailUrl']);
@@ -93,6 +94,15 @@ Route::group([ 'middleware' => 'user', 'prefix'=>'userzone'], function()
 Route::group([ 'middleware' => 'admin', 'prefix'=>'adminzone'], function()
 {
     Route::get('/', ['uses'=>'Admin\OrderController@orders'])->name('adminzone');
+
+
+
+    Route::get('/results', ['uses'=>'Admin\ResultController@index'])->name('admin.results');
+    Route::post('/results-add', ['uses'=>'Admin\ResultController@create'])->name('admin.results.add');
+    Route::post('/results-update', ['uses'=>'Admin\ResultController@update'])->name('admin.results.update');
+    Route::post('/results-delete', ['uses'=>'Admin\ResultController@delete'])->name('admin.results.delete');
+
+
 
     Route::get('/answers', ['uses'=>'Admin\AnswerController@answers'])->name('admin.answers');
 
@@ -276,3 +286,33 @@ Route::get('download/paycheck/{id}', function ( $id )
 
     return response()->download($path, $fileName.'.'.File::extension( $path ));
 })->name('download.paychecks');
+
+
+
+
+
+
+Route::get('download/results/{id}', function ( $id )
+{
+
+    try {
+
+        $task = App\Result::where('status', true)->find( $id );
+
+        if( !$task ) throw new Exception('Доступ запрещен');
+
+
+        if ( !(\App\User::isAdmin(\Illuminate\Support\Facades\Auth::user()) || \App\Order::where('user_id',\Illuminate\Support\Facades\Auth::user()->id)->first()->status) )
+            throw new Exception('Доступ запрещен');
+
+
+        $path = storage_path() . '/results/' . $task->file;
+
+        if(!File::exists($path)) throw new Exception('Файл не существует.');
+
+    } catch (Exception $e) {
+        abort(404);
+    }
+
+    return response()->download($path, $task->name.'.'.File::extension( $path ));
+})->name('download.results');

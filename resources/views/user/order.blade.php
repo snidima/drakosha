@@ -7,6 +7,13 @@
     @include('user/parts/user-nav')
 
     <div class="container">
+        <h2 class="pay-h2">
+            @if( !\App\Order::getForCurrentUser() )
+                <div class="user-nav__title">Заполните данные для заявки</div>
+            @else
+                <div class="user-nav__title">Отредактируйте данные заявки</div>
+            @endif
+        </h2>
         <form action="{{route('user.order')}}" class="form form-large" v-bind:class="{ pending: pending}" id="order" method="post" v-on:submit.prevent="send">
             <div class="row">
                 <div class="col-md-6">

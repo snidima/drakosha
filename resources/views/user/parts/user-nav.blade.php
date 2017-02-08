@@ -99,12 +99,25 @@
 
 
 
+            @if( $navData['results'] == 'current' )
+                <div class="user-nav__item user-nav__item_new">
+                    <div class="user-nav__step">5</div>
+                    <div class="user-nav__title">Узнать результаты</div>
+                </div>
+            @elseif($navData['results'] == 'avail')
+                <a href="{{route('user.results')}}" class="user-nav__item user-nav__item_old">
+                    <div class="user-nav__step">5</div>
+                    <div class="user-nav__title">Узнать результаты</div>
+                </a>
+            @else
+                <div class="user-nav__item user-nav__item_disabled">
+                    <div class="user-nav__step">5</div>
+                    <div class="user-nav__title">Узнать результаты</div>
+                </div>
+            @endif
 
 
-            <div class="user-nav__item user-nav__item_disabled">
-                <div class="user-nav__step">5</div>
-                <div class="user-nav__title">Узнать результаты</div>
-            </div>
+
             <div class="user-nav__item user-nav__item_disabled">
                 <div class="user-nav__step">6</div>
                 <div class="user-nav__title">Получить награды</div>

@@ -49,7 +49,12 @@ class UserNavComposer {
             $res['answer'] = false;
 
 
-
+        if( Route::currentRouteName() == 'user.results' )
+            $res['results'] = 'current';
+        elseif( User::isAvailStep( 5 ) )
+            $res['results'] = 'avail';
+        else
+            $res['results'] = false;
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
@@ -15,7 +16,8 @@ class AnswerController extends Controller
 {
     public function getAnswer()
     {
-        if( !Order::where('user_id',Auth::user()->id)->first()->status ) return redirect(route('user'));
+        if ( !User::isAvailStep(4) ) return redirect(route('user'));
+
         $answers = Answer::where('user_id',Auth::user()->id)->with('users')->first();
 
         return view('user.answer',['answers'=>$answers]);
