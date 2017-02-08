@@ -50,8 +50,9 @@ gulp.task('deploy:dev', function () {
   return gulpSSH
     .shell([
     	'cd drakosha.prod/',
-    	'php artisan down', 
-    	'git pull origin master', 
+    	'php artisan down',
+        'git checkout master',
+        'git pull origin master',
     	'composer install',
     	'php artisan migrate', 
     	'npm install',
@@ -104,10 +105,10 @@ gulp.task('js:production',['js:clean'], function () {
         .pipe(source('app.js'))
         .pipe(buffer())
         .pipe(uglify())
-        // .pipe(rev())
+        .pipe(rev())
         .pipe(gulp.dest('./public_html/js/'))
-        // .pipe(rev.manifest())
-        // .pipe(gulp.dest('./resources/assets/manifests/js'))
+        .pipe(rev.manifest())
+        .pipe(gulp.dest('./resources/assets/manifests/js'))
         ;
 });
 
@@ -140,10 +141,10 @@ gulp.task('sass:production',['sass:clean'], function () {
         }).on('error', sass.logError))
         .pipe(autoprefixer({ browsers: ['> 1%', 'IE 7'], cascade: false }))
         .pipe(cleanCSS({keepSpecialComments : 0}))
-        // .pipe(rev())
+        .pipe(rev())
         .pipe(gulp.dest('./public_html/css/'))
-        // .pipe(rev.manifest())
-        // .pipe(gulp.dest('./resources/assets/manifests/css'))
+        .pipe(rev.manifest())
+        .pipe(gulp.dest('./resources/assets/manifests/css'))
         ;
 });
 

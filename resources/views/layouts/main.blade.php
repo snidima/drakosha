@@ -13,7 +13,8 @@
     <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,400i,700&amp;subset=cyrillic" rel="stylesheet">
 
-    <link rel="stylesheet" href="/css/app2.css">
+    <link rel="stylesheet" href="/css/{{css()}}">
+
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-resource@1.1.2/dist/vue-resource.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vex-js/3.0.0/js/vex.combined.min.js"></script>
@@ -37,15 +38,7 @@
 
 
 
-    {{--<script type="text/x-template" id="template-file">--}}
-        {{--<div>--}}
-            {{--<label for="file">@{{ title }}</label>--}}
-            {{--<input type="file" v-bind:name="name" id="file" required v-on:change="fileChange">--}}
-            {{--<label for="file" class="file-label" v-if="file" v-bind:class="{ 'active': file }"><i class="fa fa-file" aria-hidden="true"></i>@{{ file }}</label>--}}
-            {{--<label for="file" class="file-label" v-else >@{{ text }}</label>--}}
-        {{--</div>--}}
-    {{--</script>--}}
 
-    <script src="/js/app.js"></script>
+    <script src="/js/{{js()}}"></script>
 </body>
 </html>

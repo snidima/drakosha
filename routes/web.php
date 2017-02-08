@@ -26,8 +26,6 @@ Route::get('/payments', function () {
 
 
 
-
-
 Route::group([ 'prefix'=>'/payments/system/yandex'], function()
 {
     Route::get('/check', ['uses'=>'Payments\YandexController@checkUrl']);

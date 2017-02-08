@@ -1,323 +1,764 @@
-// Fonts
-//@import url(https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:400,700|Open+Sans:400,700&amp;subset=cyrillic)
-//@import url(https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed:400,700|Open+Sans:400,700&amp;subset=cyrillic)
-
-//@import "layouts"
+//@import url('https://fonts.googleapis.com/css?family=Comfortaa:300,400,700&amp;subset=cyrillic-ext')
+@import "variables"
+@import "mixins"
 @import "vendors/grid"
+@import "vendors/dialog"
+@import "vendors/loaders"
+
+
+//.container
+//  width: 900px
+//.container
+//  +d()
+
+.flex-lr
+  display: flex
+  justify-content: space-between
+  align-items: center
+  &.flex-lr_stretch
+    align-items: stretch
+  >*:not(:last-child)
+    margin-right: 10px
 
 *
   margin: 0
   padding: 0
   box-sizing: border-box
-
-body,html
-  font-size: 16px
-  margin: 0
-  padding: 0
+  outline: none
+  font-family: 'Comfortaa', cursive
+  text-rendering: optimizeLegibility
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+html, body
   width: 100%
   height: 100%
-  background-color: #3f3f3f
-  background-image: url(../images/body_bg.png)
-  font-family: 'Open Sans', sans-serif
-ul
-  list-style: none
-  margin: 0
-  padding: 0
-p
-  margin: 0
-  padding: 0
+  font-size: 16px
+  font-family: 'Comfortaa', cursive
 
-a
-  color: #55a4e7
-  text-decoration: underline
-  &:hover
-    text-decoration: none
-  
-h1
-  color: #363636
-  font-family: 'Open Sans Condensed', sans-serif
-  text-align: center
-  margin-bottom: 20px
-  text-transform: uppercase
 
 .main
-  min-height: 100%
-  min-width: 1024px
-  max-width: 1366px
-  margin: 0 auto
-  box-shadow: 0 0 25px rgba(#000, 0.5)
+  width: 100%
+  height: 100%
   display: flex
   flex-direction: column
-.main-content
-  padding: 20px
-  flex-grow: 1
-  display: flex
-  background-color: #fff
-  background-image: url(../images/content_bg.png)
+  header
+  main
+    flex-grow: 1
+  footer
 
-.content-wrap
-  flex-grow: 1
-  padding-left: 20px
+.h1
+  font-size: 2.1rem
+  color: $black1
+  font-weight: lighter
+  margin-bottom: 45px
+  margin-top: 45px
+  text-align: center
+  text-transform: uppercase
+  line-height: 1.5
+
+.cursor
+  cursor: pointer
 
 
+.pay-h2
+  color: $black2
+  font-size: 1.5rem
+  text-align: center
+  line-height: 1
+  margin-bottom: 40px
+  small
+    font-size: 1rem
+    color: $color1
+    margin-top: -5px
 
+a
+  color: $color2
+  &:hover
+    text-decoration: none
+.tac
+  text-align: center
+.ul-clear
+  list-style: none
 
+.block
+  display: block
+  width: 100%
+.color1
+  color: $color1
+.color2
+  color: $color2
 
-
-.aside-menu
-  border-radius: 15px
-  padding: 15px
-  box-shadow: 5px 5px rgba(#000, 0.15)
-  &:not(:last-child)
+.d
+  +d()
+//Главное меню
+.menu-top__wrapper
+  background: #fff
+  max-width: 1170px
+  margin-left: auto
+  margin-right: auto
+  +responsive($L)
+    width: 100%
+    padding-left: 20px
+    padding-right: 20px
+.menu-top__logo > img
+  max-width: 100%
+  height: auto
+  +responsive($L)
+    max-width: 70px
+  +responsive($S)
+    max-width: 100%
     margin-bottom: 20px
 
-  &[data-color="default"]
-    background: #ffd57d
-  &[data-color="red"]
-    background: #ae0a09
-.aside-menu__item
-  &:not(:last-of-type)
-    margin-bottom: 5px
-  a
-    font-family: 'Open Sans Condensed', sans-serif
-    font-size: 1rem
-    font-weight: bold
-    text-decoration: none
-    color: rgba(#000, 0.6)
-    &:hover
-      color: rgba(#000, 0.75)
-footer
-  background: #5c5c5c
-  height: 100px
-.top
-  background-image: url("../images/top.jpg")
-  height: 329px
-  background-position: center center
-
-.menu
+.menu-top
   display: flex
   justify-content: space-between
   align-items: center
-  background: linear-gradient(to bottom, #98e20a 0%, #82c307 100%)
-  padding: 10px 20px
-  font-family: 'Open Sans Condensed', sans-serif
+  padding: 15px 0
+  flex-direction: row
+  font-size: 1rem
 
-.menu-list
-  list-style: none
-  margin: 0
-  padding: 0
-  color: #fff
+  +responsive($S)
+    flex-direction: column
+    font-size: 1rem
+    &.menu-top_mobile-active .menu-top__list
+      display: block
+    &:not(.menu-top_mobile-active) .menu-top__list
+      display: none
+
+
+
+.menu-top__list a
   font-weight: bold
-  font-size: 1.1rem
-.menu-list__item
+  text-decoration: none
+
+.menu-top__list li
   display: inline-block
   &:not(:last-of-type)
-    margin-right: 15px
+    margin-right: 10px
+  +responsive($S)
+    &:not(:last-of-type)
+     margin-right: 0
+     margin-bottom: 5px
+    display: block
+    text-align: center
+.menu-top__list_main
+  +responsive($S)
+    margin-bottom: 25px
+.menu-top__list_main a
+  color: $black2
+  &:hover
+    color: $black1
 
-  a
-    color: #fff
-    text-decoration: none
-    text-shadow: 2px 2px rgba(#000, .1)
-    i
-      color: rgba(#fff, .8)
 
 
 
-.text-color-black
-  color: #363636
-.text-color-gray
-  color: #565656
-.text-color-green
-  color: #92db07
-.text-color-red
-  color: #f1132d
-.text-color-blue
-  color: #5db4fd
 
-.text-center
+//Главное меню нижнее
+.menu-bottom__wrapper
+  background: $color1
+
+.menu-bottom
+  list-style: none
   text-align: center
+  padding: 14px 20px
+  overflow-x: auto
+  white-space: nowrap
+  & li
+    display: inline-block
+    &:not(:last-of-type)
+      margin-right: 10px
+    a
+      white-space: pre
+      color: #fff
+      font-size: $menu-bottom-fz
+      text-decoration: none
+      &:hover
+        color: rgba(#fff, .8)
 
-.text-size-3
-  font-size: 1.4rem
-.text-size-1
-  font-size: 2.3rem
-
-.condensed
-  font-family: 'Open Sans Condensed', sans-serif
-
-.margin-bottom
-  margin-bottom: 40px
-
-
-.text-right
-  text-align: right
-
-
-
-
-
-
-
-
-
-
-
-.main-block
-  //background: rgba(#000, .05)
-  border-radius: 15px
-  padding: 20px
-
-  &:not(:last-of-type)
-    margin-bottom: 30px
-
-.circles
-  padding-top: 15px
-  margin-bottom: 20px
-  display: flex
-  align-items: center
-  justify-content: center
-.cricle
-  a
-    text-decoration: none
-  display: inline-block
-  width:  170px
-  height: 170px
-  background: #fff
-  padding: 20px
-  border-radius: 50%
-  box-shadow: 5px 5px rgba(#000, 0.2)
-  transition: all 0.1s linear
-
-  &:not([data-coor="gray"]):hover
-    box-shadow: 5px 5px rgba(#000, 0.3)
-  &:not(:last-of-type)
-    margin-right: 15px
-  &[data-coor="red"]
-    background: #f1132d
-  &[data-coor="green"]
-    background: #8cd108
-  &[data-coor="blue"]
-    background: #5db4fd
-  &[data-coor="magenta"]
-    background: #e63ed8
-  &[data-coor="orange"]
-    background: #ee7720
-  &[data-coor="gray"]
-    background: #ababab
-
-.cricle-text
+//Главное изображение с текстом
+.slider
+  &:after
+    content: ''
+    position: absolute
+    left: 0
+    top: 0
+    right: 0
+    bottom: 0
+    background: rgba(#000, .1)
+  height: 666px
+  width: 100%
+  background-image: url(../images/slider-2.jpg)
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center center
+  position: relative
+  overflow: hidden
+.slider-texts__effect
+  background: rgba(#fff, .15)
+  width: 100%
+  position: absolute
+  right: -47%
   height: 100%
+  transform: skewX(-15deg)
+  z-index: 1
+
+.slider-texts
+  position: relative
+  z-index: 2
+  text-align: right
+  display: flex
+  flex-direction: column
+  justify-content: center
+  height: 100%
+  max-width: 1170px
+  margin: 0 auto
+
+
+
+
+
+
+.slider-texts__big-text
+  font-size: 3.4rem
+  font-weight: bold
+  text-transform: uppercase
+  color: #fff
+  line-height: 1
+  text-shadow: 0 0 20px rgba($black1, .2)
+.slider-texts__under_big-text
+  font-size: 1.3rem
+  color: #fff
+  line-height: 1
+  text-shadow: 0 0 10px rgba($black1, .4)
+.slider-texts__desc
+  font-style: italic
+  margin-top: 40px
+  color: #fff
+  line-height: 1.6
+  font-size: 1.1rem
+  text-shadow: 0 0 10px rgba($black1, .6)
+
+.slider-texts__action
+  margin-top: 40px
+  .slider-texts__btn
+    font-size: 1.6rem
+    font-weight: lighter
+    padding: 20px 40px
+    border: none
+    background: $color1
+    color: #fff
+    transition: all 0.1s linear
+    cursor: pointer
+    border-radius: $br
+    .fa
+      margin-right: 15px
+    &:hover
+      background: lighten($color1, 4%)
+
+
+
+
+.btn
+  border-radius: $br
+  border-width: $bw
+  border-style: solid
+  padding: 7px
+  font-size: 1rem
+  display: inline-block
+  vertical-align: middle
+  background: transparent
+  font-family: 'Comfortaa', cursive
+  cursor: pointer
+  white-space: pre
+  .fa
+    font-size: 1rem
+    padding-right: 5px
+.btn-color1
+  border-color: $color1
+  color: $color1
+  font-weight: bold
+.btn-trans
+  border: none
+
+.btn2
+  white-space: pre
+  text-decoration: none
+  border-radius: $br
+  padding: 10px 20px
+  font-size: 1rem
+  display: inline-block
+  vertical-align: middle
+  transition: all 0.1s linear
+  border: none
+  cursor: pointer
+  .fa
+    padding-right: 5px
+  &[disabled]
+    cursor: default
+    background: $black4
+    &:hover
+      background: $black4
+.btn2-color1
+  background-color: $color1
+  color: #fff
+  &:hover
+    background-color: lighten($color1, 10%)
+
+
+
+
+.main-section
+  padding: 100px 0
+.main-section__header
+  font-size: 2.5rem
+  color: $black1
+  font-weight: lighter
+  margin-bottom: 45px
+  text-align: center
+  text-transform: uppercase
+  position: relative
+  z-index: 3
+.main-section__header_white
+  color: #fff
+.school-items
+  display: flex
+  width: 100%
+
+.school-items__item
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  width: 20%
+  text-align: center
+  padding: 15px
+  transition: all 0.1s linear
+  border-radius: $br
+  text-decoration: none
+  cursor: pointer
+  position: relative
+  &:hover
+    background: rgba(#000,.05)
+    .school-items__action
+      background: lighten($color2, 8%)
+
+.school-items__image
+  width:  182px
+  height: 182px
+  background-position: center center
+  background-size: 100%
+  background-repeat: no-repeat
+  border-radius: 50%
+  margin-left: auto
+  margin-right: auto
+  margin-bottom: 15px
+.school-items__text
+  font-size: 1rem
+  font-weight: bold
+  color: $black1
+  margin-bottom: 5px
+.school-items__small
+  color: $black4
+  display: block
+  font-size: .9rem
+.school-items__action
+  border: none
+  transition: all 0.1s linear
+  font-size: 1rem
+  font-family: 'Comfortaa', cursive
+  background: $color2
+  border-radius: $br
+  padding: 10px 20px
+  color: #fff
+  display: inline-block
+  margin-top: 10px
+  cursor: pointer
+  .fa
+    margin-right: 8px
+
+
+.main-section-bg
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center center
+  position: relative
+
+.main-section_2:before
+  content: ''
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  background:  linear-gradient(45deg, lighten($color2, 15%) 0%, $color2 100%)
+  opacity: 0.8
+.main-section-bg_text
+  position: relative
+  z-index: 1
+.main-section-bg_text-2
+  text-align: center
+  color: #fff
+  font-size: 1.6rem
+  font-weight: lighter
+  line-height: 1.5
+  z-index: 1
+
+.section-times__title
+  font-size: 1.35rem
+  font-weight: bold
+  margin-top: 20px
+  
+.section-times__devide
+  width: 75px
+  height: 2px
+  margin: 0 auto
+  margin-top: 20px
+  
+.section-times__desc
+  margin-top: 20px
+  color: $black2
+  line-height: 1.5
+  font-size: 1.1rem
+
+.section-times_1
+  .section-times__title
+    color: $color2
+  .section-times__devide
+    background: $color2
+  .section-times__desc b
+    color: $color2
+.section-times_2
+  .section-times__title
+    color: $color3
+  .section-times__devide
+    background: $color3
+  .section-times__desc b
+    color: $color3
+.section-times_3
+  .section-times__title
+    color: $color1
+  .section-times__devide
+    background: $color1
+  .section-times__desc b
+    color: $color1
+
+.main-section__pay
+  background: rgba(#000, .04)
+.section-pay
+  max-width: 300px
+  display: inline-block
+  text-align: center
+.section-pay_l
+  text-align: right
+.section-pay_r
+  text-align: left
+.section-pay__desc
+  line-height: 1.5
+  color: $black2
+  font-size: 1.1rem
+.section-pay__title
+  font-size: 6rem
+  color: $color3
+
+
+.section-award__title
+  font-size: 1.5rem
+  color: $black1
+  margin-bottom: 20px
+  font-weight: bold
+.section-award__desc
+  line-height: 1.5
+  font-size: 1.1rem
+  color: $black2
+
+
+
+.footer-wrapper
+  background: #343434
+  padding: 20px
+.footer
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: center
+.footer-menu
+  list-style: none
+  li
+    display: inline-block
+    &:not(:last-of-type)
+      margin-right: 10px
+    a
+      color: #b0b0b0
+      text-decoration: none
+
+
+ol.payments
+  list-style: none
+  margin-top: 45px
+  margin-bottom: 45px
+  li
+    font-size: 1.1rem
+    color: $black1
+    line-height: 1.5
+    counter-increment: list1
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    &:not(:last-of-type)
+      margin-bottom: 20px
+  li:before
+    content: counter(list1)
+    font-size: 3rem
+    color: $color1
+    line-height: 1
+    font-weight: bold
+    margin-right: 20px
+.payments-warning
+  margin-top: 45px
+  margin-bottom: 45px
+  color: $black1
+  line-height: 1.5
+  font-size: .9rem
+  .r
+    text-align: justify
+    display: block
+    font-weight: bold
+    font-style: italic
+    margin-top: 5px
+
+
+
+
+
+
+
+
+
+
+
+
+.form
+  margin-left: auto
+  margin-right: auto
+  margin-top: 20px
+  margin-bottom: 20px
+  text-align: right
+  position: relative
+  z-index: 1
+  transition: all 0.2s linear
+  &.pending > *:not(.form__pending)
+    opacity: .2
+  .form__pending
+    content: ''
+    position: absolute
+    left: 0
+    top: 0
+    right: 0
+    bottom: 0
+    background: transparent
+    z-index: 5
+    width: 100%
+    height: 100%
+    .form__pending-wrapper
+      display: flex
+      height: 100%
+      justify-content: center
+      align-items: center
+  .form__row
+    position: relative
+  .form__row:not(:last-of-type)
+    margin-bottom: 25px
+  .form__action
+    margin-top: 20px
+  label, input[type="text"], input[type="password"], input[type="email"],input[type="number"], textarea, select
+    display: block
+    width: 100%
+  textarea
+    min-height: 204px
+    resize: vertical
+  input[type="file"]
+    display: none
+  .file-label
+    margin-bottom: 0
+    background-color: #f0eef0
+    padding: 15px
+    border-radius: $br
+    font-size: .9rem
+    font-weight: bold
+    color: $black1
+    border: 2px solid #e1e1e1
+    cursor: pointer
+    word-break: break-all
+    text-overflow: ellipsis
+    white-space: pre
+    max-width: 100%
+    overflow: hidden
+    &.active
+      font-weight: lighter
+      font-size: 0.8rem
+      &:hover
+        border: 2px solid #e1e1e1
+    .fa
+      margin-right: 7px
+      opacity: 0.3
+    &:hover
+      border-color: $color1
+      color: $color1
+      background: #f6f4f6
+    &.error
+      border-color: $color3
+  select
+    background-color: #f0eef0
+    padding: 15px
+    border-radius: $br
+    font-size: .9rem
+    font-weight: bold
+    color: $black1
+    border: 2px solid #e1e1e1
+    &:focus
+      border-color: $color1
+      color: $color1
+      background: #f6f4f6
+    &.error
+      border-color: $color3
+  label
+    text-align: left
+    font-size: 1rem
+    font-weight: bold
+    color: $black1
+    margin-bottom: 5px
+
+  input[type="text"], input[type="password"], input[type="email"],input[type="number"], textarea
+    background-color: #f0eef0
+    padding: 15px
+    border-radius: $br
+    font-size: .9rem
+    font-weight: bold
+    color: $black1
+    border: 2px solid #e1e1e1
+    &:focus
+      border-color: $color1
+      color: $color1
+      background: #f6f4f6
+    &.error
+      border-color: $color3
+    
+.form__error
+  font-size: .7rem
+  color: darken($color3, 10%)
+  font-weight: bold
+  position: absolute
+  width: 100%
+  text-align: center
+  padding-top: 3px
+.form-small
+  max-width: 380px
+.form-large
+  max-width: 760px
+.form-full
+  max-width: 100%
+
+
+
+
+.user-header
+  line-height: .7
+  small
+    font-size: .8rem
+    text-transform: none
+    font-weight: bold
+    color: $black4
+
+.user-nav-wrapper .h2
+  text-align: center
+  font-size: 1rem
+  font-weight: bold
+  margin-bottom: 15px
+  color: $black2
+  line-height: 1.5
+.user-nav
+  margin-top: 20px
+  display: flex
+  margin-bottom: 40px
+  justify-content: space-between
+  position: relative
+  z-index: 3
+  &:before
+    content: ''
+    width: 100%
+    height: 5px
+    background: #ededed
+    position: absolute
+    z-index: 0
+    top: 36px
+.user-nav__item
+  width: 16.666666666%
+  padding: 0 10px
+  text-align: center
   display: flex
   flex-direction: column
   align-items: center
-  justify-content: center
+  position: relative
+  z-index: 3
 
-.cricle-text__title
-  font-weight: bold
-  font-size: 1.1rem
-  text-shadow: 2px 2px rgba(#000, .1) 
-  color: rgba(#fff, 1)
-.cricle-text__desc
-  font-size: 0.8rem
-  font-style: italic
-
-.main-time-block
-  margin-top: 15px
-  list-style-position: inside
-  text-align: center
-  li
-    margin-left: 0
-    padding-left: 0
-    margin-top: 7px
-
-.main-rules-block
-  margin-top: 15px
-  p:not(:last-of-type)
-    margin-bottom: 10px
-
-.main-price-block
-  width: 70%
-  margin: 0 auto
-  margin-top: 20px
-.main-reward-block
-  width: 90%
-  margin: 0 auto
-  margin-top: 20px
-
-.main-price-block__title
-  padding-bottom: 10px
-
-
-.main-block__title
+a.user-nav__item
+  text-decoration: none
+.user-nav__step
   display: flex
-  align-items: center
   justify-content: center
-  font-size: 1.4rem
-  color: #363636
-  font-family: 'Open Sans Condensed', sans-serif
-  font-weight: bold
-  text-decoration: underline
-  img
-    width: 90px
-    height: auto
-    margin-right: 10px
-
-
-
-
-.form_login
-  input[type="submit"]
-    outline: none
-    cursor: pointer
-    border: none
-    background: #8cd108
-    color: #fff
-    font-weight: bold
-    padding: 10px
-    text-transform: uppercase
-    border-radius: 10px
-    font-family: 'Open Sans', sans-serif
-    margin-top: 10px
-    &.loading:after
-      content: 'loading..'
-      width: 100px
-      border: 1px solid yellow
-
-
-
-
-  input:not([type="submit"])
-    display: block
-    width: 100%
-    border: none
-    background: #fff
-    padding: 8px
-    border-radius: 5px
-    height: 100%
-    font-family: 'Open Sans', sans-serif
-    color: #404040
-  label
-    display: block
-    font-weight: bold
-    font-size: .9rem
-    color: #363636
-    line-height: 35px
-    text-align: right
-  width: 500px
-  margin: 0 auto
+  align-items: center
   padding: 20px
-  border-radius: 15px
-  background: #f4f4f4
-  .row
-    height: 35px
-    margin-bottom: 10px
-    > div
-      height: 100%
-  small.errors
-    text-align: center
-    display: block
-    color: #f1132d
-    margin-bottom: 20px
+  width: 80px
+  height: 80px
+  line-height: 40px
+  border-radius: 50%
+  border: 6px solid #ededed
+  color: #fff
+  font-weight: bold
+  font-size: 1.4rem
+  transition: all 0.1s linear
 
-.form_login_reg
-  width: 700px
+.user-nav__item_disabled .user-nav__step
+  background: #b3b3b3
+.user-nav__item_disabled .user-nav__title
+  color: #909090
+
+.user-nav__item_new .user-nav__step
+  background: $color4
+a.user-nav__item_new:hover .user-nav__step
+  background: lighten($color4, 2%)
+
+a.user-nav__item_old:hover .user-nav__step
+  background: lighten($color2, 5%)
+.user-nav__item_old .user-nav__step
+  background: $color2
+
+.user-nav__title
+  margin-top: 8px
+  font-weight: bold
+  color: $black2
+  text-decoration: none
+
+
+
+
+
+.user-tasks
+  list-style: none
+  font-size: 1.2rem
+  font-weight: bold
+  color: $black1
+  max-width: 400px
+  margin: 40px auto
+  text-align: center
+  li:not(:last-of-type)
+    margin-bottom: 10px
+
+.admin-panel
+  padding: 10px
+  background: $black2
+  text-align: center
+  .fa
+    margin-right: 7px
+  a
+    color: #fff
+    text-decoration: none
