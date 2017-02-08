@@ -54,7 +54,7 @@ gulp.task('deploy:dev', function () {
         'git checkout master',
         'git pull origin master',
     	'composer install',
-    	'php artisan migrate', 
+    	'php artisan migrate --force',
     	'npm install',
     	'gulp production',
     	'php artisan up',
