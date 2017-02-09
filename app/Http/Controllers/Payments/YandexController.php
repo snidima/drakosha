@@ -100,12 +100,12 @@ class YandexController extends Controller
 
     public function shopSuccessUrlDemo()
     {
-        echo __METHOD__;
+        return view('user.yandex-success');
     }
 
     public function shopFailUrlDemo()
     {
-        echo __METHOD__;
+        return view('user.yandex-fail');
     }
 
 }
