@@ -16,7 +16,7 @@
                 <li><a href="{{route('orders')}}">Управление заявками</a></li>
                 <li><a href="{{route('tasks')}}">Задания</a></li>
                 <li><a href="{{route('admin.results')}}">Результаты</a></li>
-                <li><a href="{{route('tasks')}}">Награждения</a></li>
+                <li><a href="#">Награждения</a></li>
                 {{--<li><a href="{{route('admin.answers')}}">Ответы</a></li>--}}
                 {{--<li><a href="{{route('adminzone')}}">Настройки конкурса</a></li>--}}
             </ul>
