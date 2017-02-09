@@ -55,7 +55,7 @@ return [
     'mimes'                => 'Доступные расширения: :values.',
     'mimetypes'            => 'The :attribute must be a file of type: :values.',
     'min'                  => [
-        'numeric' => 'The :attribute must be at least :min.',
+        'numeric' => 'Минимальное количество :min.',
         'file'    => 'Минимум :min килобайт.',
         'string'  => 'Минимум :min символов.',
         'array'   => 'The :attribute must have at least :min items.',

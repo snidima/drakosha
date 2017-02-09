@@ -28,13 +28,15 @@ Route::get('/payments', function () {
 
 Route::group([ 'prefix'=>'/payments/system/yandex'], function()
 {
-    Route::get('/check', ['uses'=>'Payments\YandexController@checkUrl']);
-    Route::get('/aviso', ['uses'=>'Payments\YandexController@avisoUrl']);
+    Route::post('/check', ['uses'=>'Payments\YandexController@checkUrl']);
+    Route::post('/aviso', ['uses'=>'Payments\YandexController@avisoUrl']);
 
-    Route::get('/demo/check', ['uses'=>'Payments\YandexController@checkUrlDemo']);
-    Route::get('/demo/aviso', ['uses'=>'Payments\YandexController@avisoUrlDemo']);
+    Route::post('/demo/check', ['uses'=>'Payments\YandexController@checkUrlDemo']);
+    Route::post('/demo/aviso', ['uses'=>'Payments\YandexController@avisoUrlDemo']);
 
 });
+
+
 
 
 
@@ -65,9 +67,9 @@ Route::group([ 'middleware' => 'user', 'prefix'=>'userzone'], function()
 
     Route::post('/changePassword', [ 'uses' => 'UserController@changePassword' ] )->name('changePassword');
 
-    Route::get('/pay', [ 'uses' => 'UserController@getPay' ])->name('user.pay');
-    Route::post('/pay', [ 'uses' => 'UserController@postPay' ]);
-    Route::post('/paycheck', [ 'uses' => 'User\PayController@postPaycheck' ])->name('user.paycheck');
+    Route::get('/pay', [ 'uses' => 'User\PayController@getPay' ])->name('user.pay');
+    Route::post('/payonline', [ 'uses' => 'User\PayController@postPayOnline' ])->name('user.pay.online');
+    Route::post('/paycheck', [ 'uses' => 'User\PayController@postPaycheck' ])->name('user.pay.check');
 
     Route::get('/gettask', [ 'uses' => 'UserController@getTasks' ])->name('user.task');
 

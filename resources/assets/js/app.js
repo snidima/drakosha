@@ -312,14 +312,16 @@ var payment = new Vue({
                 text: 'С помощью квитанции',
                 value: 'check',
             }
-
         ],
         selectPayMethods: false,
         file: false,
         error: false,
+        error2: false,
         pending: false,
-        fileSrc: false
+        fileSrc: false,
+        sum: 0
     },
+
     created: function(){
       this.selectPayMethods = this.payMethods[0].value
     },
@@ -329,7 +331,7 @@ var payment = new Vue({
                 this.error = 'Прикрепите файл';
                 return;
             }
-            var action = '/userzone/paycheck';
+            var action = $(this.$el).find('#paycheck').attr('action');
             var self = this;
             this.pending = true;
 
@@ -355,9 +357,34 @@ var payment = new Vue({
                 this.file = filename;
                 this.error = false;
                 this.fileSrc = e.target.files[0];
-                console.log( this.fileSrc )
             }
+        },
+
+        sendOnline: function () {
+            var self = this;
+            this.pending = true;
+            this.$http.post($(this.$el).find('#payonline').attr('data-first-action'), {
+                money: this.sum
+            }).then(function(response) {
+                self.pending = false;
+                vex.dialog.confirm({
+                    message: response.body.message,
+                    callback: function (value) {
+                        if(value){
+                            $(self.$el).find('#payonline').submit();
+                        }
+                    },
+                    buttons: [
+                        $.extend({}, vex.dialog.buttons.YES, { text: 'Перейти' }),
+                        $.extend({}, vex.dialog.buttons.NO, { text: 'Отмена' })
+                    ],
+                })
+            }, function(response) {
+                self.pending = false;
+                self.error2 = response.body.money[0];
+            });
         }
+
     }
 });
 

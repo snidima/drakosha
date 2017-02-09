@@ -12,6 +12,9 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        //
+        '/payments/system/yandex/check',
+        '/payments/system/yandex/aviso',
+        '/payments/system/yandex/demo/check',
+        '/payments/system/yandex/demo/aviso',
     ];
 }

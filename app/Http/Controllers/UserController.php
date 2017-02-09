@@ -52,41 +52,7 @@ class UserController extends Controller
 
 
 
-    public function getPay()
-    {
-        if ( !Auth::user()->orders()->first() ) return redirect(route('user'));
-        try{
-        $userID = \Illuminate\Support\Facades\Auth::user()->id;
 
-        $order = Order::whereHas( 'users' , function( $q ) use ( $userID ) {
-            $q->where('user_id','=',$userID);
-        } )->first() ;
-
-         if( !$order ) throw new Exception('Ошибка доступа');
-
-        return view('user.pay',[
-            'summ' => (($order->sert_count*60 - $order->money) >=0 ) ? $order->sert_count*60 - $order->money : 0 ,
-            'money' => $order->money,
-            'sert' => $order->sert_count,
-        ]);
-        } catch (Exception $e){
-            abort('403');
-        }
-    }
-
-    public function postPay( Request $request )
-    {
-        $userID = \Illuminate\Support\Facades\Auth::user()->id;
-        $order = Order::whereHas( 'users' , function( $q ) use ( $userID ) {
-            $q->where('user_id','=',$userID);
-        } )->first() ;
-
-
-        $order->money += $request->input('money');
-        $order->save();
-
-        return redirect(route('user.pay'));
-    }
 
 
     public function getTasks()

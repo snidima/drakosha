@@ -14,7 +14,7 @@
             </h2>
             @endif
 
-            <div class="form form-small" id="user-pay" method="post" v-bind:class="{ pending: pending}">
+            <div class="form form-small" id="user-pay"  v-bind:class="{ pending: pending}">
                 <div class="form__row">
                     <label for="pay-method">Выбирите метод оплаты</label>
                     <select id="pay-method" v-model="selectPayMethods">
@@ -22,20 +22,24 @@
                     </select>
                 </div>
 
-                <form method="post" action="{{route('user.pay')}}" style="margin-top: 20px" v-if="selectPayMethods == 'ya'">
+                <form method="post" id="payonline" data-first-action="{{route('user.pay.online')}}" action="{{env('YANDEX_URL','')}}" style="margin-top: 20px" v-if="selectPayMethods == 'ya'" v-on:submit.prevent="sendOnline">
                     {{csrf_field()}}
+                    <input type="hidden" value="{{env('YANDEX_SHOPID','')}}" name="shopId">
+                    <input type="hidden" value="{{env('YANDEXSCID','')}}" name="scid">
+                    <input type="hidden" value="{{\Illuminate\Support\Facades\Auth::user()->orders()->first()->id}}" name="customerNumber">
                     <div class="form__row" style="margin-bottom: 0">
                         <label for="money">
                             Необходимая сумма: <span class="color1">{{$summ}}</span> руб.
                         </label>
                     </div>
                     <div class="form__row flex-lr flex-lr_stretch">
-                        <input type="number" name="money" id="money" required placeholder="Введите сумму">
+                        <input type="text" name="sum" id="sum" v-model="sum" required placeholder="Введите сумму" v-bind:class="{ error: error2 }">
                         <button class="btn2 btn2-color1"><i class="fa fa-rub" aria-hidden="true"></i>Оплатить</button>
                     </div>
+                    <p class="form__error" style="text-align: left" v-if="error2">@{{error2}}</p>
                 </form>
 
-                <form method="post" action="{{route('user.paycheck')}}" style="margin-top: 20px" v-if="selectPayMethods == 'check'" v-on:submit.prevent="sendCheck" enctype="multipart/form-data">
+                <form method="post" id="paycheck" action="{{route('user.pay.check')}}" style="margin-top: 20px" v-if="selectPayMethods == 'check'" v-on:submit.prevent="sendCheck" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="form__row">
                         <label for="file">Прикрепите скан чека ( jpeg,png,zip,rar )</label>
