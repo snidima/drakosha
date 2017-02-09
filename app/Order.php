@@ -20,6 +20,7 @@ class Order extends Model
 
         static::creating(function ($model) {
             $model->money = 0;
+            $model->last_pay = 0;
         });
     }
 
