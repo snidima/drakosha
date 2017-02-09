@@ -167,7 +167,7 @@ return [
          * Package Service Providers...
          */
 
-        Barryvdh\Debugbar\ServiceProvider::class,
+//        Barryvdh\Debugbar\ServiceProvider::class,
         Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
 
         /*
