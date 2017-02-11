@@ -8,6 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" href="images/favicon.png" />
 
+    {{--<link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">--}}
+    {{--<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=cyrillic" rel="stylesheet">--}}
 
 </head>
 <body>
@@ -26,9 +28,9 @@
 
 
 
+    <link rel="stylesheet" href="/css/{{css()}}">
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
-    <link rel="stylesheet" href="/css/{{css()}}">
     <script src="/js/{{js()}}"></script>
 </body>
 </html>

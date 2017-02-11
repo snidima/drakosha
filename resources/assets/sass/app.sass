@@ -1,4 +1,3 @@
-//@import url('https://fonts.googleapis.com/css?family=Comfortaa:300,400,700&amp;subset=cyrillic-ext')
 @import "variables"
 @import "mixins"
 @import "vendors/grid"
@@ -26,7 +25,7 @@
   padding: 0
   box-sizing: border-box
   outline: none
-  font-family: 'Comfortaa', cursive
+  font-family: "Century Gothic", sans-serif
   text-rendering: optimizeLegibility
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
@@ -34,7 +33,7 @@ html, body
   width: 100%
   height: 100%
   font-size: 16px
-  font-family: 'Comfortaa', cursive
+  //font-family: 'Comfortaa', cursive
 
 
 .main
@@ -51,15 +50,79 @@ html, body
   font-size: 2.1rem
   color: $black1
   font-weight: lighter
+  margin-bottom: 20px
+  margin-top:   20px
+  text-align: center
+  text-transform: uppercase
+  line-height: 1.5
+.h2
+  font-size: 1.8rem
+  color: $black1
+  font-weight: lighter
   margin-bottom: 45px
   margin-top: 45px
   text-align: center
   text-transform: uppercase
   line-height: 1.5
 
+img.r
+  max-width: 100%
+  height: auto
+
+.r
+  text-align: right
+
+p
+  font-family: "Verdana", sans-serif
+  line-height: 1.38
+
+
+small
+  line-height: 1
+span, b, u, i
+  font-family: "Verdana", sans-serif
+
+
+.label
+  padding: 5px 10px
+  border-radius: 3px
+  font-size: 0.90rem
+  font-weight: bold
+  font-family: "Century Gothic", sans-serif
+  text-transform: uppercase
+
+.label-color1
+  background: #e80257
+  color: #fff
+
+
+
+
+ol, ul
+  list-style-position: inside
+  li
+    font-family: "Verdana", sans-serif
+    &:not(:last-child)
+      margin-bottom: 0.3rem
+
+p
+  margin-bottom: 10px
+  margin-top:    10px
+
 .cursor
   cursor: pointer
 
+.warning
+  padding: 20px
+  border-radius: 5px
+  background: #f5f5f5
+  color: $black1
+  margin: 20px 0
+
+
+.block
+  margin-bottom: 40px
+  display: block
 
 .pay-h2
   color: $black2
@@ -73,7 +136,8 @@ html, body
     margin-top: -5px
 
 a
-  color: $color2
+  color: #00aab9
+  font-family: "Verdana", sans-serif
   &:hover
     text-decoration: none
 .tac
@@ -131,6 +195,7 @@ a
 .menu-top__list a
   font-weight: bold
   text-decoration: none
+  font-family: "Century Gothic", sans-serif
 
 .menu-top__list li
   display: inline-block
@@ -161,7 +226,7 @@ a
 .menu-bottom
   list-style: none
   text-align: center
-  padding: 14px 20px
+  padding: 10px 20px
   overflow-x: auto
   white-space: nowrap
   & li
@@ -173,6 +238,7 @@ a
       color: #fff
       font-size: $menu-bottom-fz
       text-decoration: none
+      font-family: "Century Gothic", sans-serif
       &:hover
         color: rgba(#fff, .8)
 
@@ -226,6 +292,7 @@ a
   color: #fff
   line-height: 1
   text-shadow: 0 0 20px rgba($black1, .2)
+  font-family: "Trebuchet MS", sans-serif
 .slider-texts__under_big-text
   font-size: 1.3rem
   color: #fff
@@ -268,8 +335,9 @@ a
   display: inline-block
   vertical-align: middle
   background: transparent
-  font-family: 'Comfortaa', cursive
+  font-family: "Century Gothic", sans-serif
   cursor: pointer
+  font-weight: bold
   white-space: pre
   .fa
     font-size: 1rem
@@ -278,6 +346,7 @@ a
   border-color: $color1
   color: $color1
   font-weight: bold
+  transition: all 0.1s linear
 .btn-trans
   border: none
 
@@ -290,6 +359,8 @@ a
   display: inline-block
   vertical-align: middle
   transition: all 0.1s linear
+  font-family: "Century Gothic", sans-serif
+  font-weight: bold
   border: none
   cursor: pointer
   .fa
@@ -365,7 +436,7 @@ a
   border: none
   transition: all 0.1s linear
   font-size: 1rem
-  font-family: 'Comfortaa', cursive
+  font-weight: bold
   background: $color2
   border-radius: $br
   padding: 10px 20px
@@ -494,12 +565,9 @@ a
 
 ol.payments
   list-style: none
-  margin-top: 45px
-  margin-bottom: 45px
   li
-    font-size: 1.1rem
+    font-size: 1rem
     color: $black1
-    line-height: 1.5
     counter-increment: list1
     display: flex
     align-items: center
@@ -518,23 +586,6 @@ ol.payments
   margin-bottom: 45px
   color: $black1
   line-height: 1.5
-  font-size: .9rem
-  .r
-    text-align: justify
-    display: block
-    font-weight: bold
-    font-style: italic
-    margin-top: 5px
-
-
-
-
-
-
-
-
-
-
 
 
 .form
@@ -758,6 +809,7 @@ a.user-nav__item_old:hover .user-nav__step
   padding: 10px
   background: $black2
   text-align: center
+  list-style: none
   .fa
     margin-right: 7px
   a

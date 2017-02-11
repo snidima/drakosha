@@ -157,9 +157,9 @@
                     <div class="section-award__devider"></div>
                     <div class="section-award__desc">
                         Все участники без исключения<br>
-                        получат <b class="color2">сертификаты участников</b>,<br>
+                        получат <b class="color1">сертификаты участников</b>,<br>
                         а наиболее отличившиеся по итогам конкурса -<br>
-                        <b class="color2">дипломы I, II, III степени</b>
+                        <b class="color1">дипломы I, II, III степени</b>
                     </div>
                 </div>
             </div>

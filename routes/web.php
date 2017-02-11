@@ -24,6 +24,18 @@ Route::get('/payments', function () {
     return view('payments');
 })->name('payments');
 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/how', function () {
+    return view('how');
+})->name('how');
+
+
+Route::get('/contacts', function () {
+    return view('contacts');
+})->name('contacts');
 
 
 Route::group([ 'prefix'=>'/payments/system/yandex'], function()

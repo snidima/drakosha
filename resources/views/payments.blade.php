@@ -4,13 +4,13 @@
 @section('content')
     <div class="container">
         <h1 class="h1">Способы оплаты</h1>
-        <div class="row">
+        <div class="row block">
             <div class="col-sm-3 tac"><img src="/images/payments/yandex_money.png" alt=""></div>
             <div class="col-sm-3 tac"><img src="/images/payments/sberbank.png" alt=""></div>
             <div class="col-sm-3 tac"><img src="/images/payments/Visa.png" alt=""></div>
             <div class="col-sm-3 tac"><img src="/images/payments/master-card.png" alt=""></div>
         </div>
-        <ol class="payments">
+        <ol class="payments block">
             <li>
                 <p>
                     <b>Через банк</b>. Для этого скачайте и распечатайте квитанцию. Чек необходимо направить  нам в виде сканированной копии
@@ -25,14 +25,14 @@
                 </p>
             </li>
         </ol>
-        <div class="tac">
+        <div class="tac block">
             <a href="#" class="btn2 btn2-color1"><i class="fa fa-download" aria-hidden="true"></i>Скачать квитанцию</a>
         </div>
-        <p class="payments-warning">
+        <p class="warning block">
             <b>Внимание!</b> От уплаты организационного взноса освобождаются участники конкурса из детских домов, дети-инвалиды
             (при официальном запросе от учреждения, который необходимо отправить на электронный ящик).
             В «ШАГ 2» вместо копии квитанции прикрепите сканированную копию любого документа, подтверждающего принадлежность к льготной группе участников.
-            <span class="r">С уважением, администраторы сайта</span>
+            <br><b>С уважением, администраторы сайта</b>
         </p>
 
     </div>

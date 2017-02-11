@@ -8,9 +8,9 @@
             <ul class="menu-top__list menu-top__list_main">
                 <li><a href="{{route('main')}}">Главная!</a></li>
                 {{--<li><a href="#">Правила участия</a></li>--}}
-                <li><a href="#">Как принять участие?</a></li>
+                <li><a href="{{route('how')}}">Как принять участие?</a></li>
                 <li><a href="{{route('payments')}}">Способы оплаты</a></li>
-                <li><a href="#">Контакты</a></li>
+                <li><a href="{{route('contacts')}}">Контакты</a></li>
             </ul>
             <ul class="menu-top__list menu-top__list_acc">
                 @if( Auth::check() )
@@ -26,7 +26,7 @@
 </div>
 <div class="menu-bottom__wrapper">
     <ul class="menu-bottom">
-        <li><a href="#">О проекте</a></li>
+        <li><a href="{{route('about')}}">О проекте</a></li>
         <li><a href="#">Общие положения</a></li>
         <li><a href="#">Критерии</a></li>
         <li><a href="#">Наградные материалы</a></li>
