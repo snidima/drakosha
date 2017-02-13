@@ -40,7 +40,7 @@ class PayController extends Controller
     {
 //        dd($request->all());
         $validator = Validator::make($request->all(), [
-            'money' => 'required|integer|min:10',
+            'money' => 'required|integer|min:1',
         ]);
 
         if ( $validator->fails() )

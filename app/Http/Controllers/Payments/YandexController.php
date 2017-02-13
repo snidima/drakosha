@@ -13,32 +13,31 @@ class YandexController extends Controller
 {
 	
 
-    public function checkUrl()
-    {
-        echo __METHOD__;
-    }
-
-    public function avisoUrl()
-    {
-        echo __METHOD__;
-    }
-
-    public function shopSuccessUrl()
-    {
-        echo __METHOD__;
-    }
-
-    public function shopFailUrl()
-    {
-        echo __METHOD__;
-    }
+//    public function checkUrl()
+//    {
+//        echo __METHOD__;
+//    }
+//
+//    public function avisoUrl()
+//    {
+//        echo __METHOD__;
+//    }
+//
+//    public function shopSuccessUrl()
+//    {
+//        echo __METHOD__;
+//    }
+//
+//    public function shopFailUrl()
+//    {
+//        echo __METHOD__;
+//    }
 
 
     /////////////////////DEMO
 
     public function check( $action, $request )
     {
-		$action = $action;
 		$orderSumAmount =  Order::find($request->input('customerNumber'))->last_pay.'.00';
 		$orderSumCurrencyPaycash =  $request->input('orderSumCurrencyPaycash');
 		$orderSumBankPaycash =  $request->input('orderSumBankPaycash');
@@ -58,7 +57,7 @@ class YandexController extends Controller
     }
 
 
-    public function checkUrlDemo( Request $request )
+    public function checkUrl( Request $request )
     {
 
 			$time = date(DATE_ATOM);
@@ -76,7 +75,7 @@ class YandexController extends Controller
 
     }
 
-    public function avisoUrlDemo( Request $request )
+    public function avisoUrl( Request $request )
     {
         Log::info('Поступил запрос от Яндекса со следующими данными:');
         Log::info( $request->all() );
@@ -98,12 +97,12 @@ class YandexController extends Controller
 
     }
 
-    public function shopSuccessUrlDemo()
+    public function shopSuccessUrl()
     {
         return view('user.yandex-success');
     }
 
-    public function shopFailUrlDemo()
+    public function shopFailUrl()
     {
         return view('user.yandex-fail');
     }

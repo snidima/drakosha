@@ -58,9 +58,6 @@ Route::group([ 'prefix'=>'/payments/system/yandex'], function()
     Route::post('/check', ['uses'=>'Payments\YandexController@checkUrl']);
     Route::post('/aviso', ['uses'=>'Payments\YandexController@avisoUrl']);
 
-    Route::post('/demo/check', ['uses'=>'Payments\YandexController@checkUrlDemo']);
-    Route::post('/demo/aviso', ['uses'=>'Payments\YandexController@avisoUrlDemo']);
-
 });
 
 
@@ -111,8 +108,6 @@ Route::group([ 'middleware' => 'user', 'prefix'=>'userzone'], function()
 
     Route::get('/pay/success', ['uses'=>'Payments\YandexController@shopSuccessUrl']);
     Route::get('/pay/fail', ['uses'=>'Payments\YandexController@shopFailUrl']);
-    Route::get('/pay/demo/success', ['uses'=>'Payments\YandexController@shopSuccessUrlDemo']);
-    Route::get('/pay/demo/fail', ['uses'=>'Payments\YandexController@shopFailUrlDemo']);
 
 });
 
