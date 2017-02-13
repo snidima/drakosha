@@ -104,10 +104,12 @@ class AuthController extends Controller
     public function postLogin( Request $request )
     {
 
-        $res = $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'email' => 'required|max:250|email',
             'password' => 'required|min:6',
         ]);
+
+        if ( $validator->fails() )  return Response::json(['error' => ['Не корректные E-mail/Пароль'] ], 422);
 
 
 

@@ -111,7 +111,7 @@ Route::group([ 'middleware' => 'admin', 'prefix'=>'adminzone'], function()
 {
     Route::get('/', ['uses'=>'Admin\OrderController@orders'])->name('adminzone');
 
-
+    Route::get('/feedback', [ 'uses' => 'FeedbackController@index' ] )->name('admin.feedback');
 
     Route::get('/results', ['uses'=>'Admin\ResultController@index'])->name('admin.results');
     Route::post('/results-add', ['uses'=>'Admin\ResultController@create'])->name('admin.results.add');

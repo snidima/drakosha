@@ -2,12 +2,12 @@
     <form v-bind:action="action" class="form form-full" style="margin: 0; margin-bottom: 20px;" v-on:submit.prevent="send" v-bind:class="{ pending: pending}">
         <div class="form__row">
             <label for="name">Имя</label>
-            <input type="text" name="name" id="name"  placeholder="Имя" v-bind:class="{ error: name.error }" v-model="name.value">
+            <input type="text" name="name" id="name" required placeholder="Имя" v-bind:class="{ error: name.error }" v-model="name.value">
             <p class="form__error" v-if="name.error">{{name.error}}</p>
         </div>
         <div class="form__row">
             <label for="email">E-mail</label>
-            <input type="text" name="email" id="email"  placeholder="E-mail" v-bind:class="{ error: email.error }" v-model="email.value">
+            <input type="email" name="email" id="email" required placeholder="E-mail" v-bind:class="{ error: email.error }" v-model="email.value">
             <p class="form__error" v-if="email.error">{{email.error}}</p>
         </div>
         <div class="form__row">
@@ -17,7 +17,7 @@
         </div>
         <div class="form__row">
             <label for="text">Текст</label>
-            <textarea name="text" id="text" v-bind:class="{ error: text.error }" v-model="text.value"></textarea>
+            <textarea name="text" id="text" required v-bind:class="{ error: text.error }" v-model="text.value"></textarea>
             <p class="form__error" v-if="text.error">{{text.error}}</p>
         </div>
         <div class="form__action">
