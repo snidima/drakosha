@@ -17,7 +17,7 @@
             по различным дисциплинам.
         </div>
         <div class="slider-texts__action">
-            <button class="slider-texts__btn"><i class="fa fa-info" aria-hidden="true"></i>Подробнее..</button>
+            <a href="{{route('about')}}" class="slider-texts__btn"><i class="fa fa-info" aria-hidden="true"></i>Подробнее..</a>
         </div>
     </div>
     <div class="slider-texts__banners">
