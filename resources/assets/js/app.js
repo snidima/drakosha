@@ -6,6 +6,18 @@ Vue.use(require('vue-resource'));
 
 
 
+import loginForm from './first-component.vue';
+
+
+
+
+Vue.component( 'login-form', loginForm );
+
+new Vue({
+    el: '#main-content'
+});
+
+
 var vex = require('vex-js');
 vex.registerPlugin(require('vex-dialog'));
 vex.defaultOptions.className = 'vex-theme-default';
