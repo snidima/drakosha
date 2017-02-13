@@ -65,6 +65,10 @@ Route::post('/resets/{email}/{code}', [ 'uses' => 'AuthController@postResetsChec
 
 
 
+Route::post('/feedback', [ 'uses' => 'FeedbackController@create' ] )->name('feedback');
+
+
+
 
 
 Route::group([ 'middleware' => 'user', 'prefix'=>'userzone'], function()

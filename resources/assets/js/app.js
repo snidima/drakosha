@@ -1,5 +1,10 @@
 window.$ = require('jquery');
 window._ = require('lodash');
+
+window.vex = require('vex-js');
+window.vex.registerPlugin(require('vex-dialog'));
+window.vex.defaultOptions.className = 'vex-theme-default';
+
 var axios = require('axios');
 var Vue = require('vue');
 Vue.use(require('vue-resource'));
@@ -7,20 +12,16 @@ Vue.use(require('vue-resource'));
 
 
 import feedback from './components/feedback.vue';
-
-
-
-
 Vue.component( 'feedback', feedback );
+
+
 
 new Vue({
     el: '#feedback'
 });
 
 
-var vex = require('vex-js');
-vex.registerPlugin(require('vex-dialog'));
-vex.defaultOptions.className = 'vex-theme-default';
+
 
 const TOKEN = document.querySelector('meta[name="csrf-token"]').content;
 

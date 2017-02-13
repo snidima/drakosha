@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-5" id="feedback">
                 <div class="h2">Обратная связь</div>
-                <feedback></feedback>
+                <feedback action="{{route('feedback')}}"></feedback>
             </div>
         </div>
     </div>

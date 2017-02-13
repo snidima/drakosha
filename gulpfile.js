@@ -19,6 +19,7 @@ var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var uglify      = require('gulp-uglify');
 var buffer = require('vinyl-buffer');
+var vueify = require('vueify');
 
 
 var config = {
@@ -91,6 +92,7 @@ gulp.task('js', function () {
     .transform('babelify', {
         presets: ['es2015']
     })
+    .transform('vueify')
     .bundle()
     .on('error', function(err){
         gutil.log(gutil.colors.red.bold('[browserify error]'));
@@ -101,7 +103,7 @@ gulp.task('js', function () {
     .pipe(gulp.dest('./public_html/js/'));
 });
 
-gulp.task('js:production',['js:clean'], function () {
+gulp.task('js:production',['js:clean','apply-prod'], function () {
     return browserify({
             entries: './resources/assets/js/app.js',
             debug: false,
@@ -110,6 +112,7 @@ gulp.task('js:production',['js:clean'], function () {
         .transform('babelify', {
             presets: ['es2015']
         })
+        .transform('vueify')
         .bundle()
         .on('error', function(err){
             gutil.log(gutil.colors.red.bold('[browserify error]'));
@@ -173,6 +176,11 @@ gulp.task('serve', ['sass','js','image:production', 'fonts'], function() {
     gulp.watch(["./public_html/**/*", "./resources/views/**/*"]).on('change', function () {
         browserSync.reload();
     });
+});
+
+
+gulp.task('apply-prod', function() {
+    process.env.NODE_ENV = 'production';
 });
 
 gulp.task('production', ['sass:production', 'image:production','js:production', 'fonts']);
