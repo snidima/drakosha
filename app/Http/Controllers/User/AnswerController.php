@@ -29,7 +29,7 @@ class AnswerController extends Controller
 //        return Response::json(['res'=>$request->file('file')->getClientOriginalExtension()], 200);
 
         $this->validate($request, [
-            'file' => 'required|max:50000|min:50|mimes:zip,rar,7z,jpeg,png',
+            'file' => 'required|max:100000|min:5|mimes:zip,rar,7z',
         ]);
 
 

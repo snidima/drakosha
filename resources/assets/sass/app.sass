@@ -25,7 +25,8 @@
   padding: 0
   box-sizing: border-box
   outline: none
-  font-family: "Century Gothic", sans-serif
+  //font-family: "Century Gothic", sans-serif
+  font-family: 'Comfortaa', cursive
   text-rendering: optimizeLegibility
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
@@ -33,7 +34,7 @@ html, body
   width: 100%
   height: 100%
   font-size: 16px
-  //font-family: 'Comfortaa', cursive
+
 
 
 .main
@@ -47,7 +48,8 @@ html, body
   footer
 
 .h1
-  font-size: 2.1rem
+  font-family: 'Comfortaa', cursive
+  font-size: 2rem
   color: $black1
   font-weight: lighter
   margin-bottom: 20px
@@ -55,7 +57,10 @@ html, body
   text-align: center
   text-transform: uppercase
   line-height: 1.5
+  > *
+    font-family: 'Comfortaa', cursive
 .h2
+  font-family: 'Comfortaa', cursive
   font-size: 1.8rem
   color: $black1
   font-weight: lighter
@@ -75,7 +80,10 @@ img.r
 p
   font-family: "Verdana", sans-serif
   line-height: 1.38
-
+  &:last-child
+    margin-bottom: 0
+  &:first-child
+    margin-top: 0
 
 small
   line-height: 1
@@ -118,7 +126,14 @@ p
   background: #f5f5f5
   color: $black1
   margin: 20px 0
-
+.warning__title
+  text-align: center
+  color: $color1
+  font-size: 1.2rem
+  font-weight: bold
+  text-transform: uppercase
+  padding: 10px
+  border-radius: 5px
 
 .block
   margin-bottom: 40px
@@ -130,10 +145,14 @@ p
   text-align: center
   line-height: 1
   margin-bottom: 40px
+  > *
+    font-family: 'Comfortaa', cursive
   small
     font-size: 1rem
     color: $color1
     margin-top: -5px
+    > *
+      font-family: 'Comfortaa', cursive
 
 a
   color: #00aab9
@@ -144,6 +163,12 @@ a
   text-align: center
 .ul-clear
   list-style: none
+
+ul.leftp
+  margin-top: 5px
+  list-style: none
+  padding-left: 20px
+  list-style-position: inside
 
 .block
   display: block
@@ -195,7 +220,7 @@ a
 .menu-top__list a
   font-weight: bold
   text-decoration: none
-  font-family: "Century Gothic", sans-serif
+  font-family: 'Comfortaa', cursive
 
 .menu-top__list li
   display: inline-block
@@ -230,15 +255,17 @@ a
   overflow-x: auto
   white-space: nowrap
   & li
+    font-family: 'Comfortaa', cursive
     display: inline-block
+    color: rgba(#fff, .4)
     &:not(:last-of-type)
       margin-right: 10px
     a
       white-space: pre
       color: #fff
-      font-size: $menu-bottom-fz
+      font-size: .88rem
       text-decoration: none
-      font-family: "Century Gothic", sans-serif
+      font-family: 'Comfortaa', cursive
       &:hover
         color: rgba(#fff, .8)
 
@@ -279,11 +306,11 @@ a
   height: 100%
   max-width: 1170px
   margin: 0 auto
-
-
-
-
-
+.slider-texts__banners
+  position: absolute
+  bottom: 10px
+  left: 10px
+  z-index: 5
 
 .slider-texts__big-text
   font-size: 3.4rem
@@ -292,7 +319,9 @@ a
   color: #fff
   line-height: 1
   text-shadow: 0 0 20px rgba($black1, .2)
-  font-family: "Trebuchet MS", sans-serif
+  font-family: 'Comfortaa', cursive
+  span
+    font-family: 'Comfortaa', cursive
 .slider-texts__under_big-text
   font-size: 1.3rem
   color: #fff
@@ -335,7 +364,7 @@ a
   display: inline-block
   vertical-align: middle
   background: transparent
-  font-family: "Century Gothic", sans-serif
+  font-family: 'Comfortaa', cursive
   cursor: pointer
   font-weight: bold
   white-space: pre
@@ -359,7 +388,7 @@ a
   display: inline-block
   vertical-align: middle
   transition: all 0.1s linear
-  font-family: "Century Gothic", sans-serif
+  font-family: 'Comfortaa', cursive
   font-weight: bold
   border: none
   cursor: pointer
@@ -390,6 +419,7 @@ a
   text-transform: uppercase
   position: relative
   z-index: 3
+  font-family: 'Comfortaa', cursive
 .main-section__header_white
   color: #fff
 .school-items
@@ -488,6 +518,7 @@ a
 .section-times__desc
   margin-top: 20px
   color: $black2
+  font-family: "Verdana", sans-serif
   line-height: 1.5
   font-size: 1.1rem
 
@@ -519,11 +550,13 @@ a
   max-width: 300px
   display: inline-block
   text-align: center
+
 .section-pay_l
   text-align: right
 .section-pay_r
   text-align: left
 .section-pay__desc
+  font-family: "Verdana", sans-serif
   line-height: 1.5
   color: $black2
   font-size: 1.1rem
@@ -541,6 +574,7 @@ a
   line-height: 1.5
   font-size: 1.1rem
   color: $black2
+  font-family: "Verdana", sans-serif
 
 
 
@@ -559,6 +593,7 @@ a
     &:not(:last-of-type)
       margin-right: 10px
     a
+      font-family: 'Comfortaa', cursive
       color: #b0b0b0
       text-decoration: none
 
@@ -678,6 +713,8 @@ ol.payments
     font-weight: bold
     color: $black1
     margin-bottom: 5px
+    > *:not(.fa)
+      font-family: 'Comfortaa', cursive
 
   input[type="text"], input[type="password"], input[type="email"],input[type="number"], textarea
     background-color: #f0eef0
@@ -697,11 +734,14 @@ ol.payments
 .form__error
   font-size: .7rem
   color: darken($color3, 10%)
+  font-family: 'Comfortaa', cursive
   font-weight: bold
   position: absolute
   width: 100%
   text-align: center
+  padding: 0
   padding-top: 3px
+  margin: 0
 .form-small
   max-width: 380px
 .form-large
@@ -713,13 +753,17 @@ ol.payments
 
 
 .user-header
-  line-height: .7
+
+  font-family: 'Comfortaa', cursive
+
   small
     font-size: .8rem
+    display: block
     text-transform: none
     font-weight: bold
     color: $black4
-
+    > *
+      font-family: 'Comfortaa', cursive
 .user-nav-wrapper .h2
   text-align: center
   font-size: 1rem
@@ -727,6 +771,9 @@ ol.payments
   margin-bottom: 15px
   color: $black2
   line-height: 1.5
+  text-transform: none
+  > *
+    font-family: 'Comfortaa', cursive
 .user-nav
   margin-top: 20px
   display: flex
@@ -815,3 +862,155 @@ a.user-nav__item_old:hover .user-nav__step
   a
     color: #fff
     text-decoration: none
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tooltip-element
+  box-sizing: border-box
+  &:after, &:before
+    box-sizing: border-box
+  *
+    box-sizing: border-box
+    &:after, &:before
+      box-sizing: border-box
+  position: absolute
+  display: none
+  z-index: 5
+  &.tooltip-open
+    display: block
+  &.tooltip-theme-arrows
+    max-width: 100%
+    max-height: 100%
+    .tooltip-content
+      border-radius: 5px
+      position: relative
+      background: rgba(#000, 0.9)
+      color: #eee
+      padding: 20px
+      font-size: .9rem
+      span
+        color: lighten($color2, 15%)
+        font-family: 'Comfortaa', cursive
+
+      line-height: 1.35
+      z-index: 5
+      //font-family: "Verdana", sans-serif
+      > *
+        //font-family: "Verdana", sans-serif
+
+      &:before
+        content: ""
+        display: block
+        position: absolute
+        width: 0
+        height: 0
+        z-index: 5
+        border-color: transparent
+        border-width: 8px
+        border-style: solid
+    &.tooltip-element-attached-bottom.tooltip-element-attached-center .tooltip-content
+      margin-bottom: 8px
+      &:before
+        top: 100%
+        left: 50%
+        margin-left: -8px
+        border-top-color: #000
+    &.tooltip-element-attached-top.tooltip-element-attached-center .tooltip-content
+      margin-top: 8px
+      &:before
+        bottom: 100%
+        left: 50%
+        margin-left: -8px
+        border-bottom-color: #000
+    &.tooltip-element-attached-right.tooltip-element-attached-middle .tooltip-content
+      margin-right: 8px
+      &:before
+        left: 100%
+        top: 50%
+        margin-top: -8px
+        border-left-color: #000
+    &.tooltip-element-attached-left.tooltip-element-attached-middle .tooltip-content
+      margin-left: 8px
+      &:before
+        right: 100%
+        top: 50%
+        margin-top: -8px
+        border-right-color: #000
+    &.tooltip-element-attached-top
+      &.tooltip-element-attached-left.tooltip-target-attached-bottom .tooltip-content
+        margin-top: 8px
+        &:before
+          bottom: 100%
+          left: 8px
+          border-bottom-color: #000
+      &.tooltip-element-attached-right.tooltip-target-attached-bottom .tooltip-content
+        margin-top: 8px
+        &:before
+          bottom: 100%
+          right: 8px
+          border-bottom-color: #000
+    &.tooltip-element-attached-bottom
+      &.tooltip-element-attached-left.tooltip-target-attached-top .tooltip-content
+        margin-bottom: 8px
+        &:before
+          top: 100%
+          left: 8px
+          border-top-color: #000
+      &.tooltip-element-attached-right.tooltip-target-attached-top .tooltip-content
+        margin-bottom: 8px
+        &:before
+          top: 100%
+          right: 8px
+          border-top-color: #000
+    &.tooltip-element-attached-top
+      &.tooltip-element-attached-right.tooltip-target-attached-left .tooltip-content
+        margin-right: 8px
+        &:before
+          top: 8px
+          left: 100%
+          border-left-color: #000
+      &.tooltip-element-attached-left.tooltip-target-attached-right .tooltip-content
+        margin-left: 8px
+        &:before
+          top: 8px
+          right: 100%
+          border-right-color: #000
+    &.tooltip-element-attached-bottom
+      &.tooltip-element-attached-right.tooltip-target-attached-left .tooltip-content
+        margin-right: 8px
+        &:before
+          bottom: 8px
+          left: 100%
+          border-left-color: #000
+      &.tooltip-element-attached-left.tooltip-target-attached-right .tooltip-content
+        margin-left: 8px
+        &:before
+          bottom: 8px
+          right: 100%
+          border-right-color: #000
+    pointer-events: none
+    .tooltip-content
+      padding: 0.5em 1em
+
+
+
+
+
+
+
+
+

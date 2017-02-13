@@ -10,6 +10,9 @@ var Vue = require('vue');
 Vue.use(require('vue-resource'));
 
 
+var Tooltip = require('tether-tooltip');
+
+
 
 import feedback from './components/feedback.vue';
 Vue.component( 'feedback', feedback );
@@ -255,9 +258,41 @@ var order = new Vue({
                 phone: this.phone.value,
                 reward: this.reward.value,
             };
-        }
+        },
+        defaultRewardD: function()
+        {
+            var self = this;
+            var res = _.map(this.defaultReward, function(e){
+                var res = {};
+                if( ( e == 'Почта России' && self.sert_count.value < 10 ) ) {
+                    if (self.reward.value =='Почта России' )
+                        self.reward.value  = 'Электронный сертификат';
+
+                    res = {
+                        value: e,
+                        avail: true
+                    };
+                } else {
+                    res = {
+                        value: e,
+                        avail: false
+                    };
+                }
+
+                return res
+            });
+            console.log ( res );
+            return res;
+
+        },
+
     },
+
+
     created: function(){
+
+
+
         this.pending = true;
         var self = this;
         this.$http.post('/userzone/order/getDefault').then(
@@ -276,7 +311,6 @@ var order = new Vue({
                 self.defaultReward = response.body.rewards;
                 self.reward.value = response.body.rewards[0];
                 self.pending = false;
-                console.log( self.defaultReward);
             });
     },
 
@@ -590,4 +624,25 @@ $('#reset-btn').click(function(){
             $.extend({}, vex.dialog.buttons.NO, { text: 'Отмена' })
         ],
     })
+});
+
+
+
+new Tooltip({
+    target: document.querySelector('#orgs'),
+    content: "В этом поле необходимо указать<br>ФИО кажого организатора в <span class='color2'>родительном падеже</span><br> и количество приглашенных им участников",
+    position: 'top center'
+});
+
+
+new Tooltip({
+    target: document.querySelector('#orgs2'),
+    content: "В этом поле необходимо указать<br> количество участников в каждом классе<br>по кажому предмету",
+    position: 'top center'
+});
+
+new Tooltip({
+    target: document.querySelector('#sert'),
+    content: "Отправка сертификатов Почтой России<br> возможна только <span>от 10 сертифкатов</span>",
+    position: 'top center'
 });

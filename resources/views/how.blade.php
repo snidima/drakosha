@@ -5,17 +5,12 @@
     <div class="container">
         <h1 class="h1">Как принять участие?</h1>
 
-        {{--<p><b>Чтобы принять участие нужно:</b></p>--}}
-        {{--<ol>--}}
-            {{--<li>Пройти процесс регистрации на нашем сайте</li>--}}
-            {{--<li>Зайти в личный кабинет</li>--}}
-            {{--<li>Соблюдая шаги, пройти процесс подачи заявки, а именно:</li>--}}
-        {{--</ol>--}}
+
 
         <div class="row">
             <div class="col-md-6">
                 <div class="warning" style="margin-top: 0;">
-                    <p class="tac"><span class="label label-color1">1. Регистрация</span></p>
+                    <div class="warning__title">1. Регистрация</div>
                     <p>
                         <a href="{{route('register')}}">Зарегестрироваться</a> на нашем сайте
                     </p>
@@ -23,7 +18,7 @@
             </div>
             <div class="col-md-6">
                 <div class="warning" style="margin-top: 0;">
-                    <p class="tac"><span class="label label-color1">2. Вход</span></p>
+                    <div class="warning__title">2. Вход</div>
                     <p>
                         После успешной регистрации войти в личный кабинет организатора
                     </p>
@@ -33,7 +28,7 @@
 
 
         <div class="warning" style="margin: 0;">
-            <p class="tac"><span class="label label-color1">3. Оплата</span></p>
+            <div class="warning__title">3. Оплата</div>
             <p>
                 Организатор оплачивает <b>общую</b> сумму за всех участников одной квитанцией или онлайн оплатой.
             </p>
@@ -53,7 +48,7 @@
 
 
         <div class="warning">
-            <p class="tac"><span class="label label-color1">4. Проведение конкурса</span></p>
+            <div class="warning__title">4. Проведение конкурса</div>
             <ol>
                 <li>Скачать задания.</li>
                 <li>Провести конкурс в своей школе, соблюдая правила регламента.</li>
@@ -61,7 +56,7 @@
         </div>
 
         <div class="warning">
-            <p class="tac"><span class="label label-color1">5. Отправка ответов</span></p>
+            <div class="warning__title">5. Отправка ответов</div>
             <ol>
                 <li>Отсканировать бланки детей или сделать чёткое фото бланков, создать один архив.</li>
                 <li>Прикрепить в своем личном кабинете отсканированные бланки.</li>
@@ -72,7 +67,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="warning" style="margin-top: 0;">
-                    <p class="tac"><span class="label label-color1">6. Итоги</span></p>
+                    <div class="warning__title">6. Итоги</div>
                     <p>
                         В разделе "Узнать результаты" скачать результаты
                     </p>
@@ -80,7 +75,7 @@
             </div>
             <div class="col-md-6">
                 <div class="warning" style="margin-top: 0;">
-                    <p class="tac"><span class="label label-color1">7. Получени награждений</span></p>
+                    <div class="warning__title">7. Получени награждений</div>
                     <p>
                         В разделе "Получить награждения" скачать наградные материалы
                     </p>

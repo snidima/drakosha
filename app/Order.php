@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class Order extends Model
 {
     public static $rewards = [
-        'Сертификат-онлайн',
+        'Электронный сертификат',
         'Почта России',
     ];
 

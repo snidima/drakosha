@@ -9,7 +9,7 @@
                 <tr>
                     <th>Имя</th>
                     <th>Email</th>
-                    <th>Тема</th>
+                    {{--<th>Тема</th>--}}
                     <th>Сообщение</th>
                 </tr>
             </thead>
@@ -18,7 +18,7 @@
                 <tr>
                     <td>{{$feedback->name}}</td>
                     <td>{{$feedback->email}}</td>
-                    <td>{{$feedback->subject}}</td>
+{{--                    <td>{{$feedback->subject}}</td>--}}
                     <td>{{$feedback->text}}</td>
                 </tr>
             @endforeach

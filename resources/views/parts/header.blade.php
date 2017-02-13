@@ -27,12 +27,10 @@
 <div class="menu-bottom__wrapper">
     <ul class="menu-bottom">
         <li><a href="{{route('about')}}">О проекте</a></li>
-        <li><a href="#">Общие положения</a></li>
-        <li><a href="#">Критерии</a></li>
-        <li><a href="#">Наградные материалы</a></li>
-        <li><a href="#">Расписания мероприятий</a></li>
-        <li><a href="#">Квитанция на оплату</a></li>
-        <li><a href="#">Итоги конкурса</a></li>
-        <li><a href="#">Реквизиты</a></li>
+        <li><a href="{{route('provisions')}}">Общие положения</a></li>
+        <li><a href="{{route('criteria')}}">Критерии</a></li>
+        <li>Наградные материалы</li>
+        <li><a href="{{route('schedule')}}">Расписания мероприятий</a></li>
+        <li>Итоги конкурса</li>
     </ul>
 </div>

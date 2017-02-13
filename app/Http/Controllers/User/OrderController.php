@@ -16,7 +16,7 @@ class OrderController extends Controller
     public function getOrder()
     {
 
-//        dd( Route::currentRouteName() );
+        if ( !Auth::user()->isAvailStep(1) ) return redirect(route('user'));
 
         $order = Auth::user()->orders()->first();
 

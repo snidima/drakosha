@@ -33,6 +33,21 @@ Route::get('/how', function () {
 })->name('how');
 
 
+Route::get('/provisions', function () {
+    return view('provisions');
+})->name('provisions');
+
+Route::get('/schedule', function () {
+    return view('schedule');
+})->name('schedule');
+
+Route::get('/criteria', function () {
+    return view('criteria');
+})->name('criteria');
+
+
+
+
 Route::get('/contacts', function () {
     return view('contacts');
 })->name('contacts');

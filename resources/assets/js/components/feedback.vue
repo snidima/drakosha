@@ -10,11 +10,7 @@
             <input type="email" name="email" id="email" required placeholder="E-mail" v-bind:class="{ error: email.error }" v-model="email.value">
             <p class="form__error" v-if="email.error">{{email.error}}</p>
         </div>
-        <div class="form__row">
-            <label for="subject">Тема</label>
-            <input type="text" name="subject" id="subject"  placeholder="Тема вопроса" v-bind:class="{ error: subject.error }" v-model="subject.value">
-            <p class="form__error" v-if="subject.error">{{subject.error}}</p>
-        </div>
+
         <div class="form__row">
             <label for="text">Текст</label>
             <textarea name="text" id="text" required v-bind:class="{ error: text.error }" v-model="text.value"></textarea>

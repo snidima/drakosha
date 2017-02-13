@@ -6,6 +6,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
 class User extends Authenticatable
 {
     private static $defaultUserRole = 'newuser';
@@ -70,8 +72,30 @@ class User extends Authenticatable
     {
         if ( !\Config::get('constants.CONCURS') ) return false;
 
+
+
+
+
         if ( $step == 1  ){
-            return true;
+
+
+            $order = Auth::user()->orders()->first();
+
+            if ( !$order ) return true;
+
+            $created = new Carbon($order->created_at);
+            $now = Carbon::now();
+
+            $order = Auth::user()->orders()->first();
+
+            if ( !$order ) return true;
+
+            $created = new Carbon($order->created_at);
+            $now = Carbon::now();
+            $diff = $created->diffInDays($now);
+
+            return ( $diff > 5 ) ? false : true;
+
         }
 
         if ( $step == 2  ){
@@ -95,7 +119,7 @@ class User extends Authenticatable
         if ( $step == 4  ){
 
             if ( \App\Order::where( 'user_id', Auth::user()->id )->first() )
-                $status = \App\Order::where( 'user_id', Auth::user()->id )->first()->status;
+                $status = ( \App\Order::where( 'user_id', Auth::user()->id )->first()->status && \App\Task::where('status', true)->first() ) ? true : false ;
             else
                 $status = false;
 

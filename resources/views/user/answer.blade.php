@@ -23,7 +23,7 @@
             <form method="post" action="{{route('user.answer')}}" style="margin-top: 20px"  class="form form-small" v-bind:class="{ pending: pending}" id="upload-answer"  v-on:submit.prevent="send"  enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="form__row">
-                    <label for="file">Прикрепите ответы ( zip,rar,7z,jpeg,png )</label>
+                    <label for="file">Прикрепите ответы ( zip, rar, 7z )</label>
                     <input type="file" name="file" id="file"  v-on:change="fileChange">
                     <label for="file" class="file-label" v-if="file" v-bind:class="{ 'active': file, error: error }" ><i class="fa fa-file" aria-hidden="true"></i>@{{ file }}</label>
                     <label for="file" class="file-label" v-else  v-bind:class="{ error: error }">Выбирите файл</label>
