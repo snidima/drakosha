@@ -6,15 +6,15 @@ Vue.use(require('vue-resource'));
 
 
 
-import loginForm from './first-component.vue';
+import feedback from './components/feedback.vue';
 
 
 
 
-Vue.component( 'login-form', loginForm );
+Vue.component( 'feedback', feedback );
 
 new Vue({
-    el: '#main-content'
+    el: '#feedback'
 });
 
 
