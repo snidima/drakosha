@@ -1,10 +1,10 @@
 <div class="contacts-menu__wrapper">
     <div class="container">
         <div class="contacts-menu">
-            <a href="#" class="contacts-menu__item">
+            <a href="tel:88002365677" class="contacts-menu__item">
                 <i class="fa fa-phone" aria-hidden="true"></i> 8-(800)-236-5677
             </a>
-            <a href="#" class="contacts-menu__item">
+            <a href="mailto:info@drakosha-olimpiada.ru" class="contacts-menu__item">
                 <i class="fa fa-envelope" aria-hidden="true"></i> info@drakosha-olimpiada.ru
             </a>
             <div class="contacts-menu__item">
