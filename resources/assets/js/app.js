@@ -9,6 +9,9 @@ var axios = require('axios');
 var Vue = require('vue');
 Vue.use(require('vue-resource'));
 
+Vue.config.debug = false;
+Vue.config.silent = true;
+
 
 var Tooltip = require('tether-tooltip');
 
