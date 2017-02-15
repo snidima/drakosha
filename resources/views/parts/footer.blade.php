@@ -3,16 +3,16 @@
     <div class="container footer">
 
         <div class="footer__item">
-            <img src="/images/logo-on-black.png" alt="">
+            <img src="/images/logo2.png" alt="">
         </div>
 
 
         <div class="footer__item footer-menu-wrapper">
             <ul class="footer-menu">
-                <li><a href="#">Главная</a></li>
-                <li><a href="/files/oferta.doc">Договор оферта</a></li>
-                <li><a href="#">О проекте</a></li>
-                <li><a href="#">Контакты</a></li>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/files/oferta.doc">Договор оферты</a></li>
+                <li><a href="{{route('about')}}">О проекте</a></li>
+                <li><a href="{{route('contacts')}}">Контакты</a></li>
             </ul>
         </div>
 
