@@ -122,11 +122,11 @@
 
 <section class="main-section main-section__pay">
     <div class="container">
-        <header class="main-section__header">Стоимость для участника:</header>
+        <header class="main-section__header">Стоимость за одного участника<br>в одной предметной дисциплине - <span>80 руб</span></header>
         <div class="row">
             <div class="col-md-5 section-pay_l">
                 <div class="section-pay">
-                    <div class="section-pay__title">{{\Config::get('constants.PRICE')}} <span>&#8381;</span></div>
+                    <div class="section-pay__title">{{\Config::get('constants.PRICE')}} Р</div>
                     <div class="section-pay__desc">
                         Направляется в оргкомитет<br>
                         организаторам конкурса
@@ -138,7 +138,7 @@
             </div>
             <div class="col-md-5 section-pay_r">
                 <div class="section-pay">
-                    <div class="section-pay__title">10 <span>&#8381;</span></div>
+                    <div class="section-pay__title">10 Р</div>
                     <div class="section-pay__desc">
                         Остаются<br>
                         на сопутствующие расходы

@@ -7,8 +7,8 @@
 
 
         <ol class="payments block">
-            <li class="payments-big"><p>Пройти процесс регистрации на нашем сайте (он займет всего несколько минут)</p></li>
-            <li class="payments-big"><p>Зайти в личный кабинет</p></li>
+            <li class="payments-big"><p>Пройти процесс регистрации на <a href="/">нашем сайте</a> (он займет всего несколько минут)</p></li>
+            <li class="payments-big"><p>Зайти в <a href="{{route('user')}}">личный кабинет</a></p></li>
             <li class="payments-big">
                 <div>
                     <p>Соблюдая шаги, пройти процесс подачи заявки, а именно:</p>
