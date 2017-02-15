@@ -77,7 +77,7 @@
                                     <b>Форма получения нагрдных материалов:</b> {{$order->reward}}
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Баланс:</b> {{$order->money}} из {{$order->sert_count*60 }}
+                                    <b>Баланс:</b> {{$order->money}} из {{$order->sert_count*\Config::get('constants.PRICE') }}
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#order-money">
                                         Изменить
                                     </button>

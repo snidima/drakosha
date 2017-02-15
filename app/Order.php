@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class Order extends Model
 {
     public static $rewards = [
-        'Электронный сертификат',
+        'Электронный вариант',
         'Почта России',
     ];
 
@@ -27,7 +27,7 @@ class Order extends Model
     protected $table = 'orders';
 
     protected $fillable = [
-        'org_num', 'region', 'city','address','postcode', 'school', 'sert_count','learner','phone','reward','teacher_learner'
+        'org_num', 'region', 'city','address','postcode', 'school', 'sert_count','phone','reward','teacher_learner'
     ];
 
     protected $guarded = ['money'];
@@ -42,7 +42,7 @@ class Order extends Model
         $sert = $this->sert_count;
         $money = $this->money;
 
-        if ( ($sert*60 - $money) > 0 )
+        if ( ($sert*\Config::get('constants.PRICE') - $money) > 0 )
             return false;
         else
             return true;
@@ -54,8 +54,8 @@ class Order extends Model
         $sert = $this->sert_count;
         $money = $this->money;
 
-        if ( ($sert*60 - $money) > 0 )
-            return $sert*60 - $money;
+        if ( ($sert*\Config::get('constants.PRICE') - $money) > 0 )
+            return $sert*\Config::get('constants.PRICE') - $money;
         else
             return 0;
 

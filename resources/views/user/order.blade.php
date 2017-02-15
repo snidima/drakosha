@@ -7,14 +7,26 @@
     @include('user/parts/user-nav')
 
     <div class="container">
-        <h2 class="pay-h2">
-            @if( !\App\Order::getForCurrentUser() )
-                <div class="user-nav__title">Заполните данные для заявки</div>
-            @else
-                <div class="user-nav__title">Отредактируйте данные заявки<br><small>( редактирование доступно в течение 5 дней после подачи заявки )</small></div>
-            @endif
-        </h2>
+
+
         <form action="{{route('user.order')}}" class="form form-large" v-bind:class="{ pending: pending}" id="order" method="post" v-on:submit.prevent="send">
+            <a href="{{route('for-teachers')}}" class="order-warning2">
+                ДЕНЕЖНОЕ ВОЗНАГРАЖДЕНИЕ ДЛЯ ОРГАНИЗАТОРОВ
+            </a>
+            <h2 class="pay-h2" style="margin-bottom: 0;">
+                @if( !\App\Order::getForCurrentUser() )
+                    <div class="user-nav__title">Заполните данные для заявки</div>
+                @else
+                    <div class="user-nav__title">Отредактируйте данные заявки<br><small>( редактирование заявки возможно до {{$days}} )</small></div>
+                    <div id="order-edit-warning" style="display: none">
+                        {{\Illuminate\Support\Facades\Auth::user()->name}}, если вы хотите добавить новых участников - отредактируйте уже созданную заявку указав общее количество сертификатов
+                    </div>
+                @endif
+            </h2>
+            <div class="order-warning">
+                <span>Внимание!</span> Если у Вас возникли вопросы по заполнению полей,<br>просто нажмите на синий значок справа от поля для получения подсказки!
+            </div>
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form__row">
@@ -47,29 +59,30 @@
                         <input type="text" name="phone" required id="phone" v-model="phone.value" placeholder="Контактный телефон" v-bind:class="{ error: phone.error }">
                         <p class="form__error" v-if="phone.error">@{{phone.error}}</p>
                     </div>
+                </div>
+                <div class="col-md-6">
                     <div class="form__row">
-                        <label for="org_num">Общее количество организаторов</label>
+                        <label for="org_num">Общее количество организаторов<br>(по количеству выбранных предметов)</label>
                         <input type="number" name="org_num" id="org_num" v-model="org_num.value" placeholder="Общее количество организаторов" v-bind:class="{ error: org_num.error }">
                         <p class="form__error" v-if="org_num.error">@{{org_num.error}}</p>
                     </div>
-                </div>
-                <div class="col-md-6">
+
                     <div class="form__row">
                         <label for="sert_count">Общее количество сертификатов</label>
                         <input type="number" name="sert_count" required id="sert_count" v-model="sert_count.value" placeholder="Необходимое количество сертификатов" v-bind:class="{ error: sert_count.error }">
                         <p class="form__error" v-if="sert_count.error">@{{sert_count.error}}</p>
                     </div>
+                    {{--<div class="form__row">--}}
+                        {{--<label for="learner">Организаторы - количество участников <i class="fa cursor fa-info-circle color2" id="orgs" aria-hidden="true"></i> :</label>--}}
+                        {{--<textarea name="learner" id="learner" v-model="learner.value" v-bind:class="{ error: learner.error }"--}}
+                                  {{--placeholder="Например:&#13;&#10;Иванову Марину Петровну - 4,&#13;&#10;Соколова Дмитрия Валерьевича - 15--}}
+                        {{--"></textarea>--}}
+                        {{--<p class="form__error" v-if="learner.error">@{{learner.error}}</p>--}}
+                    {{--</div>--}}
                     <div class="form__row">
-                        <label for="learner">Организаторы - количество участников <i class="fa cursor fa-info-circle color2" id="orgs" aria-hidden="true"></i> :</label>
-                        <textarea name="learner" id="learner" v-model="learner.value" v-bind:class="{ error: learner.error }"
-                                  placeholder="Например:&#13;&#10;Иванову Марину Петровну - 4,&#13;&#10;Соколова Дмитрия Валерьевича - 15
-                        "></textarea>
-                        <p class="form__error" v-if="learner.error">@{{learner.error}}</p>
-                    </div>
-                    <div class="form__row">
-                        <label for="teacher_learner">Предмет - класс - участники <i class="fa cursor fa-info-circle color2" id="orgs2" aria-hidden="true"></i> :</label>
+                        <label for="teacher_learner">Предмет - класс - количество участников <i class="fa cursor fa-info-circle color2" id="orgs2" aria-hidden="true"></i> :</label>
                         <textarea name="teacher_learner" v-model="teacher_learner.value" v-bind:class="{ error: teacher_learner.error }" id="teacher_learner"
-                                  placeholder="Например:&#13;&#10;Математика - 5 - 3&#13;&#10;Математика - 3а - 8&#13;&#10;Литературное чтение - 5 - 4&#13;&#10;Окружающий мир - 2 - 4
+                                  placeholder="Например:&#13;&#10;русский язык-2класс-10 участников
                         "></textarea>
                         <p class="form__error" v-if="teacher_learner.error">@{{teacher_learner.error}}</p>
                     </div>

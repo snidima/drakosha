@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Order;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Response;
+use Carbon\Carbon;
+
 
 class OrderController extends Controller
 {
@@ -20,7 +22,23 @@ class OrderController extends Controller
 
         $order = Auth::user()->orders()->first();
 
-        return view('user.order',['rewards' => Order::$rewards,'order' => $order]);
+
+        if ( $order ) {
+
+            $created = $order->created_at;
+            $last = $order->created_at->addDays(5);
+            $now = Carbon::now();
+
+//            dd($created,$last,$now, $now>$last);
+
+            $diff = $last;
+
+        } else $diff = 0;
+
+
+
+
+        return view('user.order',['rewards' => Order::$rewards,'order' => $order,'days' => $diff]);
 //        return view('user.order',['rewards' => Order::$rewards]);
     }
 
@@ -44,7 +62,7 @@ class OrderController extends Controller
             'postcode' => 'required|integer|max:999999|min:100000',
             'school' => 'required',
             'sert_count' => 'required',
-            'learner' => 'required',
+//            'learner' => 'required',
             'teacher_learner' => 'required',
             'phone' => 'required',
             'reward' => 'required',

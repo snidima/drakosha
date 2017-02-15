@@ -45,6 +45,14 @@ Route::get('/criteria', function () {
     return view('criteria');
 })->name('criteria');
 
+Route::get('/for-teachers', function () {
+    return view('for-teachers');
+})->name('for-teachers');
+
+
+Route::get('/rules', function () {
+    return view('rules');
+})->name('rules');
 
 
 

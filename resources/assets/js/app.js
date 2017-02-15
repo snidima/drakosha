@@ -224,10 +224,10 @@ var order = new Vue({
             value: '',
             error: false
         },
-        learner:{
-            value: '',
-            error: false
-        },
+        // learner:{
+        //     value: '',
+        //     error: false
+        // },
         teacher_learner:{
             value: '',
             error: false
@@ -253,7 +253,7 @@ var order = new Vue({
                 postcode: this.postcode.value,
                 school: this.school.value,
                 sert_count: this.sert_count.value,
-                learner: this.learner.value,
+                // learner: this.learner.value,
                 teacher_learner: this.teacher_learner.value,
                 phone: this.phone.value,
                 reward: this.reward.value,
@@ -264,9 +264,9 @@ var order = new Vue({
             var self = this;
             var res = _.map(this.defaultReward, function(e){
                 var res = {};
-                if( ( e == 'Почта России' && self.sert_count.value < 10 ) ) {
+                if( ( e == 'Почта России' && self.sert_count.value < 20 ) ) {
                     if (self.reward.value =='Почта России' )
-                        self.reward.value  = 'Электронный сертификат';
+                        self.reward.value  = 'Электронный вариант';
 
                     res = {
                         value: e,
@@ -281,7 +281,6 @@ var order = new Vue({
 
                 return res
             });
-            console.log ( res );
             return res;
 
         },
@@ -353,11 +352,27 @@ var payment = new Vue({
         payMethods:[
             {
                 text: 'Yandex.Деньги',
-                value: 'ya',
+                type: 'online'
+            },
+            {
+                text: 'Виза/Мастеркарт',
+                type: 'online'
+            },
+            {
+                text: 'Qiwi',
+                type: 'online'
+            },
+            {
+                text: 'Сбербанк-онлайн',
+                type: 'online'
+            },
+            {
+                text: 'Сотовые операторы',
+                type: 'online'
             },
             {
                 text: 'С помощью квитанции',
-                value: 'check',
+                type: 'offline'
             }
         ],
         selectPayMethods: false,
@@ -370,7 +385,7 @@ var payment = new Vue({
     },
 
     created: function(){
-      this.selectPayMethods = this.payMethods[0].value
+      this.selectPayMethods = this.payMethods[0]
     },
     methods:{
         sendCheck: function(){
@@ -628,21 +643,29 @@ $('#reset-btn').click(function(){
 
 
 
-new Tooltip({
-    target: document.querySelector('#orgs'),
-    content: "В этом поле необходимо указать<br>ФИО кажого организатора в <span class='color2'>родительном падеже</span><br> и количество приглашенных им участников",
-    position: 'top center'
-});
 
 
+
+
+
+
+if ( $('#order-edit-warning').length >0 )
+    vex.dialog.alert({
+        message: $('#order-edit-warning').html(),
+    })
+
+
+
+if ( $('#orgs2').length >0 )
 new Tooltip({
     target: document.querySelector('#orgs2'),
     content: "В этом поле необходимо указать<br> количество участников в каждом классе<br>по кажому предмету",
     position: 'top center'
 });
 
+if ( $('#sert').length >0 )
 new Tooltip({
     target: document.querySelector('#sert'),
-    content: "Отправка сертификатов Почтой России<br> возможна только <span>от 10 сертифкатов</span>",
+    content: "Отправка сертификатов Почтой России<br> возможна только <span>от 20 сертифкатов</span>",
     position: 'top center'
 });

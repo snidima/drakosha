@@ -18,11 +18,11 @@
                 <div class="form__row">
                     <label for="pay-method">Выбирите метод оплаты</label>
                     <select id="pay-method" v-model="selectPayMethods">
-                        <option v-for="pay in payMethods" v-bind:value="pay.value">@{{ pay.text }}</option>
+                        <option v-for="pay in payMethods" v-bind:value="pay">@{{ pay.text }}</option>
                     </select>
                 </div>
 
-                <form method="post" id="payonline" data-first-action="{{route('user.pay.online')}}" action="{{env('YANDEX_URL','')}}" style="margin-top: 20px" v-if="selectPayMethods == 'ya'" v-on:submit.prevent="sendOnline">
+                <form method="post" id="payonline" data-first-action="{{route('user.pay.online')}}" action="{{env('YANDEX_URL','')}}" style="margin-top: 20px" v-if="selectPayMethods.type == 'online'" v-on:submit.prevent="sendOnline">
                     {{csrf_field()}}
                     <input type="hidden" value="{{env('YANDEX_SHOPID','')}}" name="shopId">
                     <input type="hidden" value="{{env('YANDEXSCID','')}}" name="scid">
@@ -39,7 +39,7 @@
                     <p class="form__error" style="text-align: left" v-if="error2">@{{error2}}</p>
                 </form>
 
-                <form method="post" id="paycheck" action="{{route('user.pay.check')}}" style="margin-top: 20px" v-if="selectPayMethods == 'check'" v-on:submit.prevent="sendCheck" enctype="multipart/form-data">
+                <form method="post" id="paycheck" action="{{route('user.pay.check')}}" style="margin-top: 20px" v-if="selectPayMethods.type == 'offline'" v-on:submit.prevent="sendCheck" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="form__row">
                         <label for="file">Прикрепите скан чека ( jpeg,png,zip,rar )</label>

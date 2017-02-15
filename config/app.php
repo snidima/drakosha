@@ -168,7 +168,7 @@ return [
          */
 
 //        Barryvdh\Debugbar\ServiceProvider::class,
-//        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
 
         /*
          * Application Service Providers...

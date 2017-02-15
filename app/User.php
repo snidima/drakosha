@@ -74,8 +74,6 @@ class User extends Authenticatable
 
 
 
-
-
         if ( $step == 1  ){
 
 
@@ -83,12 +81,6 @@ class User extends Authenticatable
 
             if ( !$order ) return true;
 
-            $created = new Carbon($order->created_at);
-            $now = Carbon::now();
-
-            $order = Auth::user()->orders()->first();
-
-            if ( !$order ) return true;
 
             $created = new Carbon($order->created_at);
             $now = Carbon::now();

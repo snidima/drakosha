@@ -10,7 +10,7 @@
     <div class="slider-texts__effect"></div>
     <div class="slider-texts">
         <div class="slider-texts__big-text"><span class="color1">У</span>мный <span class="color2">Д</span>ракоша</div>
-        <div class="slider-texts__under_big-text">Онлайн конкурс для маладших школьников</div>
+        <div class="slider-texts__under_big-text">Международный конкурс для младших школьников</div>
         <div class="slider-texts__desc">
             Оргкомитет конкурса «Умный Дракоша»<br>
             приглашает принять участие в конкурсе<br>
@@ -122,27 +122,26 @@
 
 <section class="main-section main-section__pay">
     <div class="container">
-        <header class="main-section__header">Стоимость участия:</header>
+        <header class="main-section__header">Стоимость для участника:</header>
         <div class="row">
             <div class="col-md-5 section-pay_l">
                 <div class="section-pay">
-                    <div class="section-pay__title">60 Р</div>
+                    <div class="section-pay__title">{{\Config::get('constants.PRICE')}} <span>&#8381;</span></div>
                     <div class="section-pay__desc">
                         Направляется в оргкомитет<br>
                         организаторам конкурса
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 tac">
-                <img src="/images/section-pencil.png" alt="Дракоша - стоимость участия">
+            <div class="col-md-2 tac main-section__plus">
+                +
             </div>
             <div class="col-md-5 section-pay_r">
                 <div class="section-pay">
-                    <div class="section-pay__title">10 Р</div>
+                    <div class="section-pay__title">10 <span>&#8381;</span></div>
                     <div class="section-pay__desc">
-                        Остаются в школе<br>
-                        на сопутствующие<br>
-                        организационные расходы
+                        Остаются<br>
+                        на сопутствующие расходы
                     </div>
                 </div>
             </div>
@@ -174,9 +173,8 @@
                         Всем учителям, задействованным<br>
                         в подготовке и проведении конкурса в школах,<br>
                         будут выданы <b class="color1">благодарственные письма</b>.<br>
-                        Наиболее активные организаторы<br>
-                        (собравшие более 50 участников)<br>
-                        получат <b class="color1">ценные подарки</b>.
+                        Наиболее активные организаторы<br>( собравшие от 50 работ, один ученик может поучаствовать во всех дисциплинах  )
+                        получат <b class="color1">денежное вознаграждение</b>.
                     </div>
                 </div>
             </div>

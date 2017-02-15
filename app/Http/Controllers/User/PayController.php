@@ -27,7 +27,7 @@ class PayController extends Controller
             if( !$order ) throw new Exception('Ошибка доступа');
 
             return view('user.pay',[
-                'summ' => (($order->sert_count*60 - $order->money) >=0 ) ? $order->sert_count*60 - $order->money : 0 ,
+                'summ' => (($order->sert_count*\Config::get('constants.PRICE') - $order->money) >=0 ) ? $order->sert_count*\Config::get('constants.PRICE') - $order->money : 0 ,
                 'money' => $order->money,
                 'sert' => $order->sert_count,
             ]);

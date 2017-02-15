@@ -2,5 +2,6 @@
 
 
 return [
-    'CONCURS' => true
+    'CONCURS' => true,
+    'PRICE' => 70
 ];
