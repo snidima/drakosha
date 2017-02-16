@@ -123,7 +123,7 @@
 <section class="main-section main-section__pay">
     <div class="container">
         <header class="main-section__header">Стоимость за одного участника<br>в одной предметной дисциплине - <span>80 руб</span></header>
-        <div class="row">
+        <div class="row" style="padding-top: 30px;">
             <div class="col-md-5 section-pay_l">
                 <div class="section-pay">
                     <div class="section-pay__title">{{\Config::get('constants.PRICE')}} Р</div>
@@ -133,8 +133,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 tac main-section__plus">
-                +
+            <div class="col-md-2 tac" >
+                <img src="/images/section-pencil.png" alt="Дракоша - стоимость участия">
             </div>
             <div class="col-md-5 section-pay_r">
                 <div class="section-pay">

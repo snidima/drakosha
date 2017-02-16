@@ -358,11 +358,11 @@ var payment = new Vue({
                 type: 'online'
             },
             {
-                text: 'Виза/Мастеркарт',
+                text: 'Visa/Master Card',
                 type: 'online'
             },
             {
-                text: 'Qiwi',
+                text: 'QIWI',
                 type: 'online'
             },
             {
@@ -370,7 +370,7 @@ var payment = new Vue({
                 type: 'online'
             },
             {
-                text: 'Сотовые операторы',
+                text: 'Баланс телефона',
                 type: 'online'
             },
             {

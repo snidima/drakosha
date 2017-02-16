@@ -62,13 +62,13 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form__row">
-                        <label for="org_num">Общее количество организаторов<br>(по количеству выбранных предметов)</label>
+                        <label for="org_num">Общее количество организаторов</label>
                         <input type="number" name="org_num" id="org_num" v-model="org_num.value" placeholder="Общее количество организаторов" v-bind:class="{ error: org_num.error }">
                         <p class="form__error" v-if="org_num.error">@{{org_num.error}}</p>
                     </div>
 
                     <div class="form__row">
-                        <label for="sert_count">Общее количество сертификатов</label>
+                        <label for="sert_count">Общее количество сертификатов<br>(по количеству выбранных предметов)</label>
                         <input type="number" name="sert_count" required id="sert_count" v-model="sert_count.value" placeholder="Необходимое количество сертификатов" v-bind:class="{ error: sert_count.error }">
                         <p class="form__error" v-if="sert_count.error">@{{sert_count.error}}</p>
                     </div>
@@ -87,7 +87,7 @@
                         <p class="form__error" v-if="teacher_learner.error">@{{teacher_learner.error}}</p>
                     </div>
                     <div class="form__row">
-                        <label for="reward">Форма получения нагрдных материалов <i class="fa cursor fa-info-circle color2" id="sert" aria-hidden="true"></i> :</label>
+                        <label for="reward">Форма получения наградных материалов <i class="fa cursor fa-info-circle color2" id="sert" aria-hidden="true"></i> :</label>
                         <select name="reward" id="reward" v-model="reward.value">
                             <option v-for="reward in defaultRewardD" v-bind:value="reward.value" :disabled="reward.avail">@{{ reward.value }}</option>
                         </select>
