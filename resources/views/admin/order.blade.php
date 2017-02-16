@@ -36,7 +36,7 @@
                                     <b>Отчество:</b> {{$order->users->lastname}}
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Отчество:</b> {{$order->users->lastname}}
+                                    <b>Страна:</b> {{$order->users->country}}
                                 </li>
                                 <li class="list-group-item">
                                     <b>Номер телефона:</b> {{$order->phone}}

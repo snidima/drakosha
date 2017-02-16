@@ -30,7 +30,7 @@
 
 
 
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-    <script src="/js/{{js()}}"></script>
+    <script src='https://www.google.com/recaptcha/api.js' async></script>
+    <script src="/js/{{js()}}" async></script>
 </body>
 </html>

@@ -62,7 +62,7 @@ gulp.task('deploy:dev', function () {
     	'composer install',
     	'php artisan migrate --force',
     	'npm install',
-    	'NODE_ENV=production gulp production',
+    	'gulp production',
     	'php artisan up',
     	], {filePath: 'shell.log'})
     .pipe(gulp.dest('logs'))
