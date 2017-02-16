@@ -17,14 +17,22 @@ var Tooltip = require('tether-tooltip');
 
 
 
-import feedback from './components/feedback.vue';
-Vue.component( 'feedback', feedback );
+import Feedback from './components/feedback.vue';
+import Register from './components/register.vue';
+
+Vue.component( 'feedback', Feedback );
+Vue.component( 'register', Register );
 
 
 
-new Vue({
+let feedback = new Vue({
     el: '#feedback'
 });
+
+let  register = new Vue({
+    el: '#register'
+});
+
 
 
 
@@ -40,92 +48,7 @@ Vue.http.interceptors.push((request, next) => {
 
 
 
-if ( $('#form-register').length >0 ) {
 
-    var register = new Vue({
-        el: '#form-register',
-        data: {
-            pending: false,
-            email: {
-                value: '',
-                error: false
-            },
-            password: {
-                value: '',
-                error: false
-            },
-            password_confirmation: {
-                value: '',
-                error: false
-            },
-            name: {
-                value: '',
-                error: false
-            },
-            surname: {
-                value: '',
-                error: false
-            },
-            lastname:{
-                value: '',
-                error: false
-            },
-            'g-recaptcha-response': {
-                value: '',
-                error: false
-            }
-
-
-        },
-        computed:{
-            all: function(){
-                return {
-                    email: this.email.value,
-                    password: this.password.value,
-                    password_confirmation: this.password_confirmation.value,
-                    name: this.name.value,
-                    surname: this.surname.value,
-                    lastname: this.lastname.value,
-                    'g-recaptcha-response': $('[name="g-recaptcha-response"]').val()
-                };
-            }
-        },
-
-
-        methods: {
-            recaptchaTrue: function( r ){
-              this['g-recaptcha-response'].value = r;
-                $(this.$el).find('#btn-send').removeAttr('disabled');
-            },
-            send: function(){
-                var self = this;
-                this.pending = true;
-                this.$http.post('/register', this.all).then(function(response) {
-                    self.pending = false;
-                    vex.dialog.alert({
-                        message: 'Для регистрации необхадима активация аккаунта! Проверьте почту и следуйте дальнейшим инструкциям!',
-                        callback: function(){
-                            window.location.href = response.body.redirect;
-                        }
-                    })
-                }, function(response) {
-                    self.pending = false;
-                    _.forOwn(self.all, function (e,a) {
-                        if ( response.body[a] )
-                            self[a].error = response.body[a][0];
-                        else
-                            self[a].error = false;
-                    });
-
-                });
-                return false;
-            }
-        }
-    });
-
-
-    window.recaptchaCallback = register.recaptchaTrue;
-}
 
 
 if ( $('#form-login').length >0 )

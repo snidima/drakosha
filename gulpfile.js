@@ -62,7 +62,7 @@ gulp.task('deploy:dev', function () {
     	'composer install',
     	'php artisan migrate --force',
     	'npm install',
-    	'gulp production',
+    	'NODE_ENV=production gulp production',
     	'php artisan up',
     	], {filePath: 'shell.log'})
     .pipe(gulp.dest('logs'))
@@ -83,7 +83,7 @@ gulp.task('js:clean', function () {
     return gulp.src('./public_html/js', {read: false})
         .pipe(clean());
 });
-gulp.task('js', function () {
+gulp.task('js',['apply-prod'], function () {
     return browserify({
         entries: './resources/assets/js/app.js',
         debug: true,
@@ -181,6 +181,7 @@ gulp.task('serve', ['sass','js','image:production', 'fonts'], function() {
 
 gulp.task('apply-prod', function() {
     process.env.NODE_ENV = 'production';
+
 });
 
 gulp.task('production', ['sass:production', 'image:production','js:production', 'fonts']);

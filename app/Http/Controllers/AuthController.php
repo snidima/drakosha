@@ -23,6 +23,7 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:6',
             'surname' => 'required|min:2',
             'lastname' => 'required|min:2',
+            'country' => 'required|min:3',
         ]);
 
         if ( $validator->fails() )
