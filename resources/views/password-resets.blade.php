@@ -1,10 +1,7 @@
 @extends('layouts/main')
-
-
+@section('title', 'Восстановление пароля')
 @section('content')
     <h1>Восстановление пароля</h1>
-
-
     <form action="{{route('resets')}}" method="post" class="form_login">
         <small class="errors">
             @if (count($errors) > 0)

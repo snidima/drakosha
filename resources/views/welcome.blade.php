@@ -1,11 +1,6 @@
 @extends('layouts/main')
-
-@section('title', 'Конкурс для младших классов')
-
-
-
+@section('title', 'Международный конкурс для младших школьников')
 @section('content')
-
 <div class="slider">
     <div class="slider-texts__effect"></div>
     <div class="slider-texts">
@@ -24,7 +19,6 @@
         <a href="https://www.rusfond.ru/" target="_blank"><img src="/images/rusfond.jpg" alt=""></a>
     </div>
 </div>
-
 <section class="main-section">
     <div class="container">
         <header class="main-section__header">Участие в дисциплинах</header>
@@ -62,7 +56,6 @@
         </div>
     </div>
 </section>
-
 <section class="main-section main-section-bg main-section_2" style="background-image: url(../images/section-bg-1.jpg)">
     <div class="container">
         <p class="main-section-bg_text main-section-bg_text-2">
@@ -72,7 +65,6 @@
         </p>
     </div>
 </section>
-
 <section class="main-section">
     <div class="container">
         <header class="main-section__header">Сроки выполнения конкурса:</header>
@@ -119,7 +111,6 @@
         </div>
     </div>
 </section>
-
 <section class="main-section main-section__pay">
     <div class="container">
         <header class="main-section__header">Стоимость за одного участника<br>в одной предметной дисциплине - <span>80 руб</span></header>
@@ -148,7 +139,6 @@
         </div>
     </div>
 </section>
-
 <section class="main-section">
     <div class="container">
         <header class="main-section__header">Награждения:</header>

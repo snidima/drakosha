@@ -1,5 +1,5 @@
 @extends('layouts/main')
-
+@section('title', 'Критерии')
 @section('content')
 
     <div class="container">

@@ -1,16 +1,14 @@
 @extends('layouts/main')
 
-@section('title', 'Вознаграждение для учителей!')
+@section('title', 'Денежное вознаграждение для учителей')
 @section('content')
     <div class="container">
         <h1 class="h1"><span class="color1">Вознаграждение</span> для учителей</h1>
-
 
         <p class="warning tac">
             <b>Уважаемые организаторы</b>, для того чтобы повысить  мотивацию и Ваш интерес к участию в Международном конкурсе для младших школьников
             <b>«УМНЫЙ ДРАКОША»</b> Оргкомитет предоставляет Вам возможность  <br><b>получить денежное вознаграждение!!!</b>
         </p>
-
 
         <div class="row" style="margin-top: 50px; margin-bottom: 50px;">
             <div class="col-md-6">
@@ -31,16 +29,12 @@
             </div>
         </div>
 
-
-
-
         <b></b>
 
         <div class="h1"><span class="color1">Благодарим за доверие</span><br> и желаем вам успешной регистрации и участия в конкурсе!</div>
         <p style="text-align: right; margin-bottom: 20px;">
             С  уважением Оргкомитет  «УМНЫЙ ДРАКОША»
         </p>
-
 
     </div>
 @endsection

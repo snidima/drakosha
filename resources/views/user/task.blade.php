@@ -1,12 +1,8 @@
 @extends('layouts/main')
-
+@section('title', 'Задания')
 @section('content')
-
 @include('user/parts/user-nav')
-
    <div class="container">
-
-
        @if(count($tasks)>0)
            <h2 class="pay-h2">Задания доступные для скачивания: </h2>
            <ul class="user-tasks">
@@ -17,8 +13,5 @@
        @else
            <h2 class="pay-h2">К сожалению, заданий для скачивания пока нет.<br><small>В ближайшее время они появятся.</small></h2>
        @endif
-
-
    </div>
-
 @endsection

@@ -1,10 +1,7 @@
 @extends('layouts/main')
-
+@section('title', 'Оплата')
 @section('content')
-
-
     @include('user/parts/user-nav')
-
     <div class="container">
         @if( $summ > 0)
             @if( \Illuminate\Support\Facades\Auth::user()->pay_checks()->first() )
@@ -13,7 +10,6 @@
                 <small>Повторная заграузка заменит предыдущий скан</small>
             </h2>
             @endif
-
             <div class="form form-small" id="user-pay"  v-bind:class="{ pending: pending}">
                 <div class="form__row">
                     <label for="pay-method">Выбирите метод оплаты</label>
@@ -21,7 +17,6 @@
                         <option v-for="pay in payMethods" v-bind:value="pay">@{{ pay.text }}</option>
                     </select>
                 </div>
-
                 <form method="post" id="payonline" data-first-action="{{route('user.pay.online')}}" action="{{env('YANDEX_URL','')}}" style="margin-top: 20px" v-if="selectPayMethods.type == 'online'" v-on:submit.prevent="sendOnline">
                     {{csrf_field()}}
                     <input type="hidden" value="{{env('YANDEX_SHOPID','')}}" name="shopId">
@@ -38,7 +33,6 @@
                     </div>
                     <p class="form__error" style="text-align: left" v-if="error2">@{{error2}}</p>
                 </form>
-
                 <form method="post" id="paycheck" action="{{route('user.pay.check')}}" style="margin-top: 20px" v-if="selectPayMethods.type == 'offline'" v-on:submit.prevent="sendCheck" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="form__row">
@@ -53,7 +47,6 @@
                         <button class="btn2 btn2-color1" style="display: block;width: 100%"><i class="fa fa-upload" aria-hidden="true"></i>Прикрепить</button>
                     </div>
                 </form>
-
                 <div class="form__pending" v-show="pending" style="display: none;">
                     <div class="form__pending-wrapper">
                         <div class="sk-circle">
@@ -73,122 +66,11 @@
                     </div>
                 </div>
             </div>
-
         @else
-
             <h2 class="pay-h2">
                 Конкурс оплачен.<br>
                 <small>Доступное количество сертификатов: <b class="color1">{{$sert}}</b></small>
             </h2>
-
         @endif
-
     </div>
-
-    {{--<div class="container">--}}
-        {{--<div class="row">--}}
-            {{--<div class="col-md-6">--}}
-                {{--<form action="{{route('login')}}" class="form form-full" id="form-login" method="post" v-on:submit.prevent="send">--}}
-                    {{--<div class="form__row">--}}
-                        {{--<label for="email">Введите сумму( Необходимо {{$summ}} руб.  )</label>--}}
-                        {{--<input type="number" name="money" id="email" required v-model="formData.email" placeholder="Введите сумму">--}}
-                    {{--</div>--}}
-                    {{--<div class="form__row flex-lr">--}}
-                        {{--<select>--}}
-                            {{--<option value="yandex">Yandex.Деньги</option>--}}
-                        {{--</select>--}}
-                        {{--<button class="btn2 btn2-color1"><i class="fa fa-rub" aria-hidden="true"></i>Оплатить</button>--}}
-                    {{--</div>--}}
-                {{--</form>--}}
-            {{--</div>--}}
-            {{--<div class="col-md-6">--}}
-                {{--<form action="{{route('login')}}" class="form form-full" id="form-login" method="post" v-on:submit.prevent="send">--}}
-                    {{--<div class="form__row">--}}
-                        {{--<label for="email">Оплата через Yandex.Деньги</label>--}}
-                        {{--<input type="email" name="email" id="email" required v-model="formData.email" placeholder="E-mail">--}}
-                    {{--</div>--}}
-                    {{--<div class="form__row">--}}
-                        {{--<button class="btn2 btn2-color1"><i class="fa fa-rub" aria-hidden="true"></i>Оплатить</button>--}}
-                    {{--</div>--}}
-                {{--</form>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-
-
-        {{--<h1 class="h1 user-header">--}}
-            {{--<b class="color1">{{Auth::user()->name}}</b>, добро пожаловать!<br>--}}
-            {{--<small>--}}
-                {{--Изменить пароль от личного кабинета вы можете по <a href="{{route('profile')}}">ссылке</a>--}}
-            {{--</small>--}}
-        {{--</h1>--}}
-        {{--@include('user/parts/user-nav', ['active' => '1'])--}}
-
-
-        {{--<h1>--}}
-            {{--Оплата<br>--}}
-            {{--<small style="font-size: 16px;">Текущий баланс: {{$money}} руб.</small><br>--}}
-            {{--<small style="font-size: 16px;">Заявлено сертификатов: {{$sert}} </small>--}}
-        {{--</h1>--}}
-
-
-        {{--<form action="{{route('user.pay')}}" method="post" class="form_login">--}}
-            {{--<small class="errors">--}}
-                {{--@if (count($errors) > 0)--}}
-                    {{--<div class="alert alert-danger">--}}
-                        {{--<ul>--}}
-                            {{--@foreach ($errors->all() as $error)--}}
-                                {{--<li>{{ $error }}</li>--}}
-                            {{--@endforeach--}}
-                        {{--</ul>--}}
-                    {{--</div>--}}
-                {{--@endif--}}
-            {{--</small>--}}
-            {{--{{ csrf_field() }}--}}
-            {{--<div class="row">--}}
-                {{--<label for="money" class="col-lg-3 control-label">Сумма, руб:</label>--}}
-                {{--<div class="col-lg-9">--}}
-                    {{--<input type="number" class="form-control" id="money" placeholder="Сумма" name="money" value="{{$summ}}">--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<div class="text-right">--}}
-                {{--<input type="submit" value="Оплатить">--}}
-            {{--</div>--}}
-        {{--</form>--}}
-        {{--<br><br>--}}
-        {{--<form action="{{route('user.paycheck')}}" method="post" class="form_login" enctype="multipart/form-data">--}}
-            {{--<small class="errors">--}}
-                {{--@if (count($errors) > 0)--}}
-                    {{--<div class="alert alert-danger">--}}
-                        {{--<ul>--}}
-                            {{--@foreach ($errors->all() as $error)--}}
-                                {{--<li>{{ $error }}</li>--}}
-                            {{--@endforeach--}}
-                        {{--</ul>--}}
-                    {{--</div>--}}
-                {{--@endif--}}
-            {{--</small>--}}
-            {{--{{ csrf_field() }}--}}
-            {{--<div class="row">--}}
-                {{--<label for="file" class="col-lg-4 control-label">Прикрепить чек</label>--}}
-                {{--<div class="col-lg-8">--}}
-                    {{--<input type="file" class="form-control" id="file"  name="file">--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
-            {{--<div class="text-right">--}}
-                {{--@if( 1>0 )--}}
-                    {{--<input type="submit" value="Прикрепить чек">--}}
-                {{--@else--}}
-                    {{--<input type="submit" value="Прикрепить чек">--}}
-                {{--@endif--}}
-            {{--</div>--}}
-        {{--</form>--}}
-
-        
-
-
-
-
-
 @endsection

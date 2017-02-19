@@ -1,6 +1,6 @@
 @extends('layouts/main')
 
-@section('title', 'Конкурс для младших классов')
+@section('title', 'Способы оплаты')
 @section('content')
     <div class="container">
         <h1 class="h1">Способы оплаты</h1>

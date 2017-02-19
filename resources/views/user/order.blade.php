@@ -1,14 +1,8 @@
 @extends('layouts/main')
-
+@section('title', 'Подать заявку')
 @section('content')
-
-
-
     @include('user/parts/user-nav')
-
     <div class="container">
-
-
         <form action="{{route('user.order')}}" class="form form-large" v-bind:class="{ pending: pending}" id="order" method="post" v-on:submit.prevent="send">
             <a href="{{route('for-teachers')}}" class="order-warning2">
                 ДЕНЕЖНОЕ ВОЗНАГРАЖДЕНИЕ ДЛЯ ОРГАНИЗАТОРОВ
@@ -72,13 +66,6 @@
                         <input type="number" name="sert_count" required id="sert_count" v-model="sert_count.value" placeholder="Необходимое количество сертификатов" v-bind:class="{ error: sert_count.error }">
                         <p class="form__error" v-if="sert_count.error">@{{sert_count.error}}</p>
                     </div>
-                    {{--<div class="form__row">--}}
-                        {{--<label for="learner">Организаторы - количество участников <i class="fa cursor fa-info-circle color2" id="orgs" aria-hidden="true"></i> :</label>--}}
-                        {{--<textarea name="learner" id="learner" v-model="learner.value" v-bind:class="{ error: learner.error }"--}}
-                                  {{--placeholder="Например:&#13;&#10;Иванову Марину Петровну - 4,&#13;&#10;Соколова Дмитрия Валерьевича - 15--}}
-                        {{--"></textarea>--}}
-                        {{--<p class="form__error" v-if="learner.error">@{{learner.error}}</p>--}}
-                    {{--</div>--}}
                     <div class="form__row">
                         <label for="teacher_learner">Предмет - класс - количество участников <i class="fa cursor fa-info-circle color2" id="orgs2" aria-hidden="true"></i> :</label>
                         <textarea name="teacher_learner" v-model="teacher_learner.value" v-bind:class="{ error: teacher_learner.error }" id="teacher_learner"
@@ -96,7 +83,6 @@
 
                 </div>
             </div>
-
             <div class="form__action">
                 <button class="btn2 btn2-color1" id="btn-send"><i class="fa fa-paper-plane" aria-hidden="true"></i>Отправить</button>
             </div>

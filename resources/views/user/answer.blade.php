@@ -1,5 +1,5 @@
 @extends('layouts/main')
-
+@section('title', 'Ответы')
 @section('content')
 @include('user/parts/user-nav')
 
@@ -17,8 +17,6 @@
         @else
             <h2 class="pay-h2">Загрузить ответы: </h2>
         @endif
-
-
 
             <form method="post" action="{{route('user.answer')}}" style="margin-top: 20px"  class="form form-small" v-bind:class="{ pending: pending}" id="upload-answer"  v-on:submit.prevent="send"  enctype="multipart/form-data">
                 {{csrf_field()}}

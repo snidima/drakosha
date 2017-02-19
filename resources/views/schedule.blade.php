@@ -1,5 +1,5 @@
 @extends('layouts/main')
-
+@section('title', 'Расписание мероприятий')
 @section('content')
 
     <div class="container">

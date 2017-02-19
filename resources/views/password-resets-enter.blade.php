@@ -1,6 +1,5 @@
 @extends('layouts/main')
-
-
+@section('title', 'Восстановление пароля')
 @section('content')
     <div class="container">
         <h1 class="h1">Восстановление пароля:</h1>
@@ -19,22 +18,4 @@
             </div>
         </form>
     </div>
-    {{--<form action="" method="post" class="form_login">--}}
-        {{--{{ csrf_field() }}--}}
-        {{--<div class="row">--}}
-            {{--<label for="inputPass" class="col-lg-4 control-label">Новый пароль</label>--}}
-            {{--<div class="col-lg-8">--}}
-                {{--<input type="password" class="form-control" id="inputEmail" placeholder="Введите новый пароль" name="password" >--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        {{--<div class="row">--}}
-            {{--<label for="inputPass" class="col-lg-4 control-label">Еще раз</label>--}}
-            {{--<div class="col-lg-8">--}}
-                {{--<input type="password" class="form-control" id="inputEmail" placeholder="Повторите новый пароль" name="password_confirmation">--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        {{--<div class="text-right">--}}
-            {{--<input type="submit" value="Войти">--}}
-        {{--</div>--}}
-    {{--</form>--}}
 @endsection
