@@ -9,8 +9,8 @@ var axios = require('axios');
 var Vue = require('vue');
 Vue.use(require('vue-resource'));
 
-Vue.config.debug = false;
-Vue.config.silent = true;
+// Vue.config.debug = false;
+// Vue.config.silent = true;
 
 
 var Tooltip = require('tether-tooltip');
@@ -19,9 +19,11 @@ var Tooltip = require('tether-tooltip');
 
 import Feedback from './components/feedback.vue';
 import Register from './components/register.vue';
+import Pay from './components/pay.vue';
 
 Vue.component( 'feedback', Feedback );
 Vue.component( 'register', Register );
+Vue.component( 'pay', Pay );
 
 
 
@@ -31,6 +33,10 @@ let feedback = new Vue({
 
 let  register = new Vue({
     el: '#register'
+});
+
+var payment = new Vue({
+    el: '#user-pay',
 });
 
 
@@ -271,112 +277,6 @@ var order = new Vue({
 
 
 
-if ( $('#user-pay').length >0 )
-var payment = new Vue({
-    el: '#user-pay',
-    data: {
-        payMethods:[
-            {
-                text: 'Yandex.Деньги',
-                type: 'online'
-            },
-            {
-                text: 'Visa/Master Card',
-                type: 'online'
-            },
-            {
-                text: 'QIWI',
-                type: 'online'
-            },
-            {
-                text: 'Сбербанк-онлайн',
-                type: 'online'
-            },
-            {
-                text: 'Баланс телефона',
-                type: 'online'
-            },
-            {
-                text: 'С помощью квитанции',
-                type: 'offline'
-            }
-        ],
-        selectPayMethods: false,
-        file: false,
-        error: false,
-        error2: false,
-        pending: false,
-        fileSrc: false,
-        sum: 0
-    },
-
-    created: function(){
-      this.selectPayMethods = this.payMethods[0]
-    },
-    methods:{
-        sendCheck: function(){
-            if ( !this.file ) {
-                this.error = 'Прикрепите файл';
-                return;
-            }
-            var action = $(this.$el).find('#paycheck').attr('action');
-            var self = this;
-            this.pending = true;
-
-            var formData = new FormData();
-            formData.append('file', this.fileSrc);
-
-            this.$http.post(action, formData).then(function(response) {
-                self.pending = false;
-                vex.dialog.alert({
-                    message: 'Чек успешно загружен!',
-                    callback: function(){
-                        window.location.href = response.body.redirect;
-                    }
-                })
-            }, function(response) {
-                self.pending = false;
-                self.error = response.body.file[0];
-            });
-        },
-        fileChange: function(e){
-            var filename = e.target.files[0].name;
-            if( filename ){
-                this.file = filename;
-                this.error = false;
-                this.fileSrc = e.target.files[0];
-            }
-        },
-
-        sendOnline: function () {
-            var self = this;
-            this.pending = true;
-            this.$http.post($(this.$el).find('#payonline').attr('data-first-action'), {
-                money: this.sum
-            }).then(function(response) {
-                self.pending = false;
-                vex.dialog.confirm({
-                    message: response.body.message,
-                    callback: function (value) {
-                        if(value){
-                            $(self.$el).find('#payonline').submit();
-                        }
-                    },
-                    buttons: [
-                        $.extend({}, vex.dialog.buttons.YES, { text: 'Перейти' }),
-                        $.extend({}, vex.dialog.buttons.NO, { text: 'Отмена' })
-                    ],
-                })
-            }, function(response) {
-                self.pending = false;
-                self.error2 = response.body.money[0];
-            });
-        }
-
-    }
-});
-
-
 
 
 
@@ -508,27 +408,6 @@ var changePassword = new Vue({
 
 
 
-
-// Vue.component('file-component', {
-//     template: '#template-file',
-//     props: ['title','text','name'],
-//     data: function(){
-//         return{
-//             file: false
-//         }
-//     },
-//     methods:{
-//         fileChange: function(e){
-//             var fullPath = e.target.value;
-//             var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-//             var filename = fullPath.substring(startIndex);
-//             if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-//                 filename = filename.substring(1);
-//             }
-//             this.file = filename;
-//         }
-//     }
-// });
 
 
 

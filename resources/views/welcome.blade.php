@@ -137,6 +137,9 @@
                 </div>
             </div>
         </div>
+        <div class="section-pay__com">
+            ОРГКОМИТЕТ “ УМНЫЙ ДРАКОША” берет на себя  <br> КОМИССИЮ онлайн оплату через: VISA, Master Card,Qiwi, Yandex Деньги.
+        </div>
     </div>
 </section>
 <section class="main-section">
