@@ -76,17 +76,11 @@ class User extends Authenticatable
 
         if ( $step == 1  ){
 
-
             $order = Auth::user()->orders()->first();
 
             if ( !$order ) return true;
 
-
-            $created = new Carbon($order->created_at);
-            $now = Carbon::now();
-            $diff = $created->diffInDays($now);
-
-            return ( $diff > 5 ) ? false : true;
+            return !( Carbon::now() > $order->created_at->addDays( \Config::get('constants.ORDER_CHANGE_DAYS') ) );
 
         }
 

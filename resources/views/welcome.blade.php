@@ -15,9 +15,6 @@
             <a href="{{route('about')}}" class="slider-texts__btn"><i class="fa fa-info" aria-hidden="true"></i>Подробнее..</a>
         </div>
     </div>
-    <div class="slider-texts__banners">
-        <a href="https://www.rusfond.ru/" target="_blank"><img src="/images/rusfond.jpg" alt=""></a>
-    </div>
 </div>
 <section class="main-section">
     <div class="container">
@@ -111,6 +108,9 @@
         </div>
     </div>
 </section>
+<div class="rusfond-banner">
+    <a href="http://www.rusfond.ru/" target="_blank"><img src="/images/rusfond-2.jpg" alt="Русфонд" ></a>
+</div>
 <section class="main-section main-section__pay">
     <div class="container">
         <header class="main-section__header">Стоимость за одного участника<br>в одной предметной дисциплине - <span>80 руб</span></header>

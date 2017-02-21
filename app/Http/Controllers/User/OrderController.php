@@ -25,21 +25,15 @@ class OrderController extends Controller
 
         if ( $order ) {
 
-            $created = $order->created_at;
-            $last = $order->created_at->addDays(5);
-            $now = Carbon::now();
+            $last = $order->created_at->addDays( \Config::get('constants.ORDER_CHANGE_DAYS') );
 
-//            dd($created,$last,$now, $now>$last);
 
-            $diff = $last;
-
-        } else $diff = 0;
+        } else $last = 0;
 
 
 
 
-        return view('user.order',['rewards' => Order::$rewards,'order' => $order,'days' => $diff]);
-//        return view('user.order',['rewards' => Order::$rewards]);
+        return view('user.order',['rewards' => Order::$rewards,'order' => $order,'days' => $last]);
     }
 
     public function getDefault( Request $request )

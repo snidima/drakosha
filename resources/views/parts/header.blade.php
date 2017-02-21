@@ -17,7 +17,7 @@
     {{--<nav class="menu-top">--}}
     <nav class="menu-top  menu-top_mobile-active">
         <div class="menu-top__logo">
-            <a href="{{route('main')}}"><img src="/images/logo2.png" alt="logo"></a>
+            <a href="{{route('main')}}"><img src="/images/logo3.png" alt="logo"></a>
         </div>
         <ul class="menu-top__list menu-top__list_main">
             <li><a href="{{route('main')}}">Главная!</a></li>

@@ -1,7 +1,10 @@
 <div class="footer-wrapper">
     <div class="container footer">
         <div class="footer__item">
-            <img src="/images/logo2.png" alt="">
+            <img src="/images/logo3.png" alt="">
+        </div>
+        <div class="footer__item">
+            <a href="http://xn--80abucjiibhv9a.xn--p1ai/" target="_blank"><img src="/images/MON.jpg" alt="Министерство образования и науки Российской Федерации" ></a>
         </div>
         <div class="footer__item footer-menu-wrapper">
             <ul class="footer-menu">
