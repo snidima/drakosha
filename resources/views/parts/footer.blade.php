@@ -3,9 +3,7 @@
         <div class="footer__item">
             <img src="/images/logo3.png" alt="">
         </div>
-        <div class="footer__item">
-            <a href="http://xn--80abucjiibhv9a.xn--p1ai/" target="_blank"><img src="/images/MON.jpg" alt="Министерство образования и науки Российской Федерации" ></a>
-        </div>
+
         <div class="footer__item footer-menu-wrapper">
             <ul class="footer-menu">
                 <li><a href="/">Главная</a></li>
@@ -20,6 +18,10 @@
             <img src="/images/payments/pack/sberbank.png" alt="Сбербанк" title="Сбербанк">
             <img src="/images/payments/pack/visa.png" alt="VISA" title="VISA">
             <img src="/images/payments/pack/yandex-money.png" alt="Яндекс.Деньги" title="Яндекс.Деньги">
+        </div>
+
+        <div class="footer__item">
+            <a href="http://xn--80abucjiibhv9a.xn--p1ai/" target="_blank"><img style="max-height: 80px; width: auto" src="/images/MON.png" alt="Министерство образования и науки Российской Федерации" ></a>
         </div>
     </div>
 </div>

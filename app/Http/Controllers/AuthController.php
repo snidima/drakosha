@@ -90,6 +90,7 @@ class AuthController extends Controller
 
     public function getRegister()
     {
+        if ( Auth::check() ) return redirect(route('user'));
         return view('register');
     }
 

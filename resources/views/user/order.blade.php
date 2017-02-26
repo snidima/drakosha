@@ -11,7 +11,7 @@
                 @if( !\App\Order::getForCurrentUser() )
                     <div class="user-nav__title">Заполните данные для заявки</div>
                 @else
-                    <div class="user-nav__title">Отредактируйте данные заявки<br><small>( редактирование заявки возможно до {{$days}} )</small></div>
+                    <div class="user-nav__title">Заявка №{{\Illuminate\Support\Facades\Auth::user()->id}}. Отредактируйте данные заявки<br><small>( редактирование заявки возможно до {{$days}} )</small></div>
                     <div id="order-edit-warning" style="display: none">
                         {{\Illuminate\Support\Facades\Auth::user()->name}}, если вы хотите добавить новых участников - отредактируйте уже созданную заявку указав общее количество сертификатов
                     </div>

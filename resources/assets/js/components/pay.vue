@@ -10,9 +10,13 @@
             <input type="hidden" name="shopId" v-model="shopid">
             <input type="hidden" name="scid" v-model="scid">
             <input type="hidden" value="" name="customerNumber" v-model="userid">
-            <div class="form__row user-payments__online">
+
+            <div class="form__row user-payments__online" v-if="!selectPayMethods.type2">
                 Оргкомитет “УМНЫЙ ДРАКОША” <br>комиссию берет на себя!!!
             </div>
+
+            <div class="user-payments__sberbank-com tac" v-if="selectPayMethods.type2">Комиссия 0-1% от суммы</div>
+
             <div class="form__row" style="margin-bottom: 0">
                 <label for="sum">
                     Необходимая сумма: <span class="color1">{{summ}}</span> руб.
@@ -24,13 +28,6 @@
             </div>
             <p class="form__error" style="text-align: left" v-if="error2">{{error2}}</p>
         </form>
-
-        <div v-if="selectPayMethods.type == '2'" class="user-payments__sberbank" style="margin-top: -20px;">
-            <div class="user-payments__sberbank-com tac">Комиссия 0-1% от суммы</div>
-            <div class="user-payments__sberbank-download">
-                <div class="tac" style="margin-bottom: 10px;"><a href="/files/Памятка ИП Болучевская.docx" class="btn2 btn2-color1"><i class="fa fa-download" aria-hidden="true"></i> Скачать памятку ( docx )</a></div>
-            </div>
-        </div>
 
         <form method="post" id="paycheck" v-bind:action="check-action" style="margin-top: 20px" v-if="selectPayMethods.type == '3'" v-on:submit.prevent="sendCheck" enctype="multipart/form-data">
             <div class="user-payments__sberbank-com tac" style="margin-top: -20px;">Комиссия зависит от банка-отправителя</div>
@@ -79,11 +76,13 @@
                 payMethods:[
                     {
                         text: 'Visa, Master Card, Yandex.Деньги, QIWI',
-                        type: '1'
+                        type: '1',
+
                     },
                     {
                         text: 'Сбербанк-Онлайн',
-                        type: '2'
+                        type: '1',
+                        type2: true
                     },
                     {
                         text: 'По реквизитам в банке',

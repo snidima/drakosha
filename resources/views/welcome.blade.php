@@ -47,7 +47,7 @@
             <a href="{{route('register')}}" class="school-items__item">
                 <div class="school-items__image" style="background-image: url(../images/main-item-5.jpg)"></div>
                 <div class="school-items__text">Окружающий мир</div>
-                <div class="school-items__small">1-5 класс</div>
+                <div class="school-items__small">1-4 класс</div>
                 <button class="school-items__action"><i class="fa fa-rocket" aria-hidden="true"></i>Участвовать</button>
             </a>
         </div>
