@@ -26,7 +26,7 @@ var config = {
   host: 'halflife3.beget.com',
   port: 22,
   username: 'snidimod',
-  password: 'rL49VTJp'
+  privateKey: fs.readFileSync('C:/keys/drakosha.ppk')
 }
 
 var gulpSSH = new GulpSSH({

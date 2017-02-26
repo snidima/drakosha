@@ -21,7 +21,7 @@
         </div>
 
         <div class="footer__item">
-            <a href="http://xn--80abucjiibhv9a.xn--p1ai/" target="_blank"><img style="max-height: 80px; width: auto" src="/images/MON.png" alt="Министерство образования и науки Российской Федерации" ></a>
+            <a href="http://xn--80abucjiibhv9a.xn--p1ai/" target="_blank"><img style="max-height: 80px; width: auto" src="/images/mon.png" alt="Министерство образования и науки Российской Федерации" ></a>
         </div>
     </div>
 </div>
